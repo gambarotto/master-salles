@@ -31,8 +31,10 @@ class UpdateUserAdressesService {
     if (!userExists) {
       throw new AppError('User non-exists');
     }
+
     const userAddress = await this.userAdressesRepository.findById(data.id);
-    if (!userAddress) {
+
+    if (!userAddress || undefined) {
       throw new AppError('Address not found');
     }
     if (userAddress.user_id !== userExists.id) {

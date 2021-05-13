@@ -10,7 +10,7 @@ interface IRequest {
 }
 
 @injectable()
-class UserAvatarService {
+class UpdateUserAvatarService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -24,12 +24,13 @@ class UserAvatarService {
       throw new AppError('Only authenticate users can change avatar', 401);
     }
     if (user.avatar) {
-      await this.storageProvider.deleteFile(avatarFileName);
+      await this.storageProvider.deleteFile(user.avatar);
     }
     const fileName = await this.storageProvider.saveFile(avatarFileName);
     user.avatar = fileName;
+
     await this.usersRepository.update(user);
     return user;
   }
 }
-export default UserAvatarService;
+export default UpdateUserAvatarService;

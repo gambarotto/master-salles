@@ -56,7 +56,6 @@ export default class CreateUserAddress1620673337517
             type: 'varchar',
             isNullable: true,
           },
-
           {
             name: 'created_at',
             type: 'timestamp',

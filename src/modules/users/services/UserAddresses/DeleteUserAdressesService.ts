@@ -1,4 +1,3 @@
-import UserAddress from '@modules/users/infra/typeorm/entities/UserAddress';
 import IUserAdressesRepository from '@modules/users/repositories/IUserAdressesRepository';
 import IUsersRepository from '@modules/users/repositories/IUserRepository';
 import AppError from '@shared/errors/AppError';
@@ -6,18 +5,11 @@ import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
   user_id: string;
-  street: string;
-  number: string;
-  district: string;
-  city: string;
-  zip_code: string;
-  complement: string;
-  reference_point: string;
-  alias: string;
+  address_id: string;
 }
 
 @injectable()
-class CreateUserService {
+class DeleteUserAdressesService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -25,14 +17,19 @@ class CreateUserService {
     private userAdressesRepository: IUserAdressesRepository,
   ) {}
 
-  public async execute(data: IRequest): Promise<UserAddress> {
-    const userExists = await this.usersRepository.findById(data.user_id);
-
+  public async execute({ user_id, address_id }: IRequest): Promise<void> {
+    const userExists = await this.usersRepository.findById(user_id);
     if (!userExists) {
       throw new AppError('User non-exists');
     }
-    const userAddress = await this.userAdressesRepository.create(data);
-    return userAddress;
+    const userAddress = await this.userAdressesRepository.findById(address_id);
+    if (!userAddress) {
+      throw new AppError('Address not found');
+    }
+    if (userAddress.user_id !== userExists.id) {
+      throw new AppError('You can delete only yours adresses');
+    }
+    await this.userAdressesRepository.delete(userAddress);
   }
 }
-export default CreateUserService;
+export default DeleteUserAdressesService;

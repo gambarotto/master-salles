@@ -4,20 +4,8 @@ import IUsersRepository from '@modules/users/repositories/IUserRepository';
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 
-interface IRequest {
-  user_id: string;
-  street: string;
-  number: string;
-  district: string;
-  city: string;
-  zip_code: string;
-  complement: string;
-  reference_point: string;
-  alias: string;
-}
-
 @injectable()
-class CreateUserService {
+class ListUserAdressesProvider {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -25,14 +13,15 @@ class CreateUserService {
     private userAdressesRepository: IUserAdressesRepository,
   ) {}
 
-  public async execute(data: IRequest): Promise<UserAddress> {
-    const userExists = await this.usersRepository.findById(data.user_id);
-
+  public async execute(user_id: string): Promise<UserAddress[] | undefined> {
+    const userExists = await this.usersRepository.findById(user_id);
     if (!userExists) {
       throw new AppError('User non-exists');
     }
-    const userAddress = await this.userAdressesRepository.create(data);
+    const userAddress = await this.userAdressesRepository.findAllByUser(
+      user_id,
+    );
     return userAddress;
   }
 }
-export default CreateUserService;
+export default ListUserAdressesProvider;

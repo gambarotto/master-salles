@@ -29,8 +29,24 @@ class FakeUserAddressessRepository implements IUserAddressRepository {
     return userAddress;
   }
 
+  public async delete(userAddress: UserAddress): Promise<void> {
+    const userAddressIndex = this.userAdresses.findIndex(
+      address => address.id === userAddress.id,
+    );
+    this.userAdresses.splice(userAddressIndex, 1);
+  }
+
   public async findById(address_id: string): Promise<UserAddress | undefined> {
     return this.userAdresses.find(address => address.id === address_id);
+  }
+
+  public async findAllByUser(
+    user_id: string,
+  ): Promise<UserAddress[] | undefined> {
+    const userAdresses = this.userAdresses.filter(
+      address => address.user_id === user_id,
+    );
+    return userAdresses;
   }
 }
 

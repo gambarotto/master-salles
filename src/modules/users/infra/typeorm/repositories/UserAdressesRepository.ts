@@ -21,9 +21,22 @@ class UserAddressessRepository implements IUserAddressRepository {
     return updatedUserAddress;
   }
 
+  public async delete(userAddress: UserAddress): Promise<void> {
+    await this.ormRepository.remove(userAddress);
+  }
+
   public async findById(address_id: string): Promise<UserAddress | undefined> {
-    const userAddress = await this.ormRepository.findOne(address_id);
+    const userAddress = await this.ormRepository.findOne({
+      where: { id: address_id },
+    });
     return userAddress;
+  }
+
+  public async findAllByUser(
+    user_id: string,
+  ): Promise<UserAddress[] | undefined> {
+    const userAdresses = await this.ormRepository.find({ where: { user_id } });
+    return userAdresses;
   }
 }
 export default UserAddressessRepository;
