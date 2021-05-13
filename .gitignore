@@ -3,7 +3,7 @@
 node_modules/
 build/
 tmp/*
-!tmp/.gitkeep
+!temp/.gitkeep
 temp/
 src/config/auth.ts
 
