@@ -3,7 +3,7 @@ import { classToClass } from 'class-transformer';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-class SessionController {
+class SessionUserController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { email, password } = request.body;
     const authenticateUser = container.resolve(AuthenticateUserService);
@@ -15,4 +15,4 @@ class SessionController {
   }
 }
 
-export default SessionController;
+export default SessionUserController;

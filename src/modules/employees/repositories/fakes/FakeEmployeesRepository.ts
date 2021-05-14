@@ -26,10 +26,12 @@ class FakeEmployeesRepository implements IEmployeesRepository {
     return employee;
   }
 
-  // public async delete(user_id: string): Promise<void> {
-  //   const userIndex = this.employees.findIndex(user => user.id === user_id);
-  //   this.employees.splice(userIndex, 1);
-  // }
+  public async delete(employee_id: string): Promise<void> {
+    const employeeIndex = this.employees.findIndex(
+      employee => employee.id === employee_id,
+    );
+    this.employees.splice(employeeIndex, 1);
+  }
 
   public async findById(employee_id: string): Promise<Employee | undefined> {
     const employee = this.employees.find(e => e.id === employee_id);
@@ -37,8 +39,8 @@ class FakeEmployeesRepository implements IEmployeesRepository {
   }
 
   public async findByEmail(email: string): Promise<Employee | undefined> {
-    const user = this.employees.find(u => u.email === email);
-    return user;
+    const employee = this.employees.find(e => e.email === email);
+    return employee;
   }
 }
 

@@ -6,8 +6,8 @@ const userProfilesRoutes = Router();
 const userProfilesController = new UserProfilesController();
 userProfilesRoutes.use(ensureAuthenticated);
 
-userProfilesRoutes.get('/', userProfilesController.index);
-userProfilesRoutes.put('/', userProfilesController.update);
-userProfilesRoutes.delete('/', userProfilesController.delete);
+userProfilesRoutes.get('/me', userProfilesController.index);
+userProfilesRoutes.put('/me', userProfilesController.update);
+userProfilesRoutes.delete('/me', userProfilesController.delete);
 
 export default userProfilesRoutes;

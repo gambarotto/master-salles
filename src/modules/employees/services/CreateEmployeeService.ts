@@ -32,6 +32,9 @@ class CreateEmployeeService {
     if (checkAlreadyExists) {
       throw new AppError('Email address already used.');
     }
+    if (responsibility !== 'admin' && responsibility !== 'seller') {
+      throw new AppError('responsibility should be equal to admin or seller');
+    }
     const hashedPassword = await this.hashProvider.generateHash(password);
     const user = await this.employeesRepository.create({
       name,

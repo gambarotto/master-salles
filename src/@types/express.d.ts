@@ -3,5 +3,8 @@ declare namespace Express {
     user: {
       id: string;
     };
+    employee: {
+      id: string;
+    };
   }
 }

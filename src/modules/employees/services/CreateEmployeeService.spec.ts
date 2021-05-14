@@ -41,4 +41,14 @@ describe('CreateEmployee', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+  it('Should not be able create a new employee with a invalid responsibility ', async () => {
+    await expect(
+      createEmployeeService.execute({
+        name: 'Diego2',
+        email: 'diego@diego.com',
+        password: '123456',
+        responsibility: 'invalid-responsibility',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });

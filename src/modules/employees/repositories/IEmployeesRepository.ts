@@ -7,5 +7,5 @@ export default interface IEmployeesRepository {
   findByEmail(email: string): Promise<Employee | undefined>;
   create(data: ICreateEmployeeDTO): Promise<Employee>;
   update(employee: Employee): Promise<Employee>;
-  // delete(user_id: string): Promise<void>;
+  delete(employee_id: string): Promise<void>;
 }

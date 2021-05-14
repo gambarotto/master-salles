@@ -7,9 +7,9 @@ const userAdressesController = new UserAdressesController();
 
 userAdressesRoutes.use(ensureAuthenticated);
 
-userAdressesRoutes.get('/', userAdressesController.index);
-userAdressesRoutes.post('/', userAdressesController.create);
-userAdressesRoutes.put('/', userAdressesController.update);
-userAdressesRoutes.delete('/:address_id', userAdressesController.delete);
+userAdressesRoutes.get('/me', userAdressesController.index);
+userAdressesRoutes.post('/me', userAdressesController.create);
+userAdressesRoutes.put('/me', userAdressesController.update);
+userAdressesRoutes.delete('/me/:address_id', userAdressesController.delete);
 
 export default userAdressesRoutes;

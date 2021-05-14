@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for users/services/UserAddresses/ListUserAdressesProvider.ts</title>
+    <title>Code coverage report for employees/services/EmployeeProfile/ShowEmployeeProfileService.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">users/services/UserAddresses</a> ListUserAdressesProvider.ts</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">employees/services/EmployeeProfile</a> ShowEmployeeProfileService.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>27/27</span>
+                <span class='fraction'>25/25</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>27/27</span>
+                <span class='fraction'>25/25</span>
             </div>
         
             
@@ -82,26 +82,13 @@
 <a name='L23'></a><a href='#L23'>23</a>
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -109,35 +96,42 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import UserAddress from '@modules/users/infra/typeorm/entities/UserAddress';
-import IUserAdressesRepository from '@modules/users/repositories/IUserAdressesRepository';
-import IUsersRepository from '@modules/users/repositories/IUserRepository';
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import IEmployeesRepository from '@modules/employees/repositories/IEmployeesRepository';
+import User from '@modules/users/infra/typeorm/entities/User';
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 &nbsp;
+interface IRequest {
+  employee_id: string;
+}
+&nbsp;
 @injectable()
-class ListUserAdressesProvider {
+class ShowEmployeeProfileService {
   constructor(
-    @inject('UsersRepository')
-    private usersRepository: IUsersRepository,
-    @inject('UserAdressesRepository')
-    private userAdressesRepository: IUserAdressesRepository,
+    @inject('EmployeesRepository')
+    private employeesRepository: IEmployeesRepository,
   ) {}
 &nbsp;
-  public async execute(user_id: string): Promise&lt;UserAddress[] | undefined&gt; {
-    const userExists = await this.usersRepository.findById(user_id);
-    if (!userExists) {
-      throw new AppError('User non-exists');
+  public async execute({ employee_id }: IRequest): Promise&lt;User&gt; {
+    const employee = await this.employeesRepository.findById(employee_id);
+    if (!employee) {
+      throw new AppError('Employee not found');
     }
-    const userAddress = await this.userAdressesRepository.findAllByUser(
-      user_id,
-    );
-    return userAddress;
+    return employee;
   }
 }
-export default ListUserAdressesProvider;
+export default ShowEmployeeProfileService;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
