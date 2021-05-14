@@ -1,4 +1,4 @@
-import { Exclude } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
@@ -34,11 +34,11 @@ class Employee {
   @UpdateDateColumn()
   updated_at: Date;
 
-  // @Expose({ name: 'avatar_url' })
-  // getAvatarUrl(): string | null {
-  //   return this.avatar
-  //     ? `${process.env.APP_API_URL}/files/${this.avatar}`
-  //     : null;
-  // }
+  @Expose({ name: 'avatar_url' })
+  getAvatarUrl(): string | null {
+    return this.avatar
+      ? `${process.env.APP_API_URL}/files/${this.avatar}`
+      : null;
+  }
 }
 export default Employee;

@@ -1,12 +1,13 @@
+/* eslint-disable no-console */
 import 'reflect-metadata';
 import 'dotenv/config';
+import 'express-async-errors';
 
 import express, { Response, Request, NextFunction } from 'express';
 import cors from 'cors';
 import uploadConfig from '@config/upload';
 import AppError from '@shared/errors/AppError';
 import routes from './routes';
-import 'express-async-errors';
 import '@shared/infra/typeorm';
 import '@shared/container';
 

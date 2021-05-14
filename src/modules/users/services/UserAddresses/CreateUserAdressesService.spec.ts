@@ -1,3 +1,4 @@
+import AppError from '@shared/errors/AppError';
 import FakeUserAdressesRepository from '../../repositories/fakes/FakeUserAdressesRepository';
 import FakeUsersRepository from '../../repositories/fakes/FakeUsersRepository';
 import CreateUserAdressessService from './CreateUserAdressesService';
@@ -47,7 +48,7 @@ describe('CreateUserAddress', () => {
         reference_point: 'perto de',
         alias: 'casa',
       }),
-    ).rejects.toBeInstanceOf(Error);
+    ).rejects.toBeInstanceOf(AppError);
   });
   it('Should not be able create a new user address without required properties', async () => {
     await expect(
@@ -62,6 +63,6 @@ describe('CreateUserAddress', () => {
         reference_point: 'perto de',
         alias: 'casa',
       }),
-    ).rejects.toBeInstanceOf(Error);
+    ).rejects.toBeInstanceOf(AppError);
   });
 });

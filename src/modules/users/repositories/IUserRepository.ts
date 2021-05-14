@@ -1,5 +1,4 @@
 import ICreateUserDTO from '../dtos/ICreateUserDTO';
-// import IFindAllProvidersDTO from '../dtos/IFindAllProvidersDTO';
 import User from '../infra/typeorm/entities/User';
 
 export default interface IUsersRepository {
@@ -8,4 +7,5 @@ export default interface IUsersRepository {
   findByEmail(email: string): Promise<User | undefined>;
   create(data: ICreateUserDTO): Promise<User>;
   update(user: User): Promise<User>;
+  delete(user_id: string): Promise<void>;
 }

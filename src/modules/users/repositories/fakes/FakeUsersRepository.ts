@@ -24,6 +24,11 @@ class FakeUsersRepository implements IUsersRepository {
     return user;
   }
 
+  public async delete(user_id: string): Promise<void> {
+    const userIndex = this.users.findIndex(user => user.id === user_id);
+    this.users.splice(userIndex, 1);
+  }
+
   public async findById(user_id: string): Promise<User | undefined> {
     const user = this.users.find(u => u.id === user_id);
     return user;

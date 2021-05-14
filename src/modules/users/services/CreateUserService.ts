@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe';
 import User from '../infra/typeorm/entities/User';
-import IHashProvider from '../providers/hashProvider/models/IHashProvider';
+import IHashProvider from '../../../shared/container/providers/hashProvider/models/IHashProvider';
 import IUsersRepository from '../repositories/IUserRepository';
 
 interface IRequest {

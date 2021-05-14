@@ -1,4 +1,4 @@
-import FakeHashProvider from '../providers/hashProvider/fakes/FakeHashProvider';
+import FakeHashProvider from '../../../shared/container/providers/hashProvider/fakes/FakeHashProvider';
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import CreateUserService from './CreateUserService';
 
