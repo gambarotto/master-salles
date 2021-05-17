@@ -1,5 +1,6 @@
 import employeesRoutes from '@modules/employees/infra/http/routes/employees.routes';
 import employeesProfilesRoutes from '@modules/employees/infra/http/routes/profiles.routes';
+import storesRoutes from '@modules/stores/infra/http/routes/stores.routes';
 import userAdressesRoutes from '@modules/users/infra/http/routes/adresses.routes';
 import userProfilesRoutes from '@modules/users/infra/http/routes/profiles.routes';
 import usersRoutes from '@modules/users/infra/http/routes/users.routes';
@@ -16,5 +17,7 @@ routes.use('/profiles/users', userProfilesRoutes);
 
 routes.use('/employees', employeesRoutes);
 routes.use('/profiles/employees', employeesProfilesRoutes);
+
+routes.use('/stores', storesRoutes);
 
 export default routes;
