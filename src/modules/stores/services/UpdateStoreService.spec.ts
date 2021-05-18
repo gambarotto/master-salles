@@ -27,6 +27,20 @@ describe('Update Store', () => {
     expect(storeUpdated.cnpj).toBe('21.111.111/1111-11');
     expect(storeUpdated.name).toBe('Loja de Queijo');
   });
+  it('Should be able update a store without inform cnpj and description', async () => {
+    const store = await fakeStoresRepository.create({
+      name: 'Loja de Queijo',
+      description:
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+      cnpj: '11.111.111/1111-11',
+    });
+    const storeUpdated = await updateStoreService.execute({
+      store_id: store.id,
+    });
+
+    expect(storeUpdated.cnpj).toBe('11.111.111/1111-11');
+    expect(storeUpdated.name).toBe('Loja de Queijo');
+  });
   it('Should not be able update a store with invalid store id', async () => {
     await expect(
       updateStoreService.execute({
@@ -44,12 +58,18 @@ describe('Update Store', () => {
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
       cnpj: '11.111.111/1111-11',
     });
+    await fakeStoresRepository.create({
+      name: 'Loja de Queijo',
+      description:
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
+      cnpj: '22.222.222/2222-22',
+    });
     await expect(
       updateStoreService.execute({
         store_id: store.id,
         description:
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
-        cnpj: '11.111.111/1111-11',
+        cnpj: '22.222.222/2222-22',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });

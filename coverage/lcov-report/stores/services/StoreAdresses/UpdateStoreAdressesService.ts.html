@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for employees/services/EmployeeProfile/UpdateEmployeeProfileService.ts</title>
+    <title>Code coverage report for stores/services/StoreAdresses/UpdateStoreAdressesService.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">employees/services/EmployeeProfile</a> UpdateEmployeeProfileService.ts</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">stores/services/StoreAdresses</a> UpdateStoreAdressesService.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>62/62</span>
+                <span class='fraction'>65/65</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.62% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>11/13</span>
+                <span class='fraction'>15/15</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>62/62</span>
+                <span class='fraction'>65/65</span>
             </div>
         
             
@@ -119,7 +119,10 @@
 <a name='L60'></a><a href='#L60'>60</a>
 <a name='L61'></a><a href='#L61'>61</a>
 <a name='L62'></a><a href='#L62'>62</a>
-<a name='L63'></a><a href='#L63'>63</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -136,113 +139,119 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import User from '@modules/users/infra/typeorm/entities/User';
-import IHashProvider from '@shared/container/providers/hashProvider/models/IHashProvider';
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import StoreAddress from '@modules/stores/infra/typeorm/entities/StoreAddress';
+import IStoreAdressesRepository from '@modules/stores/repositories/IStoreAdressesRepository';
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
-import IEmployeesRepository from '@modules/employees/repositories/IEmployeesRepository';
 &nbsp;
 interface IRequest {
-  employee_id: string;
-  name?: string;
-  email?: string;
-  old_password?: string;
-  new_password?: string;
+  store_address_id: string;
+  street?: string;
+  number?: string;
+  district?: string;
+  city?: string;
+  zip_code?: string;
+  complement?: string;
+  reference_point?: string;
+  lat?: string;
+  long?: string;
 }
 &nbsp;
 @injectable()
-class UpdateEmployeeProfileService {
+class UpdateStoreAdressesService {
   constructor(
-    @inject('EmployeesRepository')
-    private employeesRepository: IEmployeesRepository,
-    @inject('HashProvider')
-    private hashProvider: IHashProvider,
+    @inject('StoreAdressesRepository')
+    private storeAdressesRepository: IStoreAdressesRepository,
   ) {}
 &nbsp;
   public async execute({
-    employee_id,
-    name,
-    email,
-    old_password,
-    new_password,
-  }: IRequest): Promise&lt;User&gt; {
-    const employee = await this.employeesRepository.findById(employee_id);
-    if (!employee) {
-      throw new AppError('Employee not found');
+    store_address_id,
+    street,
+    number,
+    district,
+    city,
+    zip_code,
+    complement,
+    reference_point,
+    lat,
+    long,
+  }: IRequest): Promise&lt;StoreAddress&gt; {
+    const storeAddress = await this.storeAdressesRepository.findById(
+      store_address_id,
+    );
+&nbsp;
+    if (!storeAddress) {
+      throw new AppError('Store Address not found');
     }
-    if (<span class="branch-0 cbranch-no" title="branch not covered" >email </span>&amp;&amp; email !== employee.email) {
-      const alreadyExistsEmail = await this.employeesRepository.findByEmail(
-        email,
-      );
-      if (alreadyExistsEmail) {
-        throw new AppError('Email already exists');
-      }
-    }
-    if (<span class="branch-0 cbranch-no" title="branch not covered" >old_password)</span> {
-      const matchedPassword = await this.hashProvider.compareHash(
-        old_password,
-        employee.password,
-      );
-      if (!matchedPassword) {
-        throw new AppError('Password do not match');
-      }
-      if (!new_password) {
-        throw new AppError('New Password is missing');
-      }
-      const passwordHashed = await this.hashProvider.generateHash(new_password);
-      employee.password = passwordHashed;
-    }
-    Object.assign(employee, { name, email });
-    const updatedEmployee = await this.employeesRepository.update(employee);
-    return updatedEmployee;
+&nbsp;
+    Object.assign(storeAddress, {
+      street: street || storeAddress.street,
+      number: number || storeAddress.number,
+      district: district || storeAddress.district,
+      city: city || storeAddress.city,
+      zip_code: zip_code || storeAddress.zip_code,
+      complement: complement || storeAddress.complement,
+      reference_point: reference_point || storeAddress.reference_point,
+      lat: lat || storeAddress.lat,
+      long: long || storeAddress.long,
+    });
+&nbsp;
+    const storeUpdated = await this.storeAdressesRepository.update(
+      storeAddress,
+    );
+&nbsp;
+    return storeUpdated;
   }
 }
-export default UpdateEmployeeProfileService;
+export default UpdateStoreAdressesService;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
