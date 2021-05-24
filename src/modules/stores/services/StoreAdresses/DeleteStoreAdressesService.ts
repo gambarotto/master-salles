@@ -2,10 +2,6 @@ import IStoreAdressesRepository from '@modules/stores/repositories/IStoreAdresse
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 
-interface IRequest {
-  store_address_id: string;
-}
-
 @injectable()
 class DeleteStoreAdressesService {
   constructor(
@@ -13,15 +9,15 @@ class DeleteStoreAdressesService {
     private storeAdressesRepository: IStoreAdressesRepository,
   ) {}
 
-  public async execute({ store_address_id }: IRequest): Promise<void> {
-    const storeAddress = await this.storeAdressesRepository.findById(
-      store_address_id,
+  public async execute(store_id: string): Promise<void> {
+    const storeAddress = await this.storeAdressesRepository.findByStoreId(
+      store_id,
     );
 
     if (!storeAddress) {
       throw new AppError('Store not found');
     }
-    await this.storeAdressesRepository.delete(store_address_id);
+    await this.storeAdressesRepository.delete(storeAddress.id);
   }
 }
 export default DeleteStoreAdressesService;

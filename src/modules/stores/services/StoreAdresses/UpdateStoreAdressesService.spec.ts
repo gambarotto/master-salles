@@ -35,7 +35,7 @@ describe('Update Store Address', () => {
       long: Number('-74.0059731'),
     });
     const storeAddressUpdated = await updateStoreAdressesService.execute({
-      store_address_id: storeAddress.id,
+      store_id: storeAddress.store_id,
       street: 'rua da loja editada',
       number: '888',
       district: 'bairro da loja editada',
@@ -68,14 +68,14 @@ describe('Update Store Address', () => {
       long: Number('-74.0059731'),
     });
     const storeAddressUpdated = await updateStoreAdressesService.execute({
-      store_address_id: storeAddress.id,
+      store_id: storeAddress.store_id,
     });
     expect(storeAddressUpdated.street).toBe('rua da loja');
   });
   it('Should not be able update a store address with invalid store-address-id', async () => {
     await expect(
       updateStoreAdressesService.execute({
-        store_address_id: 'store-address-id',
+        store_id: 'store-address-id',
         street: 'rua da loja editada',
         number: '888',
         district: 'bairro da loja editada',

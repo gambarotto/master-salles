@@ -34,9 +34,7 @@ describe('Delete Store Address', () => {
       lat: Number('40.7143528'),
       long: Number('-74.0059731'),
     });
-    await deleteStoreAdressesService.execute({
-      store_address_id: storeAddress.id,
-    });
+    await deleteStoreAdressesService.execute(storeAddress.store_id);
 
     await expect(
       fakeStoreAdressesRepository.findById(storeAddress.id),
@@ -44,9 +42,7 @@ describe('Delete Store Address', () => {
   });
   it('Should not be able delete a store address with invalid-store-address-id', async () => {
     await expect(
-      deleteStoreAdressesService.execute({
-        store_address_id: 'invalid-store-address-id',
-      }),
+      deleteStoreAdressesService.execute('invalid-store-address-id'),
     ).rejects.toBeInstanceOf(AppError);
   });
 });
