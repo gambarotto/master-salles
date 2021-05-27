@@ -3,9 +3,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import UserAddress from './UserAddress';
 
 @Entity('users')
 class User {
@@ -22,8 +24,11 @@ class User {
   @Exclude()
   password: string;
 
-  @Column()
-  avatar: string;
+  @Column({ nullable: true })
+  avatar?: string;
+
+  @OneToMany(() => UserAddress, userAddress => userAddress.user)
+  adresses: UserAddress[];
 
   @CreateDateColumn()
   created_at: Date;

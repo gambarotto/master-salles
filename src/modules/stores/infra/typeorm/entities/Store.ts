@@ -21,7 +21,7 @@ class Store {
   @Column()
   cnpj: string;
 
-  @Column()
+  @Column({ nullable: true })
   image_logo: string;
 
   @CreateDateColumn()

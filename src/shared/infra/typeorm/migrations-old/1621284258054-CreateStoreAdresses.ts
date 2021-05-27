@@ -1,12 +1,12 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateUserAddress1620673337517
+export default class CreateStoreAdresses1621284258054
   implements MigrationInterface
 {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'users_adresses',
+        name: 'stores_adresses',
         columns: [
           {
             name: 'id',
@@ -16,7 +16,7 @@ export default class CreateUserAddress1620673337517
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'user_id',
+            name: 'store_id',
             type: 'uuid',
           },
           {
@@ -52,8 +52,13 @@ export default class CreateUserAddress1620673337517
             isNullable: true,
           },
           {
-            name: 'alias',
-            type: 'varchar',
+            name: 'lat',
+            type: 'float',
+            isNullable: true,
+          },
+          {
+            name: 'long',
+            type: 'float',
             isNullable: true,
           },
           {
@@ -69,10 +74,10 @@ export default class CreateUserAddress1620673337517
         ],
         foreignKeys: [
           {
-            name: 'AddresUser',
-            referencedTableName: 'users',
+            name: 'stores_adresses',
+            referencedTableName: 'stores',
             referencedColumnNames: ['id'],
-            columnNames: ['user_id'],
+            columnNames: ['store_id'],
             onDelete: 'SET NULL',
             onUpdate: 'CASCADE',
           },
@@ -82,6 +87,6 @@ export default class CreateUserAddress1620673337517
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('users_adresses');
+    await queryRunner.dropTable('stores_adresses');
   }
 }

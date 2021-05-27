@@ -1,12 +1,12 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateStoreAdresses1621284258054
+export default class CreateUserAddress1620673337517
   implements MigrationInterface
 {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'stores_adresses',
+        name: 'users_adresses',
         columns: [
           {
             name: 'id',
@@ -15,10 +15,10 @@ export default class CreateStoreAdresses1621284258054
             generationStrategy: 'uuid',
             default: 'uuid_generate_v4()',
           },
-          {
-            name: 'store_id',
-            type: 'uuid',
-          },
+          // {
+          //   name: 'user_id',
+          //   type: 'uuid',
+          // },
           {
             name: 'street',
             type: 'varchar',
@@ -52,13 +52,8 @@ export default class CreateStoreAdresses1621284258054
             isNullable: true,
           },
           {
-            name: 'lat',
-            type: 'float',
-            isNullable: true,
-          },
-          {
-            name: 'long',
-            type: 'float',
+            name: 'alias',
+            type: 'varchar',
             isNullable: true,
           },
           {
@@ -72,21 +67,21 @@ export default class CreateStoreAdresses1621284258054
             default: 'now()',
           },
         ],
-        foreignKeys: [
-          {
-            name: 'AddresStore',
-            referencedTableName: 'stores',
-            referencedColumnNames: ['id'],
-            columnNames: ['store_id'],
-            onDelete: 'SET NULL',
-            onUpdate: 'CASCADE',
-          },
-        ],
+        // foreignKeys: [
+        //   {
+        //     name: 'users_adresses',
+        //     referencedTableName: 'users',
+        //     referencedColumnNames: ['id'],
+        //     columnNames: ['user_id'],
+        //     onDelete: 'SET NULL',
+        //     onUpdate: 'CASCADE',
+        //   },
+        // ],
       }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('stores_adresses');
+    await queryRunner.dropTable('users_adresses');
   }
 }

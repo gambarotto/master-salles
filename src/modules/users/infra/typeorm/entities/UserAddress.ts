@@ -2,17 +2,22 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import User from './User';
 
 @Entity('users_adresses')
 class UserAddress {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  user_id: string;
+  @ManyToOne(() => User, user => user.adresses, {
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
+  })
+  user: User;
 
   @Column()
   street: string;
@@ -29,13 +34,13 @@ class UserAddress {
   @Column()
   zip_code: string;
 
-  @Column()
+  @Column({ nullable: true })
   complement: string;
 
-  @Column()
+  @Column({ nullable: true })
   reference_point: string;
 
-  @Column()
+  @Column({ nullable: true })
   alias: string;
 
   @CreateDateColumn()
@@ -43,12 +48,5 @@ class UserAddress {
 
   @UpdateDateColumn()
   updated_at: Date;
-
-  // @Expose({ name: 'avatar_url' })
-  // getAvatarUrl(): string | null {
-  //   return this.avatar
-  //     ? `${process.env.APP_API_URL}/files/${this.avatar}`
-  //     : null;
-  // }
 }
 export default UserAddress;

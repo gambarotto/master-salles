@@ -11,8 +11,8 @@ class StoreAddress {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  store_id: string;
+  // @Column()
+  // store_id: string;
 
   @Column()
   street: string;
@@ -29,16 +29,16 @@ class StoreAddress {
   @Column()
   zip_code: string;
 
-  @Column()
+  @Column({ nullable: true })
   complement: string;
 
-  @Column()
+  @Column({ nullable: true })
   reference_point: string;
 
-  @Column()
+  @Column({ nullable: true })
   lat: number;
 
-  @Column()
+  @Column({ nullable: true })
   long: number;
 
   @CreateDateColumn()

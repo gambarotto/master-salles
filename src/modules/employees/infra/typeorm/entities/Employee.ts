@@ -25,7 +25,7 @@ class Employee {
   @Column()
   responsibility: string;
 
-  @Column()
+  @Column({ nullable: true })
   avatar: string;
 
   @CreateDateColumn()

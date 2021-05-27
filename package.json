@@ -5,7 +5,7 @@
     "license": "MIT",
     "scripts": {
         "build": "tsc",
-        "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+        "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js ",
         "start": "ts-node src/shared/infra/http/server.ts",
         "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
         "test": "jest"
@@ -26,6 +26,7 @@
         "tsc": "^2.0.3",
         "tsyringe": "^4.5.0",
         "typeorm": "^0.2.32",
+        "typeorm-naming-strategies": "^2.0.0",
         "uuid": "^8.3.2"
     },
     "devDependencies": {
