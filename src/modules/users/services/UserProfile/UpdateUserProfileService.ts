@@ -5,7 +5,7 @@ import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
-  user_id: string;
+  userId: string;
   name?: string;
   email?: string;
   old_password?: string;
@@ -22,13 +22,13 @@ class UpdateUserProfileService {
   ) {}
 
   public async execute({
-    user_id,
+    userId,
     name,
     email,
     old_password,
     new_password,
   }: IRequest): Promise<User> {
-    const user = await this.usersRepository.findById(user_id);
+    const user = await this.usersRepository.findById({ userId });
     if (!user) {
       throw new AppError('User not found');
     }

@@ -9,9 +9,9 @@ interface IRequest {
   number?: string;
   district?: string;
   city?: string;
-  zip_code?: string;
+  zipCode?: string;
   complement?: string;
-  reference_point?: string;
+  referencePoint?: string;
   lat?: string;
   long?: string;
 }
@@ -29,9 +29,9 @@ class UpdateStoreAdressesService {
     number,
     district,
     city,
-    zip_code,
+    zipCode,
     complement,
-    reference_point,
+    referencePoint,
     lat,
     long,
   }: IRequest): Promise<StoreAddress> {
@@ -48,9 +48,9 @@ class UpdateStoreAdressesService {
       number: number || storeAddress.number,
       district: district || storeAddress.district,
       city: city || storeAddress.city,
-      zip_code: zip_code || storeAddress.zip_code,
+      zipCode: zipCode || storeAddress.zipCode,
       complement: complement || storeAddress.complement,
-      reference_point: reference_point || storeAddress.reference_point,
+      referencePoint: referencePoint || storeAddress.referencePoint,
       lat: lat || storeAddress.lat,
       long: long || storeAddress.long,
     });

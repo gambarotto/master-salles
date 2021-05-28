@@ -3,9 +3,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import StoreAddress from './StoreAddress';
 
 @Entity('stores')
 class Store {
@@ -22,18 +24,21 @@ class Store {
   cnpj: string;
 
   @Column({ nullable: true })
-  image_logo: string;
+  imageLogo: string;
+
+  @OneToMany(() => StoreAddress, storeAddress => storeAddress.store)
+  address: string;
 
   @CreateDateColumn()
-  created_at: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updatedAt: Date;
 
-  @Expose({ name: 'logo_url' })
+  @Expose({ name: 'logoUrl' })
   getLogo(): string | null {
-    return this.image_logo
-      ? `${process.env.APP_API_URL}/files/${this.image_logo}`
+    return this.imageLogo
+      ? `${process.env.APP_API_URL}/files/${this.imageLogo}`
       : null;
   }
 }

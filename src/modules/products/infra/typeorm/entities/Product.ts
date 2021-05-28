@@ -20,19 +20,19 @@ class Product {
   description: string;
 
   @Column()
-  cost_price: number;
+  costPrice: number;
 
   @Column()
-  sale_price: number;
+  salePrice: number;
 
-  // @ManyToMany(() => Category, category => category.products)
-  // @JoinTable()
-  // categories: Category[];
-
-  @CreateDateColumn()
-  created_at: Date;
+  @ManyToMany(() => Category, category => category.products)
+  @JoinTable()
+  categories: Category[];
 
   @CreateDateColumn()
-  updated_at: Date;
+  createdAt: Date;
+
+  @CreateDateColumn()
+  updatedAt: Date;
 }
 export default Product;

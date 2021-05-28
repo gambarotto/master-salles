@@ -4,9 +4,9 @@ export default interface ICreateStoreAdressesDTO {
   number: string;
   district: string;
   city: string;
-  zip_code: string;
+  zipCode: string;
   complement: string;
-  reference_point: string;
+  referencePoint: string;
   lat: number;
   long: number;
 }

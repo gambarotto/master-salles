@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('user_tokens')
+@Entity('userTokens')
 class UserToken {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -17,12 +17,12 @@ class UserToken {
   token: string;
 
   @Column()
-  user_id: string;
+  userId: string;
 
   @CreateDateColumn()
-  created_at: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updatedAt: Date;
 }
 export default UserToken;

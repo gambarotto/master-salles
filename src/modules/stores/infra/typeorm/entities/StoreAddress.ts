@@ -2,17 +2,19 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import Store from './Store';
 
-@Entity('stores_adresses')
+@Entity('storeAdresses')
 class StoreAddress {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  // @Column()
-  // store_id: string;
+  @ManyToOne(() => Store, store => store.address)
+  store: string;
 
   @Column()
   street: string;
@@ -27,13 +29,13 @@ class StoreAddress {
   city: string;
 
   @Column()
-  zip_code: string;
+  zipCode: string;
 
   @Column({ nullable: true })
   complement: string;
 
   @Column({ nullable: true })
-  reference_point: string;
+  referencePoint: string;
 
   @Column({ nullable: true })
   lat: number;
@@ -42,9 +44,9 @@ class StoreAddress {
   long: number;
 
   @CreateDateColumn()
-  created_at: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updatedAt: Date;
 }
 export default StoreAddress;

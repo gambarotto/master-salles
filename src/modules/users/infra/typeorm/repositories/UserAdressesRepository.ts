@@ -1,4 +1,4 @@
-import ICreateAddressUserDto from '@modules/users/dtos/ICreateAddressUserDTO';
+import ICreateAddressUserDTO from '@modules/users/dtos/ICreateAddressUserDTO';
 import IUserAddressRepository from '@modules/users/repositories/IUserAdressesRepository';
 import { getRepository, Repository } from 'typeorm';
 import UserAddress from '../entities/UserAddress';
@@ -10,7 +10,7 @@ class UserAddressessRepository implements IUserAddressRepository {
     this.ormRepository = getRepository(UserAddress);
   }
 
-  public async create(data: ICreateAddressUserDto): Promise<UserAddress> {
+  public async create(data: ICreateAddressUserDTO): Promise<UserAddress> {
     const userAddress = this.ormRepository.create(data);
     await this.ormRepository.save(userAddress);
     return userAddress;
@@ -22,20 +22,27 @@ class UserAddressessRepository implements IUserAddressRepository {
   }
 
   public async delete(userAddress: UserAddress): Promise<void> {
-    await this.ormRepository.remove(userAddress);
+    console.log('oi');
+
+    await this.ormRepository.delete(userAddress.id);
   }
 
-  public async findById(address_id: string): Promise<UserAddress | undefined> {
-    const userAddress = await this.ormRepository.findOne({
-      where: { id: address_id },
+  public async findById(
+    addressId: string,
+  ): Promise<UserAddress | (UserAddress & { user: string }) | undefined> {
+    const userAddress = await this.ormRepository.findOne(addressId, {
+      loadRelationIds: true,
     });
+
     return userAddress;
   }
 
   public async findAllByUser(
-    user_id: string,
+    userId: string,
   ): Promise<UserAddress[] | undefined> {
-    const userAdresses = await this.ormRepository.find({ where: { user_id } });
+    const userAdresses = await this.ormRepository.find({
+      where: { user: { id: userId } },
+    });
     return userAdresses;
   }
 }

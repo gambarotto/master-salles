@@ -1,4 +1,4 @@
-import ICreateAddressUserDto from '@modules/users/dtos/ICreateAddressUserDTO';
+import ICreateAddressUserDTO from '@modules/users/dtos/ICreateAddressUserDTO';
 import UserAddress from '@modules/users/infra/typeorm/entities/UserAddress';
 import { v4 } from 'uuid';
 import IUserAddressRepository from '../IUserAdressesRepository';
@@ -10,10 +10,10 @@ class FakeUserAddressessRepository implements IUserAddressRepository {
     this.userAdresses = [];
   }
 
-  public async create(data: ICreateAddressUserDto): Promise<UserAddress> {
+  public async create(data: ICreateAddressUserDTO): Promise<UserAddress> {
     const userAddress = new UserAddress();
-    const { user_id, street, city, zip_code } = data;
-    if (!user_id || !street || !city || !zip_code) {
+    const { user, street, city, zipCode } = data;
+    if (!user || !street || !city || !zipCode) {
       throw new Error('Error');
     }
     Object.assign(userAddress, { id: v4() }, data);
@@ -41,10 +41,10 @@ class FakeUserAddressessRepository implements IUserAddressRepository {
   }
 
   public async findAllByUser(
-    user_id: string,
+    userId: string,
   ): Promise<UserAddress[] | undefined> {
     const userAdresses = this.userAdresses.filter(
-      address => address.user_id === user_id,
+      address => address.user.id === userId,
     );
     return userAdresses;
   }

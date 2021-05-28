@@ -38,7 +38,7 @@ export default class CreateStoreAdresses1621284258054
             type: 'varchar',
           },
           {
-            name: 'zip_code',
+            name: 'zipCode',
             type: 'varchar',
           },
           {
@@ -47,7 +47,7 @@ export default class CreateStoreAdresses1621284258054
             isNullable: true,
           },
           {
-            name: 'reference_point',
+            name: 'referencePoint',
             type: 'varchar',
             isNullable: true,
           },
@@ -62,12 +62,12 @@ export default class CreateStoreAdresses1621284258054
             isNullable: true,
           },
           {
-            name: 'created_at',
+            name: 'createdAt',
             type: 'timestamp',
             default: 'now()',
           },
           {
-            name: 'updated_at',
+            name: 'updatedAt',
             type: 'timestamp',
             default: 'now()',
           },

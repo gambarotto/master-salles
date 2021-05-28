@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import User from './User';
 
-@Entity('users_adresses')
+@Entity('userAdresses')
 class UserAddress {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -16,6 +16,7 @@ class UserAddress {
   @ManyToOne(() => User, user => user.adresses, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
+    nullable: false,
   })
   user: User;
 
@@ -32,21 +33,21 @@ class UserAddress {
   city: string;
 
   @Column()
-  zip_code: string;
+  zipCode: string;
 
   @Column({ nullable: true })
   complement: string;
 
   @Column({ nullable: true })
-  reference_point: string;
+  referencePoint: string;
 
   @Column({ nullable: true })
   alias: string;
 
   @CreateDateColumn()
-  created_at: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updatedAt: Date;
 }
 export default UserAddress;

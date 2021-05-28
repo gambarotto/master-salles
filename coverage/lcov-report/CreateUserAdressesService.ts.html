@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 
@@ -15,48 +14,48 @@
         }
     </style>
 </head>
-    
+
 <body>
-<div class='wrapper'>
-    <div class='pad1'>
-        <h1><a href="index.html">All files</a> CreateUserAdressesService.ts</h1>
-        <div class='clearfix'>
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
-                <span class="quiet">Statements</span>
-                <span class='fraction'>0/36</span>
+    <div class='wrapper'>
+        <div class='pad1'>
+            <h1><a href="index.html">All files</a> CreateUserAdressesService.ts</h1>
+            <div class='clearfix'>
+
+                <div class='fl pad1y space-right2'>
+                    <span class="strong">0% </span>
+                    <span class="quiet">Statements</span>
+                    <span class='fraction'>0/36</span>
+                </div>
+
+
+                <div class='fl pad1y space-right2'>
+                    <span class="strong">0% </span>
+                    <span class="quiet">Branches</span>
+                    <span class='fraction'>0/1</span>
+                </div>
+
+
+                <div class='fl pad1y space-right2'>
+                    <span class="strong">0% </span>
+                    <span class="quiet">Functions</span>
+                    <span class='fraction'>0/1</span>
+                </div>
+
+
+                <div class='fl pad1y space-right2'>
+                    <span class="strong">0% </span>
+                    <span class="quiet">Lines</span>
+                    <span class='fraction'>0/36</span>
+                </div>
+
+
             </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>0/1</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
-                <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
-                <span class="quiet">Lines</span>
-                <span class='fraction'>0/36</span>
-            </div>
-        
-            
+            <p class="quiet">
+                Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+            </p>
         </div>
-        <p class="quiet">
-            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
-        </p>
-    </div>
-    <div class='status-line low'></div>
-    <pre><table class="coverage">
+        <div class='status-line low'></div>
+        <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
 <a name='L3'></a><a href='#L3'>3</a>
@@ -135,14 +134,14 @@
 <span class="cstat-no" title="statement not covered" >import IUsersRepository from '../repositories/IUserRepository';</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >interface IRequest {</span>
-<span class="cstat-no" title="statement not covered" >  user_id: string;</span>
+<span class="cstat-no" title="statement not covered" >  userId: string;</span>
 <span class="cstat-no" title="statement not covered" >  street: string;</span>
 <span class="cstat-no" title="statement not covered" >  number: string;</span>
 <span class="cstat-no" title="statement not covered" >  district: string;</span>
 <span class="cstat-no" title="statement not covered" >  city: string;</span>
-<span class="cstat-no" title="statement not covered" >  zip_code: string;</span>
+<span class="cstat-no" title="statement not covered" >  zipCode: string;</span>
 <span class="cstat-no" title="statement not covered" >  complement: string;</span>
-<span class="cstat-no" title="statement not covered" >  reference_point: string;</span>
+<span class="cstat-no" title="statement not covered" >  referencePoint: string;</span>
 <span class="cstat-no" title="statement not covered" >  alias: string;</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -156,7 +155,7 @@
 <span class="cstat-no" title="statement not covered" >  ) {}</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  public async execute(data: IRequest): Promise&lt;UserAddress&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const userExists = await this.usersRepository.findById(data.user_id);</span>
+<span class="cstat-no" title="statement not covered" >    const userExists = await this.usersRepository.findById(data.userId);</span>
 <span class="cstat-no" title="statement not covered" >    if (!userExists) {</span>
 <span class="cstat-no" title="statement not covered" >      throw new Error('User non-exists');</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
@@ -165,24 +164,28 @@
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" >export default CreateUserService;</span>
-&nbsp;</pre></td></tr></table></pre>
+&nbsp;</pre></td>
+        </tr>
+        </table>
+        </pre>
 
-                <div class='push'></div><!-- for sticky footer -->
-            </div><!-- /wrapper -->
-            <div class='footer quiet pad2 space-top1 center small'>
-                Code coverage generated by
-                <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed May 12 2021 17:03:22 GMT-0300 (Horário Padrão de Brasília)
-            </div>
-        </div>
-        <script src="prettify.js"></script>
-        <script>
-            window.onload = function () {
-                prettyPrint();
-            };
-        </script>
-        <script src="sorter.js"></script>
-        <script src="block-navigation.js"></script>
-    </body>
+        <div class='push'></div>
+        <!-- for sticky footer -->
+    </div>
+    <!-- /wrapper -->
+    <div class='footer quiet pad2 space-top1 center small'>
+        Code coverage generated by
+        <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed May 12 2021 17:03:22 GMT-0300 (Horário Padrão de Brasília)
+    </div>
+    </div>
+    <script src="prettify.js"></script>
+    <script>
+        window.onload = function() {
+            prettyPrint();
+        };
+    </script>
+    <script src="sorter.js"></script>
+    <script src="block-navigation.js"></script>
+</body>
+
 </html>
-    

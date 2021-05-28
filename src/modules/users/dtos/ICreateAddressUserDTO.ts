@@ -1,11 +1,13 @@
+import User from '../infra/typeorm/entities/User';
+
 export default interface ICreateAddressUserDto {
-  user_id: string;
+  user: User;
   street: string;
   number: string;
   district: string;
   city: string;
-  zip_code: string;
+  zipCode: string;
   complement: string;
-  reference_point: string;
+  referencePoint: string;
   alias: string;
 }

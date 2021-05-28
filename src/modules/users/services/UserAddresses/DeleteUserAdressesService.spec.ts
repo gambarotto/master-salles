@@ -23,24 +23,24 @@ describe('Delete UserAdresses', () => {
       password: '123456',
     });
     const userAddress = await fakeUserAdressesRepository.create({
-      user_id: user.id,
+      userId: user.id,
       street: 'rua um',
       number: '34',
       district: 'bairro1',
       city: 'cidade1',
-      zip_code: '13132132',
+      zipCode: '13132132',
       complement: 'condominio',
-      reference_point: 'perto de',
+      referencePoint: 'perto de',
       alias: 'casa',
     });
     await expect(
       deleteUserAdressesService.execute({
-        user_id: user.id,
+        userId: user.id,
         address_id: userAddress.id,
       }),
     ).resolves.not.toBeInstanceOf(AppError);
   });
-  it('Should not be able delete a user address with user_id/address_id invalids', async () => {
+  it('Should not be able delete a user address with userId/address_id invalids', async () => {
     const user = await fakeUsersRepository.create({
       name: 'Diego',
       email: 'diego@diego.com',
@@ -48,13 +48,13 @@ describe('Delete UserAdresses', () => {
     });
     await expect(
       deleteUserAdressesService.execute({
-        user_id: 'invalid-id',
+        userId: 'invalid-id',
         address_id: 'userAddress.id',
       }),
     ).rejects.toBeInstanceOf(AppError);
     await expect(
       deleteUserAdressesService.execute({
-        user_id: user.id,
+        userId: user.id,
         address_id: 'userAddress.id',
       }),
     ).rejects.toBeInstanceOf(AppError);
@@ -71,19 +71,19 @@ describe('Delete UserAdresses', () => {
       password: '123456',
     });
     const user1Address = await fakeUserAdressesRepository.create({
-      user_id: user.id,
+      userId: user.id,
       street: 'rua um',
       number: '34',
       district: 'bairro1',
       city: 'cidade1',
-      zip_code: '13132132',
+      zipCode: '13132132',
       complement: 'condominio',
-      reference_point: 'perto de',
+      referencePoint: 'perto de',
       alias: 'casa',
     });
     await expect(
       deleteUserAdressesService.execute({
-        user_id: user2.id,
+        userId: user2.id,
         address_id: user1Address.id,
       }),
     ).rejects.toBeInstanceOf(AppError);

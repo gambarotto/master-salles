@@ -29,12 +29,12 @@ class Employee {
   avatar: string;
 
   @CreateDateColumn()
-  created_at: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updated_at: Date;
+  updatedAt: Date;
 
-  @Expose({ name: 'avatar_url' })
+  @Expose({ name: 'avatarUrl' })
   getAvatarUrl(): string | null {
     return this.avatar
       ? `${process.env.APP_API_URL}/files/${this.avatar}`

@@ -23,7 +23,7 @@ describe('UserAvatar', () => {
       password: '123456',
     });
     const user = await updateUserAvatarService.execute({
-      user_id: newUser.id,
+      userId: newUser.id,
       avatarFileName: 'avatarFileName.png',
     });
     expect(user.avatar).not.toBeNull();
@@ -37,11 +37,11 @@ describe('UserAvatar', () => {
       password: '123456',
     });
     await updateUserAvatarService.execute({
-      user_id: newUser.id,
+      userId: newUser.id,
       avatarFileName: 'avatarFileName.png',
     });
     const user = await updateUserAvatarService.execute({
-      user_id: newUser.id,
+      userId: newUser.id,
       avatarFileName: 'new-avatar.png',
     });
 
@@ -52,7 +52,7 @@ describe('UserAvatar', () => {
   it('Should not be able update avatar user if his not logged', async () => {
     await expect(
       updateUserAvatarService.execute({
-        user_id: 'invalid-id',
+        userId: 'invalid-id',
         avatarFileName: 'new-avatar.png',
       }),
     ).rejects.toBeInstanceOf(AppError);

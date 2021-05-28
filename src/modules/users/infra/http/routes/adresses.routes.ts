@@ -12,9 +12,9 @@ const validationRequestCreate = celebrate({
     number: Joi.string().required(),
     district: Joi.string().required(),
     city: Joi.string().required(),
-    zip_code: Joi.string().required().max(8),
+    zipCode: Joi.string().required().max(8),
     complement: Joi.string(),
-    reference_point: Joi.string(),
+    referencePoint: Joi.string(),
     alias: Joi.string(),
   },
 });
@@ -25,9 +25,9 @@ const validationRequestUpdate = celebrate({
     number: Joi.string(),
     district: Joi.string(),
     city: Joi.string(),
-    zip_code: Joi.string().max(8),
+    zipCode: Joi.string().max(8),
     complement: Joi.string(),
-    reference_point: Joi.string(),
+    referencePoint: Joi.string(),
     alias: Joi.string(),
   },
 });

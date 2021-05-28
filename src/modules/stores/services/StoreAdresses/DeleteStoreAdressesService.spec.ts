@@ -28,9 +28,9 @@ describe('Delete Store Address', () => {
       number: '888',
       district: 'bairro da loja',
       city: 'jundiai',
-      zip_code: '13123123',
+      zipCode: '13123123',
       complement: 'prox. ao mercado',
-      reference_point: 'igreja',
+      referencePoint: 'igreja',
       lat: Number('40.7143528'),
       long: Number('-74.0059731'),
     });

@@ -5,7 +5,7 @@ import User from '../infra/typeorm/entities/User';
 import IUsersRepository from '../repositories/IUserRepository';
 
 interface IRequest {
-  user_id: string;
+  userId: string;
   avatarFileName: string;
 }
 
@@ -18,8 +18,8 @@ class UpdateUserAvatarService {
     private storageProvider: IStorageProvider,
   ) {}
 
-  public async execute({ user_id, avatarFileName }: IRequest): Promise<User> {
-    const user = await this.usersRepository.findById(user_id);
+  public async execute({ userId, avatarFileName }: IRequest): Promise<User> {
+    const user = await this.usersRepository.findById(userId);
     if (!user) {
       throw new AppError('Only authenticate users can change avatar', 401);
     }

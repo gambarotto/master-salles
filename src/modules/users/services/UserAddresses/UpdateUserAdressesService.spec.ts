@@ -23,26 +23,26 @@ describe('updateUserAddress', () => {
       password: '123456',
     });
     const userAddress = await fakeUserAdressesRepository.create({
-      user_id: user.id,
+      userId: user.id,
       street: 'rua um',
       number: '34',
       district: 'bairro1',
       city: 'cidade1',
-      zip_code: '13132132',
+      zipCode: '13132132',
       complement: 'condominio',
-      reference_point: 'perto de',
+      referencePoint: 'perto de',
       alias: 'casa',
     });
     const updatedUserAddress = await updateUserAddress.execute({
-      user_id: user.id,
+      userId: user.id,
       id: userAddress.id,
       street: 'rua um editado',
       number: '34',
       district: 'bairro1',
       city: 'cidade1',
-      zip_code: '13132132',
+      zipCode: '13132132',
       complement: 'condominio',
-      reference_point: 'perto de',
+      referencePoint: 'perto de',
       alias: 'casa',
     });
     expect(updatedUserAddress.street).toBe('rua um editado');
@@ -50,15 +50,15 @@ describe('updateUserAddress', () => {
   it('Should not be able update a user address with invalid user id', async () => {
     await expect(
       updateUserAddress.execute({
-        user_id: 'invalid-user-id',
+        userId: 'invalid-user-id',
         id: 'ghjjghyt5u8i9ugj',
         street: 'rua um editado',
         number: '34',
         district: 'bairro1',
         city: 'cidade1',
-        zip_code: '13132132',
+        zipCode: '13132132',
         complement: 'condominio',
-        reference_point: 'perto de',
+        referencePoint: 'perto de',
         alias: 'casa',
       }),
     ).rejects.toBeInstanceOf(AppError);
@@ -70,27 +70,27 @@ describe('updateUserAddress', () => {
       password: '123456',
     });
     await fakeUserAdressesRepository.create({
-      user_id: user.id,
+      userId: user.id,
       street: 'rua um',
       number: '34',
       district: 'bairro1',
       city: 'cidade1',
-      zip_code: '13132132',
+      zipCode: '13132132',
       complement: 'condominio',
-      reference_point: 'perto de',
+      referencePoint: 'perto de',
       alias: 'casa',
     });
     await expect(
       updateUserAddress.execute({
-        user_id: user.id,
+        userId: user.id,
         id: 'invalid-address-id',
         street: 'rua um editado',
         number: '34',
         district: 'bairro1',
         city: 'cidade1',
-        zip_code: '13132132',
+        zipCode: '13132132',
         complement: 'condominio',
-        reference_point: 'perto de',
+        referencePoint: 'perto de',
         alias: 'casa',
       }),
     ).rejects.toBeInstanceOf(AppError);
@@ -107,27 +107,27 @@ describe('updateUserAddress', () => {
       password: '123456',
     });
     const user1Address = await fakeUserAdressesRepository.create({
-      user_id: user.id,
+      userId: user.id,
       street: 'rua um',
       number: '34',
       district: 'bairro1',
       city: 'cidade1',
-      zip_code: '13132132',
+      zipCode: '13132132',
       complement: 'condominio',
-      reference_point: 'perto de',
+      referencePoint: 'perto de',
       alias: 'casa',
     });
     await expect(
       updateUserAddress.execute({
-        user_id: user2.id,
+        userId: user2.id,
         id: user1Address.id,
         street: 'rua um editado',
         number: '34',
         district: 'bairro1',
         city: 'cidade1',
-        zip_code: '13132132',
+        zipCode: '13132132',
         complement: 'condominio',
-        reference_point: 'perto de',
+        referencePoint: 'perto de',
         alias: 'casa',
       }),
     ).rejects.toBeInstanceOf(AppError);

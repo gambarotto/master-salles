@@ -1,10 +1,12 @@
 // import Product from '@modules/products/infra/typeorm/entities/Product';
+import Product from '@modules/products/infra/typeorm/entities/Product';
 import { Expose } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
+  ManyToMany,
 } from 'typeorm';
 
 @Entity('categories')
@@ -18,16 +20,16 @@ class Category {
   @Column({ nullable: true })
   image: string;
 
-  // @ManyToMany(() => Product, product => product.categories)
-  // products: Product[];
+  @ManyToMany(() => Product, product => product.categories)
+  products: Product[];
 
   @CreateDateColumn()
-  created_at: Date;
+  createdAt: Date;
 
   @CreateDateColumn()
-  updated_at: Date;
+  updatedAt: Date;
 
-  @Expose({ name: 'image_url' })
+  @Expose({ name: 'imageUrl' })
   getAvatarUrl(): string | null {
     return this.image ? `${process.env.APP_API_URL}/files/${this.image}` : null;
   }

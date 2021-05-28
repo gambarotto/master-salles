@@ -5,14 +5,14 @@ import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
-  user_id: string;
+  userId: string;
   street: string;
   number: string;
   district: string;
   city: string;
-  zip_code: string;
+  zipCode: string;
   complement: string;
-  reference_point: string;
+  referencePoint: string;
   alias: string;
 }
 
@@ -25,13 +25,33 @@ class CreateUserService {
     private userAdressesRepository: IUserAdressesRepository,
   ) {}
 
-  public async execute(data: IRequest): Promise<UserAddress> {
-    const userExists = await this.usersRepository.findById(data.user_id);
+  public async execute({
+    userId,
+    street,
+    number,
+    district,
+    city,
+    zipCode,
+    complement,
+    referencePoint,
+    alias,
+  }: IRequest): Promise<UserAddress> {
+    const userExists = await this.usersRepository.findById({ userId });
 
     if (!userExists) {
       throw new AppError('User non-exists');
     }
-    const userAddress = await this.userAdressesRepository.create(data);
+    const userAddress = await this.userAdressesRepository.create({
+      street,
+      user: userExists,
+      number,
+      district,
+      city,
+      zipCode,
+      complement,
+      referencePoint,
+      alias,
+    });
     return userAddress;
   }
 }

@@ -23,25 +23,25 @@ describe('CreateUserAddress', () => {
       password: '123456',
     });
     await fakeUserAdressesRepository.create({
-      user_id: user.id,
+      userId: user.id,
       street: 'rua um',
       number: '34',
       district: 'bairro1',
       city: 'cidade1',
-      zip_code: '13132132',
+      zipCode: '13132132',
       complement: 'condominio',
-      reference_point: 'perto de',
+      referencePoint: 'perto de',
       alias: 'casa',
     });
     await fakeUserAdressesRepository.create({
-      user_id: user.id,
+      userId: user.id,
       street: 'rua um',
       number: '34',
       district: 'bairro1',
       city: 'cidade1',
-      zip_code: '13132132',
+      zipCode: '13132132',
       complement: 'condominio',
-      reference_point: 'perto de',
+      referencePoint: 'perto de',
       alias: 'casa',
     });
     const listUserAdresses = await listUserAdressesProvider.execute(user.id);

@@ -4,7 +4,7 @@ import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
-  user_id: string;
+  userId: string;
   password?: string;
 }
 
@@ -17,8 +17,8 @@ class DeleteUserProfileService {
     private hashProvider: IHashProvider,
   ) {}
 
-  public async execute({ user_id, password }: IRequest): Promise<void> {
-    const user = await this.usersRepository.findById(user_id);
+  public async execute({ userId, password }: IRequest): Promise<void> {
+    const user = await this.usersRepository.findById({ userId });
     if (!user) {
       throw new AppError('User not found');
     }
@@ -32,7 +32,7 @@ class DeleteUserProfileService {
     if (!matchedPassword) {
       throw new AppError('Password do not match');
     }
-    await this.usersRepository.delete(user_id);
+    await this.usersRepository.delete(userId);
   }
 }
 export default DeleteUserProfileService;
