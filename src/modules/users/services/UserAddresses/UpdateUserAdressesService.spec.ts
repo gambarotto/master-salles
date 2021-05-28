@@ -23,7 +23,7 @@ describe('updateUserAddress', () => {
       password: '123456',
     });
     const userAddress = await fakeUserAdressesRepository.create({
-      user,
+      user_id: user.id,
       street: 'rua um',
       number: '34',
       district: 'bairro1',
@@ -72,7 +72,7 @@ describe('updateUserAddress', () => {
       password: '123456',
     });
     await fakeUserAdressesRepository.create({
-      user,
+      user_id: user.id,
       street: 'rua um',
       number: '34',
       district: 'bairro1',
@@ -109,7 +109,7 @@ describe('updateUserAddress', () => {
       password: '123456',
     });
     const user1Address = await fakeUserAdressesRepository.create({
-      user,
+      user_id: user.id,
       street: 'rua um',
       number: '34',
       district: 'bairro1',

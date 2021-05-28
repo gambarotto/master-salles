@@ -23,7 +23,7 @@ describe('CreateUserAddress', () => {
       password: '123456',
     });
     await fakeUserAdressesRepository.create({
-      user,
+      user_id: user.id,
       street: 'rua um',
       number: '34',
       district: 'bairro1',
@@ -34,7 +34,7 @@ describe('CreateUserAddress', () => {
       alias: 'casa',
     });
     await fakeUserAdressesRepository.create({
-      user,
+      user_id: user.id,
       street: 'rua um',
       number: '34',
       district: 'bairro1',

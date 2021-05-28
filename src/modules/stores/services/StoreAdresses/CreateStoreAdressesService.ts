@@ -51,7 +51,6 @@ class CreateStoreAdressesService {
 
     const storeAddress = await this.storeAdressesRepository.create({
       store_id,
-      store: storeAlreadyExists,
       street,
       number,
       district,

@@ -24,7 +24,6 @@ describe('Update Store Address', () => {
     });
     const storeAddress = await fakeStoreAdressesRepository.create({
       store_id: store.id,
-      store,
       street: 'rua da loja',
       number: '888',
       district: 'bairro da loja',
@@ -36,7 +35,7 @@ describe('Update Store Address', () => {
       long: Number('-74.0059731'),
     });
     const storeAddressUpdated = await updateStoreAdressesService.execute({
-      store_id: storeAddress.store.id,
+      store_id: storeAddress.store_id,
       street: 'rua da loja editada',
       number: '888',
       district: 'bairro da loja editada',
@@ -58,7 +57,6 @@ describe('Update Store Address', () => {
     });
     const storeAddress = await fakeStoreAdressesRepository.create({
       store_id: store.id,
-      store,
       street: 'rua da loja',
       number: '888',
       district: 'bairro da loja',
@@ -70,7 +68,7 @@ describe('Update Store Address', () => {
       long: Number('-74.0059731'),
     });
     const storeAddressUpdated = await updateStoreAdressesService.execute({
-      store_id: storeAddress.store.id,
+      store_id: storeAddress.store_id,
     });
     expect(storeAddressUpdated.street).toBe('rua da loja');
   });

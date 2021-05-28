@@ -46,7 +46,7 @@ class FakeStoreAdressesRepository implements IStoreAdressesRepository {
     store_id: string,
   ): Promise<StoreAddress | undefined> {
     const storeAddress = this.storeAdresses.find(
-      strAddress => strAddress.store.id === store_id,
+      strAddress => strAddress.store_id === store_id,
     );
     return storeAddress;
   }
