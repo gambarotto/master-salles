@@ -23,7 +23,7 @@ describe('Delete UserAdresses', () => {
       password: '123456',
     });
     const userAddress = await fakeUserAdressesRepository.create({
-      userId: user.id,
+      user,
       street: 'rua um',
       number: '34',
       district: 'bairro1',
@@ -71,7 +71,7 @@ describe('Delete UserAdresses', () => {
       password: '123456',
     });
     const user1Address = await fakeUserAdressesRepository.create({
-      userId: user.id,
+      user,
       street: 'rua um',
       number: '34',
       district: 'bairro1',

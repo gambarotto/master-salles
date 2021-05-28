@@ -36,8 +36,13 @@ class FakeUserAddressessRepository implements IUserAddressRepository {
     this.userAdresses.splice(userAddressIndex, 1);
   }
 
-  public async findById(address_id: string): Promise<UserAddress | undefined> {
-    return this.userAdresses.find(address => address.id === address_id);
+  public async findById(
+    addressId: string,
+  ): Promise<UserAddress | (UserAddress & { user: string }) | undefined> {
+    const addressFinded = this.userAdresses.find(
+      address => address.id === addressId,
+    ) as UserAddress & { user: string };
+    return addressFinded;
   }
 
   public async findAllByUser(

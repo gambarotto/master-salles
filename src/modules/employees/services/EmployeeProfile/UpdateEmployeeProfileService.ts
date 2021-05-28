@@ -1,8 +1,8 @@
-import User from '@modules/users/infra/typeorm/entities/User';
 import IHashProvider from '@shared/container/providers/hashProvider/models/IHashProvider';
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 import IEmployeesRepository from '@modules/employees/repositories/IEmployeesRepository';
+import Employee from '@modules/employees/infra/typeorm/entities/Employee';
 
 interface IRequest {
   employee_id: string;
@@ -27,7 +27,7 @@ class UpdateEmployeeProfileService {
     email,
     old_password,
     new_password,
-  }: IRequest): Promise<User> {
+  }: IRequest): Promise<Employee> {
     const employee = await this.employeesRepository.findById(employee_id);
     if (!employee) {
       throw new AppError('Employee not found');

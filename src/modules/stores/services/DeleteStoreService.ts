@@ -14,7 +14,7 @@ class DeleteStoreService {
   ) {}
 
   public async execute({ storeId }: IRequest): Promise<void> {
-    const store = await this.storeRepository.findById(storeId);
+    const store = await this.storeRepository.findById({ storeId });
 
     if (!store) {
       throw new AppError('Store not found');

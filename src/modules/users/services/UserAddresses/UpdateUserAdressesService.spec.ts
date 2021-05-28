@@ -23,7 +23,7 @@ describe('updateUserAddress', () => {
       password: '123456',
     });
     const userAddress = await fakeUserAdressesRepository.create({
-      userId: user.id,
+      user,
       street: 'rua um',
       number: '34',
       district: 'bairro1',
@@ -33,6 +33,7 @@ describe('updateUserAddress', () => {
       referencePoint: 'perto de',
       alias: 'casa',
     });
+
     const updatedUserAddress = await updateUserAddress.execute({
       userId: user.id,
       id: userAddress.id,
@@ -45,6 +46,7 @@ describe('updateUserAddress', () => {
       referencePoint: 'perto de',
       alias: 'casa',
     });
+
     expect(updatedUserAddress.street).toBe('rua um editado');
   });
   it('Should not be able update a user address with invalid user id', async () => {
@@ -70,7 +72,7 @@ describe('updateUserAddress', () => {
       password: '123456',
     });
     await fakeUserAdressesRepository.create({
-      userId: user.id,
+      user,
       street: 'rua um',
       number: '34',
       district: 'bairro1',
@@ -107,7 +109,7 @@ describe('updateUserAddress', () => {
       password: '123456',
     });
     const user1Address = await fakeUserAdressesRepository.create({
-      userId: user.id,
+      user,
       street: 'rua um',
       number: '34',
       district: 'bairro1',

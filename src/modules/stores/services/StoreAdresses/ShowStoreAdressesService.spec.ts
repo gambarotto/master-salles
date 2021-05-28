@@ -25,6 +25,7 @@ describe('List Store Address', () => {
     });
     await fakeStoreAdressesRepository.create({
       storeId: store.id,
+      store,
       street: 'rua da loja',
       number: '888',
       district: 'bairro da loja',

@@ -1,4 +1,5 @@
 import ICreateStoreDTO from '@modules/stores/dtos/ICreateStoreDTO';
+import IFindStoreByIdDTO from '@modules/stores/dtos/IFindStoreByIdDTO';
 import Store from '@modules/stores/infra/typeorm/entities/Store';
 import { v4 } from 'uuid';
 import IStoresRepository from '../IStoresRepository';
@@ -37,8 +38,14 @@ class FakeStoresRepository implements IStoresRepository {
     this.stores.splice(storeIndex, 1);
   }
 
-  public async findById(storeId: string): Promise<Store | undefined> {
+  public async findById({
+    storeId,
+    address = false,
+  }: IFindStoreByIdDTO): Promise<Store | undefined> {
     const store = this.stores.find(str => str.id === storeId);
+    if (address && store?.address !== undefined) {
+      store.address = { ...store.address };
+    }
     return store;
   }
 

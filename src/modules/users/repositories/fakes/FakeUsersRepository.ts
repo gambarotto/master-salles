@@ -2,6 +2,8 @@ import { v4 } from 'uuid';
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
 import User from '@modules/users/infra/typeorm/entities/User';
 import IUsersRepository from '@modules/users/repositories/IUserRepository';
+import IFindUserByIdDTO from '@modules/users/dtos/IFindUserByIdDTO';
+import UserAddress from '@modules/users/infra/typeorm/entities/UserAddress';
 
 class FakeUsersRepository implements IUsersRepository {
   private users: User[];
@@ -29,8 +31,14 @@ class FakeUsersRepository implements IUsersRepository {
     this.users.splice(userIndex, 1);
   }
 
-  public async findById(userId: string): Promise<User | undefined> {
+  public async findById({
+    userId,
+    address = false,
+  }: IFindUserByIdDTO): Promise<User | undefined> {
     const user = this.users.find(u => u.id === userId);
+    if (address && user) {
+      user.adresses = [{} as UserAddress];
+    }
     return user;
   }
 

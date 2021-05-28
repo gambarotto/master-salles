@@ -33,14 +33,13 @@ class UpdateUserAdressesService {
     if (!userExists) {
       throw new AppError('User non-exists');
     }
-
     const userAddress = await this.userAdressesRepository.findById(data.id);
 
     if (!userAddress || undefined) {
       throw new AppError('Address not found');
     }
-    // TODO dto verificar
-    if (userAddress.user !== userExists.id) {
+
+    if (userAddress.user.id !== userExists.id) {
       throw new AppError('You can edit only yours adresses');
     }
     Object.assign(userAddress, data);

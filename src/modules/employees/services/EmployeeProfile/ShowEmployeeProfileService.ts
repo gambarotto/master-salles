@@ -1,5 +1,5 @@
+import Employee from '@modules/employees/infra/typeorm/entities/Employee';
 import IEmployeesRepository from '@modules/employees/repositories/IEmployeesRepository';
-import User from '@modules/users/infra/typeorm/entities/User';
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 
@@ -14,7 +14,7 @@ class ShowEmployeeProfileService {
     private employeesRepository: IEmployeesRepository,
   ) {}
 
-  public async execute({ employee_id }: IRequest): Promise<User> {
+  public async execute({ employee_id }: IRequest): Promise<Employee> {
     const employee = await this.employeesRepository.findById(employee_id);
     if (!employee) {
       throw new AppError('Employee not found');

@@ -60,7 +60,7 @@ describe('Create Store Address', () => {
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
       cnpj: '11.111.111/1111-11',
     });
-    await createStoreAdressesService.execute({
+    const storeAddress = await createStoreAdressesService.execute({
       storeId: store.id,
       street: 'rua da loja',
       number: '888',
@@ -72,6 +72,9 @@ describe('Create Store Address', () => {
       lat: '40.7143528',
       long: '-74.0059731',
     });
+    store.address = storeAddress;
+    await fakeStoresRepository.update(store);
+
     await expect(
       createStoreAdressesService.execute({
         storeId: store.id,

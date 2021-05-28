@@ -26,7 +26,7 @@ class DeleteUserAdressesService {
     if (!userAddress) {
       throw new AppError('Address not found');
     }
-    if (userAddress.user !== userExists.id) {
+    if (userAddress.user.id !== userExists.id) {
       throw new AppError('You can delete only yours adresses');
     }
     await this.userAdressesRepository.delete(userAddress);

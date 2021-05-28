@@ -29,7 +29,7 @@ class UserAddressessRepository implements IUserAddressRepository {
     addressId: string,
   ): Promise<UserAddress | (UserAddress & { user: string }) | undefined> {
     const userAddress = await this.ormRepository.findOne(addressId, {
-      loadRelationIds: true,
+      relations: ['user'],
     });
 
     return userAddress;
