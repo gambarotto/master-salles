@@ -9,13 +9,13 @@ class DeleteStoreAdressesService {
     private storeAdressesRepository: IStoreAdressesRepository,
   ) {}
 
-  public async execute(store_id: string): Promise<void> {
+  public async execute(storeId: string): Promise<void> {
     const storeAddress = await this.storeAdressesRepository.findByStoreId(
-      store_id,
+      storeId,
     );
 
     if (!storeAddress) {
-      throw new AppError('Store not found');
+      throw new AppError('Do not have Store Address');
     }
     await this.storeAdressesRepository.delete(storeAddress.id);
   }

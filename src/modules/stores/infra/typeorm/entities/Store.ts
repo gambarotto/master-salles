@@ -3,7 +3,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -26,8 +26,8 @@ class Store {
   @Column({ nullable: true })
   imageLogo: string;
 
-  @OneToMany(() => StoreAddress, storeAddress => storeAddress.store)
-  address: string;
+  @OneToOne(() => StoreAddress, storeAddress => storeAddress.store)
+  address: StoreAddress;
 
   @CreateDateColumn()
   createdAt: Date;

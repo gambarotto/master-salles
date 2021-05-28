@@ -192,7 +192,7 @@ import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 &nbsp;
 interface IRequest {
-  store_id: string;
+  storeId: string;
   street?: string;
   number?: string;
   district?: string;
@@ -212,7 +212,7 @@ class UpdateStoreAdressesService {
   ) {}
 &nbsp;
   public async execute({
-    store_id,
+    storeId,
     street,
     number,
     district,
@@ -224,7 +224,7 @@ class UpdateStoreAdressesService {
     long,
   }: IRequest): Promise&lt;StoreAddress&gt; {
     const storeAddress = await this.storeAdressesRepository.findByStoreId(
-      store_id,
+      storeId,
     );
 &nbsp;
     if (!storeAddress) {

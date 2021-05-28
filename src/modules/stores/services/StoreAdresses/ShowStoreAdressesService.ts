@@ -13,13 +13,15 @@ class ShowStoreAdressesService {
     private storeRepository: IStoresRepository,
   ) {}
 
-  public async execute(store_id: string): Promise<StoreAddress | undefined> {
-    const storeAlreadyExists = await this.storeRepository.findById(store_id);
+  public async execute(storeId: string): Promise<StoreAddress | undefined> {
+    const storeAlreadyExists = await this.storeRepository.findById({
+      storeId,
+    });
     if (!storeAlreadyExists) {
       throw new AppError('Store non-exists');
     }
     const storeAddress = await this.storeAdressesRepository.findByStoreId(
-      store_id,
+      storeId,
     );
     if (!storeAddress) {
       throw new AppError('Store Address non-exists');

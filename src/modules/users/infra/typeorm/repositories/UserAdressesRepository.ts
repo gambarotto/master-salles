@@ -22,8 +22,6 @@ class UserAddressessRepository implements IUserAddressRepository {
   }
 
   public async delete(userAddress: UserAddress): Promise<void> {
-    console.log('oi');
-
     await this.ormRepository.delete(userAddress.id);
   }
 

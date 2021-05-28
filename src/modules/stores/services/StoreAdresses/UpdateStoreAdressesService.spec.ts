@@ -23,7 +23,7 @@ describe('Update Store Address', () => {
       cnpj: '11.111.111/1111-11',
     });
     const storeAddress = await fakeStoreAdressesRepository.create({
-      store_id: store.id,
+      storeId: store.id,
       street: 'rua da loja',
       number: '888',
       district: 'bairro da loja',
@@ -35,7 +35,7 @@ describe('Update Store Address', () => {
       long: Number('-74.0059731'),
     });
     const storeAddressUpdated = await updateStoreAdressesService.execute({
-      store_id: storeAddress.store_id,
+      storeId: storeAddress.storeId,
       street: 'rua da loja editada',
       number: '888',
       district: 'bairro da loja editada',
@@ -56,7 +56,7 @@ describe('Update Store Address', () => {
       cnpj: '11.111.111/1111-11',
     });
     const storeAddress = await fakeStoreAdressesRepository.create({
-      store_id: store.id,
+      storeId: store.id,
       street: 'rua da loja',
       number: '888',
       district: 'bairro da loja',
@@ -68,14 +68,14 @@ describe('Update Store Address', () => {
       long: Number('-74.0059731'),
     });
     const storeAddressUpdated = await updateStoreAdressesService.execute({
-      store_id: storeAddress.store_id,
+      storeId: storeAddress.storeId,
     });
     expect(storeAddressUpdated.street).toBe('rua da loja');
   });
   it('Should not be able update a store address with invalid store-address-id', async () => {
     await expect(
       updateStoreAdressesService.execute({
-        store_id: 'store-address-id',
+        storeId: 'store-address-id',
         street: 'rua da loja editada',
         number: '888',
         district: 'bairro da loja editada',

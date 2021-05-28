@@ -23,13 +23,13 @@ describe('List all Stores', () => {
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
       cnpj: '21.111.111/1111-11',
     });
-    await deleteStoreService.execute({ store_id: store.id });
+    await deleteStoreService.execute({ storeId: store.id });
     const stores = await fakeStoresRepository.findAllStores();
     expect(stores).toHaveLength(1);
   });
   it('Should not be able delete a store with invalid store id', async () => {
     await expect(
-      deleteStoreService.execute({ store_id: 'invalid-store-id' }),
+      deleteStoreService.execute({ storeId: 'invalid-store-id' }),
     ).rejects.toBeInstanceOf(AppError);
   });
 });

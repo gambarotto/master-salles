@@ -30,15 +30,15 @@ class FakeStoresRepository implements IStoresRepository {
     return this.stores[storeIndex];
   }
 
-  public async delete(store_id: string): Promise<void> {
+  public async delete(storeId: string): Promise<void> {
     const storeIndex = this.stores.findIndex(
-      strIndex => strIndex.id === store_id,
+      strIndex => strIndex.id === storeId,
     );
     this.stores.splice(storeIndex, 1);
   }
 
-  public async findById(store_id: string): Promise<Store | undefined> {
-    const store = this.stores.find(str => str.id === store_id);
+  public async findById(storeId: string): Promise<Store | undefined> {
+    const store = this.stores.find(str => str.id === storeId);
     return store;
   }
 

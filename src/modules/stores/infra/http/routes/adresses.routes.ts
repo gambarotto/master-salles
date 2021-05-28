@@ -4,9 +4,9 @@ import StoreAdressesController from '../controllers/StoreAdressesController';
 const storeAdressesRoutes = Router();
 const storeAdressesController = new StoreAdressesController();
 
-storeAdressesRoutes.get('/:store_id', storeAdressesController.show);
-storeAdressesRoutes.post('/:store_id', storeAdressesController.create);
-storeAdressesRoutes.put('/:store_id', storeAdressesController.update);
-storeAdressesRoutes.delete('/:store_id', storeAdressesController.delete);
+storeAdressesRoutes.get('/:storeId', storeAdressesController.show);
+storeAdressesRoutes.post('/:storeId', storeAdressesController.create);
+storeAdressesRoutes.put('/:storeId', storeAdressesController.update);
+storeAdressesRoutes.delete('/:storeId', storeAdressesController.delete);
 
 export default storeAdressesRoutes;

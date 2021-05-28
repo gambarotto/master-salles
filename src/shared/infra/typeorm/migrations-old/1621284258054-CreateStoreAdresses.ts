@@ -16,7 +16,7 @@ export default class CreateStoreAdresses1621284258054
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'store_id',
+            name: 'storeId',
             type: 'uuid',
           },
           {
@@ -77,7 +77,7 @@ export default class CreateStoreAdresses1621284258054
             name: 'stores_adresses',
             referencedTableName: 'stores',
             referencedColumnNames: ['id'],
-            columnNames: ['store_id'],
+            columnNames: ['storeId'],
             onDelete: 'SET NULL',
             onUpdate: 'CASCADE',
           },

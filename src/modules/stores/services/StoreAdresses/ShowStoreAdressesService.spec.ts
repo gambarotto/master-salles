@@ -24,7 +24,7 @@ describe('List Store Address', () => {
       cnpj: '11.111.111/1111-11',
     });
     await fakeStoreAdressesRepository.create({
-      store_id: store.id,
+      storeId: store.id,
       street: 'rua da loja',
       number: '888',
       district: 'bairro da loja',

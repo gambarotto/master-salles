@@ -4,7 +4,7 @@ import Store from '../infra/typeorm/entities/Store';
 import IStoresRepository from '../repositories/IStoresRepository';
 
 interface IRequest {
-  store_id: string;
+  storeId: string;
   name?: string;
   description?: string;
   cnpj?: string;
@@ -18,12 +18,14 @@ class UpdateStoreService {
   ) {}
 
   public async execute({
-    store_id,
+    storeId,
     name,
     description,
     cnpj,
   }: IRequest): Promise<Store> {
-    const store = await this.storeRepository.findById(store_id);
+    const store = await this.storeRepository.findById({
+      storeId,
+    });
 
     if (!store) {
       throw new AppError('Store not found');

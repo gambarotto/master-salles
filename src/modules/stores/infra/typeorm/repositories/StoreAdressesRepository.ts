@@ -21,22 +21,22 @@ class StoreAdressesRepository implements IStoreAdressesRepository {
     return storeAddressSaved;
   }
 
-  public async delete(store_address_id: string): Promise<void> {
-    await this.ormRepository.delete(store_address_id);
+  public async delete(storeAddressId: string): Promise<void> {
+    await this.ormRepository.delete(storeAddressId);
   }
 
   public async findById(
-    store_address_id: string,
+    storeAddressId: string,
   ): Promise<StoreAddress | undefined> {
-    const storeAddress = await this.ormRepository.findOne(store_address_id);
+    const storeAddress = await this.ormRepository.findOne(storeAddressId);
     return storeAddress;
   }
 
   public async findByStoreId(
-    store_id: string,
+    storeId: string,
   ): Promise<StoreAddress | undefined> {
     const storeAddress = await this.ormRepository.findOne({
-      where: { store_id },
+      where: { store: storeId },
     });
     return storeAddress;
   }

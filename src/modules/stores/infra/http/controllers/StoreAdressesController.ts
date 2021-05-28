@@ -19,12 +19,12 @@ class StoreAdressesController {
       long,
     } = request.body;
 
-    const { store_id } = request.params;
+    const { storeId } = request.params;
 
     const createStoreAdresses = container.resolve(CreateStoreAdressesService);
 
     const storeAddress = await createStoreAdresses.execute({
-      store_id,
+      storeId,
       street,
       number,
       district,
@@ -40,11 +40,11 @@ class StoreAdressesController {
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
-    const { store_id } = request.params;
+    const { storeId } = request.params;
 
     const showStoreAdresses = container.resolve(ShowStoreAdressesService);
 
-    const storeAddress = await showStoreAdresses.execute(store_id);
+    const storeAddress = await showStoreAdresses.execute(storeId);
 
     return response.json(storeAddress);
   }
@@ -62,12 +62,12 @@ class StoreAdressesController {
       long,
     } = request.body;
 
-    const { store_id } = request.params;
+    const { storeId } = request.params;
 
     const updateStoreAdresses = container.resolve(UpdateStoreAdressesService);
 
     const storeAddress = await updateStoreAdresses.execute({
-      store_id,
+      storeId,
       street,
       number,
       district,
@@ -83,11 +83,11 @@ class StoreAdressesController {
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
-    const { store_id } = request.params;
+    const { storeId } = request.params;
 
     const deleteStoreAdresses = container.resolve(DeleteStoreAdressesService);
 
-    await deleteStoreAdresses.execute(store_id);
+    await deleteStoreAdresses.execute(storeId);
 
     return response.json({ message: 'Store Address was deteted' });
   }

@@ -23,7 +23,7 @@ describe('Delete Store Address', () => {
       cnpj: '11.111.111/1111-11',
     });
     const storeAddress = await fakeStoreAdressesRepository.create({
-      store_id: store.id,
+      storeId: store.id,
       street: 'rua da loja',
       number: '888',
       district: 'bairro da loja',
@@ -34,7 +34,7 @@ describe('Delete Store Address', () => {
       lat: Number('40.7143528'),
       long: Number('-74.0059731'),
     });
-    await deleteStoreAdressesService.execute(storeAddress.store_id);
+    await deleteStoreAdressesService.execute(storeAddress.storeId);
 
     await expect(
       fakeStoreAdressesRepository.findById(storeAddress.id),

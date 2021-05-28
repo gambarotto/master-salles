@@ -6,7 +6,7 @@ const storesController = new StoresController();
 
 storesRoutes.get('/', storesController.index);
 storesRoutes.post('/', storesController.create);
-storesRoutes.put('/:store_id', storesController.update);
-storesRoutes.delete('/:store_id', storesController.delete);
+storesRoutes.put('/:storeId', storesController.update);
+storesRoutes.delete('/:storeId', storesController.delete);
 
 export default storesRoutes;

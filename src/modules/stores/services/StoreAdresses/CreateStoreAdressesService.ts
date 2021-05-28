@@ -5,7 +5,7 @@ import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
-  store_id: string;
+  storeId: string;
   street: string;
   number: string;
   district: string;
@@ -27,7 +27,7 @@ class CreateStoreAdressesService {
   ) {}
 
   public async execute({
-    store_id,
+    storeId,
     street,
     number,
     district,
@@ -38,19 +38,20 @@ class CreateStoreAdressesService {
     lat,
     long,
   }: IRequest): Promise<StoreAddress> {
-    const storeAlreadyExists = await this.storeRepository.findById(store_id);
+    const storeAlreadyExists = await this.storeRepository.findById({
+      storeId,
+      address: true,
+    });
     if (!storeAlreadyExists) {
       throw new AppError('Store non-exists');
     }
-    const storeAddressAlreadyExists =
-      await this.storeAdressesRepository.findByStoreId(store_id);
-
-    if (storeAddressAlreadyExists) {
+    if (storeAlreadyExists.address) {
       throw new AppError('Store Address already exists');
     }
 
     const storeAddress = await this.storeAdressesRepository.create({
-      store_id,
+      storeId,
+      store: storeAlreadyExists,
       street,
       number,
       district,

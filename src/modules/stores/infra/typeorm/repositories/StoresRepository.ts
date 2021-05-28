@@ -1,4 +1,5 @@
 import ICreateStoreDTO from '@modules/stores/dtos/ICreateStoreDTO';
+import IFindStoreByIdDTO from '@modules/stores/dtos/IFindStoreByIdDTO';
 import Store from '@modules/stores/infra/typeorm/entities/Store';
 import IStoresRepository from '@modules/stores/repositories/IStoresRepository';
 import { getRepository, Repository } from 'typeorm';
@@ -25,12 +26,22 @@ class StoresRepository implements IStoresRepository {
     return storeUpdated;
   }
 
-  public async delete(store_id: string): Promise<void> {
-    await this.ormRepository.delete(store_id);
+  public async delete(storeId: string): Promise<void> {
+    await this.ormRepository.delete(storeId);
   }
 
-  public async findById(store_id: string): Promise<Store | undefined> {
-    const store = await this.ormRepository.findOne(store_id);
+  public async findById({
+    storeId,
+    address = false,
+  }: IFindStoreByIdDTO): Promise<Store | undefined> {
+    let store;
+    if (address) {
+      store = await this.ormRepository.findOne(storeId, {
+        relations: ['address'],
+      });
+    } else {
+      store = await this.ormRepository.findOne(storeId);
+    }
     return store;
   }
 
@@ -40,7 +51,7 @@ class StoresRepository implements IStoresRepository {
   }
 
   public async findAllStores(): Promise<Store[]> {
-    const stores = await this.ormRepository.find();
+    const stores = await this.ormRepository.find({ relations: ['address'] });
     return stores;
   }
 }

@@ -25,28 +25,28 @@ class FakeStoreAdressesRepository implements IStoreAdressesRepository {
     return storeAddress;
   }
 
-  public async delete(store_address_id: string): Promise<void> {
+  public async delete(storeAddressId: string): Promise<void> {
     const findIndex = this.storeAdresses.findIndex(
-      strAddress => strAddress.id === store_address_id,
+      strAddress => strAddress.id === storeAddressId,
     );
 
     this.storeAdresses.splice(findIndex, 1);
   }
 
   public async findById(
-    store_address_id: string,
+    storeAddressId: string,
   ): Promise<StoreAddress | undefined> {
     const storeAddress = this.storeAdresses.find(
-      strAddress => strAddress.id === store_address_id,
+      strAddress => strAddress.id === storeAddressId,
     );
     return storeAddress;
   }
 
   public async findByStoreId(
-    store_id: string,
+    storeId: string,
   ): Promise<StoreAddress | undefined> {
     const storeAddress = this.storeAdresses.find(
-      strAddress => strAddress.store_id === store_id,
+      strAddress => strAddress.storeId === storeId,
     );
     return storeAddress;
   }

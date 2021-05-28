@@ -2,7 +2,8 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  ManyToOne,
+  JoinColumn,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -13,8 +14,9 @@ class StoreAddress {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => Store, store => store.address)
-  store: string;
+  @OneToOne(() => Store, store => store.address)
+  @JoinColumn({ name: 'storeId' })
+  store: Store;
 
   @Column()
   street: string;
@@ -37,10 +39,10 @@ class StoreAddress {
   @Column({ nullable: true })
   referencePoint: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: 'float8' })
   lat: number;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: 'float8' })
   long: number;
 
   @CreateDateColumn()

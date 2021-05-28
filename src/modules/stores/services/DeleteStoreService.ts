@@ -3,7 +3,7 @@ import { inject, injectable } from 'tsyringe';
 import IStoresRepository from '../repositories/IStoresRepository';
 
 interface IRequest {
-  store_id: string;
+  storeId: string;
 }
 
 @injectable()
@@ -13,13 +13,13 @@ class DeleteStoreService {
     private storeRepository: IStoresRepository,
   ) {}
 
-  public async execute({ store_id }: IRequest): Promise<void> {
-    const store = await this.storeRepository.findById(store_id);
+  public async execute({ storeId }: IRequest): Promise<void> {
+    const store = await this.storeRepository.findById(storeId);
 
     if (!store) {
       throw new AppError('Store not found');
     }
-    await this.storeRepository.delete(store_id);
+    await this.storeRepository.delete(storeId);
   }
 }
 export default DeleteStoreService;

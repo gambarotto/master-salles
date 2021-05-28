@@ -24,7 +24,7 @@ describe('Create Store Address', () => {
       cnpj: '11.111.111/1111-11',
     });
     const storeAddress = await createStoreAdressesService.execute({
-      store_id: store.id,
+      storeId: store.id,
       street: 'rua da loja',
       number: '888',
       district: 'bairro da loja',
@@ -40,7 +40,7 @@ describe('Create Store Address', () => {
   it('Should not be able create a new store address with invalid-store-id', async () => {
     await expect(
       createStoreAdressesService.execute({
-        store_id: 'invalid-store-id',
+        storeId: 'invalid-store-id',
         street: 'rua da loja',
         number: '888',
         district: 'bairro da loja',
@@ -61,7 +61,7 @@ describe('Create Store Address', () => {
       cnpj: '11.111.111/1111-11',
     });
     await createStoreAdressesService.execute({
-      store_id: store.id,
+      storeId: store.id,
       street: 'rua da loja',
       number: '888',
       district: 'bairro da loja',
@@ -74,7 +74,7 @@ describe('Create Store Address', () => {
     });
     await expect(
       createStoreAdressesService.execute({
-        store_id: store.id,
+        storeId: store.id,
         street: 'rua da loja1',
         number: '888',
         district: 'bairro da loja1',
