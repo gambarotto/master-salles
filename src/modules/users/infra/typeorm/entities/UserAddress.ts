@@ -1,4 +1,3 @@
-import { Expose } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
@@ -21,7 +20,6 @@ class UserAddress {
     nullable: false,
   })
   @JoinColumn({ name: 'user_id' })
-  @Expose({ name: 'user' })
   user_id: string;
 
   @Column()
