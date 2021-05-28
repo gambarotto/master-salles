@@ -33,10 +33,12 @@ class StoreAdressesRepository implements IStoreAdressesRepository {
   }
 
   public async findByStoreId(
-    storeId: string,
+    store_id: string,
   ): Promise<StoreAddress | undefined> {
     const storeAddress = await this.ormRepository.findOne({
-      where: { store: storeId },
+      where: { store_id },
+      relations: ['store_id'],
+      loadRelationIds: true,
     });
     return storeAddress;
   }

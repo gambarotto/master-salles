@@ -5,14 +5,14 @@ import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
-  storeId: string;
+  store_id: string;
   street: string;
   number: string;
   district: string;
   city: string;
-  zipCode: string;
+  zip_code: string;
   complement: string;
-  referencePoint: string;
+  reference_point: string;
   lat: string;
   long: string;
 }
@@ -27,19 +27,19 @@ class CreateStoreAdressesService {
   ) {}
 
   public async execute({
-    storeId,
+    store_id,
     street,
     number,
     district,
     city,
-    zipCode,
+    zip_code,
     complement,
-    referencePoint,
+    reference_point,
     lat,
     long,
   }: IRequest): Promise<StoreAddress> {
     const storeAlreadyExists = await this.storeRepository.findById({
-      storeId,
+      store_id,
       address: true,
     });
     if (!storeAlreadyExists) {
@@ -50,15 +50,15 @@ class CreateStoreAdressesService {
     }
 
     const storeAddress = await this.storeAdressesRepository.create({
-      storeId,
+      store_id,
       store: storeAlreadyExists,
       street,
       number,
       district,
       city,
-      zipCode,
+      zip_code,
       complement,
-      referencePoint,
+      reference_point,
       lat: Number(lat),
       long: Number(long),
     });

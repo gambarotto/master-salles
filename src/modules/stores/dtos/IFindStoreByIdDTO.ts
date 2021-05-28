@@ -1,4 +1,4 @@
 export default interface IFindStoreByIdDTO {
-  storeId: string;
+  store_id: string;
   address?: boolean;
 }

@@ -23,7 +23,7 @@ describe('Update UserProfile', () => {
       password: '123456',
     });
     const updatedUser = await updateUserProfileService.execute({
-      userId: user.id,
+      user_id: user.id,
       name: 'Diego editado',
       email: 'diegoeditado@diegoeditado.com',
       old_password: '123456',
@@ -35,7 +35,7 @@ describe('Update UserProfile', () => {
   it('Should not be able update a user with invalid id', async () => {
     await expect(
       updateUserProfileService.execute({
-        userId: 'invalid-id',
+        user_id: 'invalid-id',
         name: 'Diego editado',
         email: 'diegoeditado@diegoeditado.com',
         old_password: '123456',
@@ -52,7 +52,7 @@ describe('Update UserProfile', () => {
 
     await expect(
       updateUserProfileService.execute({
-        userId: user.id,
+        user_id: user.id,
         name: 'Diego editado',
         email: 'diegoeditado@diegoeditado.com',
         old_password: 'incorrect-password',
@@ -69,7 +69,7 @@ describe('Update UserProfile', () => {
 
     await expect(
       updateUserProfileService.execute({
-        userId: user.id,
+        user_id: user.id,
         name: 'Diego editado',
         email: 'diegoeditado@diegoeditado.com',
         old_password: '123456',
@@ -90,7 +90,7 @@ describe('Update UserProfile', () => {
     });
     await expect(
       updateUserProfileService.execute({
-        userId: user.id,
+        user_id: user.id,
         name: 'Diego editado',
         email: 'diego2@diego2.com',
         old_password: '123456',

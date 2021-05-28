@@ -5,7 +5,7 @@
     "port": 5432,
     "username": "postgres",
     "password": "docker",
-    "database": "master_sales",
+    "database": "master_sales_app",
     "entities": [
         "./src/modules/**/infra/typeorm/entities/*.ts"
     ],

@@ -26,16 +26,16 @@ class Store {
   @Column({ nullable: true })
   imageLogo: string;
 
-  @OneToOne(() => StoreAddress, storeAddress => storeAddress.store)
+  @OneToOne(() => StoreAddress, storeAddress => storeAddress.store_id)
   address: StoreAddress;
 
   @CreateDateColumn()
-  createdAt: Date;
+  created_at: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updated_at: Date;
 
-  @Expose({ name: 'logoUrl' })
+  @Expose({ name: 'logo_url' })
   getLogo(): string | null {
     return this.imageLogo
       ? `${process.env.APP_API_URL}/files/${this.imageLogo}`

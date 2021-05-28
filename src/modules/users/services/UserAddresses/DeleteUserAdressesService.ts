@@ -4,7 +4,7 @@ import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
-  userId: string;
+  user_id: string;
   address_id: string;
 }
 
@@ -17,8 +17,8 @@ class DeleteUserAdressesService {
     private userAdressesRepository: IUserAdressesRepository,
   ) {}
 
-  public async execute({ userId, address_id }: IRequest): Promise<void> {
-    const userExists = await this.usersRepository.findById({ userId });
+  public async execute({ user_id, address_id }: IRequest): Promise<void> {
+    const userExists = await this.usersRepository.findById({ user_id });
     if (!userExists) {
       throw new AppError('User non-exists');
     }
@@ -26,7 +26,7 @@ class DeleteUserAdressesService {
     if (!userAddress) {
       throw new AppError('Address not found');
     }
-    if (userAddress.user.id !== userExists.id) {
+    if (userAddress.user_id !== userExists.id) {
       throw new AppError('You can delete only yours adresses');
     }
     await this.userAdressesRepository.delete(userAddress);

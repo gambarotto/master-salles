@@ -28,22 +28,22 @@ describe('updateUserAddress', () => {
       number: '34',
       district: 'bairro1',
       city: 'cidade1',
-      zipCode: '13132132',
+      zip_code: '13132132',
       complement: 'condominio',
-      referencePoint: 'perto de',
+      reference_point: 'perto de',
       alias: 'casa',
     });
 
     const updatedUserAddress = await updateUserAddress.execute({
-      userId: user.id,
+      user_id: user.id,
       id: userAddress.id,
       street: 'rua um editado',
       number: '34',
       district: 'bairro1',
       city: 'cidade1',
-      zipCode: '13132132',
+      zip_code: '13132132',
       complement: 'condominio',
-      referencePoint: 'perto de',
+      reference_point: 'perto de',
       alias: 'casa',
     });
 
@@ -52,15 +52,15 @@ describe('updateUserAddress', () => {
   it('Should not be able update a user address with invalid user id', async () => {
     await expect(
       updateUserAddress.execute({
-        userId: 'invalid-user-id',
+        user_id: 'invalid-user-id',
         id: 'ghjjghyt5u8i9ugj',
         street: 'rua um editado',
         number: '34',
         district: 'bairro1',
         city: 'cidade1',
-        zipCode: '13132132',
+        zip_code: '13132132',
         complement: 'condominio',
-        referencePoint: 'perto de',
+        reference_point: 'perto de',
         alias: 'casa',
       }),
     ).rejects.toBeInstanceOf(AppError);
@@ -77,22 +77,22 @@ describe('updateUserAddress', () => {
       number: '34',
       district: 'bairro1',
       city: 'cidade1',
-      zipCode: '13132132',
+      zip_code: '13132132',
       complement: 'condominio',
-      referencePoint: 'perto de',
+      reference_point: 'perto de',
       alias: 'casa',
     });
     await expect(
       updateUserAddress.execute({
-        userId: user.id,
+        user_id: user.id,
         id: 'invalid-address-id',
         street: 'rua um editado',
         number: '34',
         district: 'bairro1',
         city: 'cidade1',
-        zipCode: '13132132',
+        zip_code: '13132132',
         complement: 'condominio',
-        referencePoint: 'perto de',
+        reference_point: 'perto de',
         alias: 'casa',
       }),
     ).rejects.toBeInstanceOf(AppError);
@@ -114,22 +114,22 @@ describe('updateUserAddress', () => {
       number: '34',
       district: 'bairro1',
       city: 'cidade1',
-      zipCode: '13132132',
+      zip_code: '13132132',
       complement: 'condominio',
-      referencePoint: 'perto de',
+      reference_point: 'perto de',
       alias: 'casa',
     });
     await expect(
       updateUserAddress.execute({
-        userId: user2.id,
+        user_id: user2.id,
         id: user1Address.id,
         street: 'rua um editado',
         number: '34',
         district: 'bairro1',
         city: 'cidade1',
-        zipCode: '13132132',
+        zip_code: '13132132',
         complement: 'condominio',
-        referencePoint: 'perto de',
+        reference_point: 'perto de',
         alias: 'casa',
       }),
     ).rejects.toBeInstanceOf(AppError);

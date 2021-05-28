@@ -23,14 +23,14 @@ describe('CreateUserAddress', () => {
       password: '123456',
     });
     const userAddress = await createUserAddress.execute({
-      userId: user.id,
+      user_id: user.id,
       street: 'rua um',
       number: '34',
       district: 'bairro1',
       city: 'cidade1',
-      zipCode: '13132132',
+      zip_code: '13132132',
       complement: 'condominio',
-      referencePoint: 'perto de',
+      reference_point: 'perto de',
       alias: 'casa',
     });
     expect(userAddress).toHaveProperty('id');
@@ -38,14 +38,14 @@ describe('CreateUserAddress', () => {
   it('Should not be able create a new user address with a invalid id', async () => {
     await expect(
       createUserAddress.execute({
-        userId: 'invalid id',
+        user_id: 'invalid id',
         street: 'rua um',
         number: '34',
         district: 'bairro1',
         city: 'cidade1',
-        zipCode: '13132132',
+        zip_code: '13132132',
         complement: 'condominio',
-        referencePoint: 'perto de',
+        reference_point: 'perto de',
         alias: 'casa',
       }),
     ).rejects.toBeInstanceOf(AppError);
@@ -53,14 +53,14 @@ describe('CreateUserAddress', () => {
   it('Should not be able create a new user address without required properties', async () => {
     await expect(
       createUserAddress.execute({
-        userId: '',
+        user_id: '',
         street: '',
         number: '34',
         district: 'bairro1',
         city: '',
-        zipCode: '',
+        zip_code: '',
         complement: 'condominio',
-        referencePoint: 'perto de',
+        reference_point: 'perto de',
         alias: 'casa',
       }),
     ).rejects.toBeInstanceOf(AppError);

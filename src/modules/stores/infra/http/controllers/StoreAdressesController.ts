@@ -12,26 +12,26 @@ class StoreAdressesController {
       number,
       district,
       city,
-      zipCode,
+      zip_code,
       complement,
-      referencePoint,
+      reference_point,
       lat,
       long,
     } = request.body;
 
-    const { storeId } = request.params;
+    const { store_id } = request.params;
 
     const createStoreAdresses = container.resolve(CreateStoreAdressesService);
 
     const storeAddress = await createStoreAdresses.execute({
-      storeId,
+      store_id,
       street,
       number,
       district,
       city,
-      zipCode,
+      zip_code,
       complement,
-      referencePoint,
+      reference_point,
       lat,
       long,
     });
@@ -40,11 +40,11 @@ class StoreAdressesController {
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
-    const { storeId } = request.params;
+    const { store_id } = request.params;
 
     const showStoreAdresses = container.resolve(ShowStoreAdressesService);
 
-    const storeAddress = await showStoreAdresses.execute(storeId);
+    const storeAddress = await showStoreAdresses.execute(store_id);
 
     return response.json(storeAddress);
   }
@@ -55,26 +55,26 @@ class StoreAdressesController {
       number,
       district,
       city,
-      zipCode,
+      zip_code,
       complement,
-      referencePoint,
+      reference_point,
       lat,
       long,
     } = request.body;
 
-    const { storeId } = request.params;
+    const { store_id } = request.params;
 
     const updateStoreAdresses = container.resolve(UpdateStoreAdressesService);
 
     const storeAddress = await updateStoreAdresses.execute({
-      storeId,
+      store_id,
       street,
       number,
       district,
       city,
-      zipCode,
+      zip_code,
       complement,
-      referencePoint,
+      reference_point,
       lat,
       long,
     });
@@ -83,11 +83,11 @@ class StoreAdressesController {
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
-    const { storeId } = request.params;
+    const { store_id } = request.params;
 
     const deleteStoreAdresses = container.resolve(DeleteStoreAdressesService);
 
-    await deleteStoreAdresses.execute(storeId);
+    await deleteStoreAdresses.execute(store_id);
 
     return response.json({ message: 'Store Address was deteted' });
   }

@@ -4,14 +4,14 @@ import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
-  storeId: string;
+  store_id: string;
   street?: string;
   number?: string;
   district?: string;
   city?: string;
-  zipCode?: string;
+  zip_code?: string;
   complement?: string;
-  referencePoint?: string;
+  reference_point?: string;
   lat?: string;
   long?: string;
 }
@@ -24,19 +24,19 @@ class UpdateStoreAdressesService {
   ) {}
 
   public async execute({
-    storeId,
+    store_id,
     street,
     number,
     district,
     city,
-    zipCode,
+    zip_code,
     complement,
-    referencePoint,
+    reference_point,
     lat,
     long,
   }: IRequest): Promise<StoreAddress> {
     const storeAddress = await this.storeAdressesRepository.findByStoreId(
-      storeId,
+      store_id,
     );
 
     if (!storeAddress) {
@@ -48,9 +48,9 @@ class UpdateStoreAdressesService {
       number: number || storeAddress.number,
       district: district || storeAddress.district,
       city: city || storeAddress.city,
-      zipCode: zipCode || storeAddress.zipCode,
+      zip_code: zip_code || storeAddress.zip_code,
       complement: complement || storeAddress.complement,
-      referencePoint: referencePoint || storeAddress.referencePoint,
+      reference_point: reference_point || storeAddress.reference_point,
       lat: lat || storeAddress.lat,
       long: long || storeAddress.long,
     });

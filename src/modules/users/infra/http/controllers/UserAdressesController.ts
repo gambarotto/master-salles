@@ -13,40 +13,40 @@ class UserAdressesController {
       number,
       district,
       city,
-      zipCode,
+      zip_code,
       complement,
-      referencePoint,
+      reference_point,
       alias,
     } = request.body;
-    const userId = request.user.id;
+    const user_id = request.user.id;
 
     const createUserAddress = container.resolve(CreateUserAdressesService);
 
     const userAddress = await createUserAddress.execute({
-      userId,
+      user_id,
       street,
       number,
       district,
       city,
-      zipCode,
+      zip_code,
       complement,
-      referencePoint,
+      reference_point,
       alias,
     });
     return response.json(classToClass(userAddress));
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    const userId = request.user.id;
+    const user_id = request.user.id;
     const {
       id,
       street,
       number,
       district,
       city,
-      zipCode,
+      zip_code,
       complement,
-      referencePoint,
+      reference_point,
       alias,
     } = request.body;
 
@@ -54,15 +54,15 @@ class UserAdressesController {
       UpdateUserAdressesService,
     );
     const updatedUserAddress = await updateUserAddressService.execute({
-      userId,
+      user_id,
       id,
       street,
       number,
       district,
       city,
-      zipCode,
+      zip_code,
       complement,
-      referencePoint,
+      reference_point,
       alias,
     });
 
@@ -73,17 +73,17 @@ class UserAdressesController {
     const deleteUserAddress = container.resolve(DeleteUserAdressesService);
 
     await deleteUserAddress.execute({
-      userId: request.user.id,
+      user_id: request.user.id,
       address_id: request.params.address_id,
     });
     return response.json({ message: 'success' });
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
-    const userId = request.user.id;
+    const user_id = request.user.id;
 
     const listUserAdresses = container.resolve(ListUserAdressesProvider);
-    const userAdresses = await listUserAdresses.execute(userId);
+    const userAdresses = await listUserAdresses.execute(user_id);
     return response.json(classToClass(userAdresses));
   }
 }

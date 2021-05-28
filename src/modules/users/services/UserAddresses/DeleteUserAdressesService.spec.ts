@@ -28,19 +28,19 @@ describe('Delete UserAdresses', () => {
       number: '34',
       district: 'bairro1',
       city: 'cidade1',
-      zipCode: '13132132',
+      zip_code: '13132132',
       complement: 'condominio',
-      referencePoint: 'perto de',
+      reference_point: 'perto de',
       alias: 'casa',
     });
     await expect(
       deleteUserAdressesService.execute({
-        userId: user.id,
+        user_id: user.id,
         address_id: userAddress.id,
       }),
     ).resolves.not.toBeInstanceOf(AppError);
   });
-  it('Should not be able delete a user address with userId/address_id invalids', async () => {
+  it('Should not be able delete a user address with user_id/address_id invalids', async () => {
     const user = await fakeUsersRepository.create({
       name: 'Diego',
       email: 'diego@diego.com',
@@ -48,13 +48,13 @@ describe('Delete UserAdresses', () => {
     });
     await expect(
       deleteUserAdressesService.execute({
-        userId: 'invalid-id',
+        user_id: 'invalid-id',
         address_id: 'userAddress.id',
       }),
     ).rejects.toBeInstanceOf(AppError);
     await expect(
       deleteUserAdressesService.execute({
-        userId: user.id,
+        user_id: user.id,
         address_id: 'userAddress.id',
       }),
     ).rejects.toBeInstanceOf(AppError);
@@ -76,14 +76,14 @@ describe('Delete UserAdresses', () => {
       number: '34',
       district: 'bairro1',
       city: 'cidade1',
-      zipCode: '13132132',
+      zip_code: '13132132',
       complement: 'condominio',
-      referencePoint: 'perto de',
+      reference_point: 'perto de',
       alias: 'casa',
     });
     await expect(
       deleteUserAdressesService.execute({
-        userId: user2.id,
+        user_id: user2.id,
         address_id: user1Address.id,
       }),
     ).rejects.toBeInstanceOf(AppError);

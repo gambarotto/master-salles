@@ -17,7 +17,7 @@ class User {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Column()
@@ -27,16 +27,16 @@ class User {
   @Column({ nullable: true })
   avatar?: string;
 
-  @OneToMany(() => UserAddress, userAddress => userAddress.user)
+  @OneToMany(() => UserAddress, userAddress => userAddress.user_id)
   adresses: UserAddress[];
 
   @CreateDateColumn()
-  createdAt: Date;
+  created_at: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updated_at: Date;
 
-  @Expose({ name: 'avatarUrl' })
+  @Expose({ name: 'avatar_url' })
   getAvatarUrl(): string | null {
     return this.avatar
       ? `${process.env.APP_API_URL}/files/${this.avatar}`

@@ -29,17 +29,20 @@ class UserAddressessRepository implements IUserAddressRepository {
     addressId: string,
   ): Promise<UserAddress | (UserAddress & { user: string }) | undefined> {
     const userAddress = await this.ormRepository.findOne(addressId, {
-      relations: ['user'],
+      relations: ['user_id'],
+      loadRelationIds: true,
     });
 
     return userAddress;
   }
 
   public async findAllByUser(
-    userId: string,
+    user_id: string,
   ): Promise<UserAddress[] | undefined> {
     const userAdresses = await this.ormRepository.find({
-      where: { user: { id: userId } },
+      where: { user_id },
+      relations: ['user_id'],
+      loadRelationIds: true,
     });
     return userAdresses;
   }

@@ -26,21 +26,21 @@ class StoresRepository implements IStoresRepository {
     return storeUpdated;
   }
 
-  public async delete(storeId: string): Promise<void> {
-    await this.ormRepository.delete(storeId);
+  public async delete(store_id: string): Promise<void> {
+    await this.ormRepository.delete(store_id);
   }
 
   public async findById({
-    storeId,
+    store_id,
     address = false,
   }: IFindStoreByIdDTO): Promise<Store | undefined> {
     let store;
     if (address) {
-      store = await this.ormRepository.findOne(storeId, {
+      store = await this.ormRepository.findOne(store_id, {
         relations: ['address'],
       });
     } else {
-      store = await this.ormRepository.findOne(storeId);
+      store = await this.ormRepository.findOne(store_id);
     }
     return store;
   }

@@ -12,8 +12,8 @@ class FakeUserAddressessRepository implements IUserAddressRepository {
 
   public async create(data: ICreateAddressUserDTO): Promise<UserAddress> {
     const userAddress = new UserAddress();
-    const { user, street, city, zipCode } = data;
-    if (!user || !street || !city || !zipCode) {
+    const { user_id, street, city, zip_code } = data;
+    if (!user_id || !street || !city || !zip_code) {
       throw new Error('Error');
     }
     Object.assign(userAddress, { id: v4() }, data);
@@ -46,10 +46,10 @@ class FakeUserAddressessRepository implements IUserAddressRepository {
   }
 
   public async findAllByUser(
-    userId: string,
+    user_id: string,
   ): Promise<UserAddress[] | undefined> {
     const userAdresses = this.userAdresses.filter(
-      address => address.user.id === userId,
+      address => address.user_id === user_id,
     );
     return userAdresses;
   }

@@ -28,9 +28,9 @@ describe('CreateUserAddress', () => {
       number: '34',
       district: 'bairro1',
       city: 'cidade1',
-      zipCode: '13132132',
+      zip_code: '13132132',
       complement: 'condominio',
-      referencePoint: 'perto de',
+      reference_point: 'perto de',
       alias: 'casa',
     });
     await fakeUserAdressesRepository.create({
@@ -39,9 +39,9 @@ describe('CreateUserAddress', () => {
       number: '34',
       district: 'bairro1',
       city: 'cidade1',
-      zipCode: '13132132',
+      zip_code: '13132132',
       complement: 'condominio',
-      referencePoint: 'perto de',
+      reference_point: 'perto de',
       alias: 'casa',
     });
     const listUserAdresses = await listUserAdressesProvider.execute(user.id);

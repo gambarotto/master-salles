@@ -16,7 +16,7 @@ export default class CreateUserAddress1620673337517
             default: 'uuid_generate_v4()',
           },
           // {
-          //   name: 'userId',
+          //   name: 'user_id',
           //   type: 'uuid',
           // },
           {
@@ -38,7 +38,7 @@ export default class CreateUserAddress1620673337517
             type: 'varchar',
           },
           {
-            name: 'zipCode',
+            name: 'zip_code',
             type: 'varchar',
           },
           {
@@ -47,7 +47,7 @@ export default class CreateUserAddress1620673337517
             isNullable: true,
           },
           {
-            name: 'referencePoint',
+            name: 'reference_point',
             type: 'varchar',
             isNullable: true,
           },
@@ -57,12 +57,12 @@ export default class CreateUserAddress1620673337517
             isNullable: true,
           },
           {
-            name: 'createdAt',
+            name: 'created_at',
             type: 'timestamp',
             default: 'now()',
           },
           {
-            name: 'updatedAt',
+            name: 'updated_at',
             type: 'timestamp',
             default: 'now()',
           },
@@ -72,7 +72,7 @@ export default class CreateUserAddress1620673337517
         //     name: 'users_adresses',
         //     referencedTableName: 'users',
         //     referencedColumnNames: ['id'],
-        //     columnNames: ['userId'],
+        //     columnNames: ['user_id'],
         //     onDelete: 'SET NULL',
         //     onUpdate: 'CASCADE',
         //   },

@@ -135,7 +135,7 @@
 <span class="cstat-no" title="statement not covered" >import IUsersRepository from '../repositories/IUserRepository';</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >interface IRequest {</span>
-<span class="cstat-no" title="statement not covered" >  userId: string;</span>
+<span class="cstat-no" title="statement not covered" >  user_id: string;</span>
 <span class="cstat-no" title="statement not covered" >  avatarFileName: string;</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -148,8 +148,8 @@
 <span class="cstat-no" title="statement not covered" >    private storageProvider: IStorageProvider,</span>
 <span class="cstat-no" title="statement not covered" >  ) {}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  public async execute({ userId, avatarFileName }: IRequest): Promise&lt;User&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const user = await this.usersRepository.findById(userId);</span>
+<span class="cstat-no" title="statement not covered" >  public async execute({ user_id, avatarFileName }: IRequest): Promise&lt;User&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    const user = await this.usersRepository.findById(user_id);</span>
 <span class="cstat-no" title="statement not covered" >    if (!user) {</span>
 <span class="cstat-no" title="statement not covered" >      throw new AppError('Only authenticate users can change avatar', 401);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>

@@ -22,21 +22,21 @@ class UsersRepository implements IUsersRepository {
     return userUpdated;
   }
 
-  public async delete(userId: string): Promise<void> {
-    await this.ormRepository.delete(userId);
+  public async delete(user_id: string): Promise<void> {
+    await this.ormRepository.delete(user_id);
   }
 
   public async findById({
-    userId,
+    user_id,
     address = false,
   }: IFindUserByIdDTO): Promise<User | undefined> {
     let user;
     if (address) {
-      user = await this.ormRepository.findOne(userId, {
+      user = await this.ormRepository.findOne(user_id, {
         relations: ['adresses'],
       });
     } else {
-      user = await this.ormRepository.findOne(userId);
+      user = await this.ormRepository.findOne(user_id);
     }
     return user;
   }

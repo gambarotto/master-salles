@@ -138,7 +138,7 @@
 <span class="cstat-no" title="statement not covered" >import { inject, injectable } from 'tsyringe';</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >interface IRequest {</span>
-<span class="cstat-no" title="statement not covered" >  userId: string;</span>
+<span class="cstat-no" title="statement not covered" >  user_id: string;</span>
 <span class="cstat-no" title="statement not covered" >  password?: string;</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -151,8 +151,8 @@
 <span class="cstat-no" title="statement not covered" >    private hashProvider: IHashProvider,</span>
 <span class="cstat-no" title="statement not covered" >  ) {}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  public async execute({ userId, password }: IRequest): Promise&lt;void&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const user = await this.usersRepository.findById(userId);</span>
+<span class="cstat-no" title="statement not covered" >  public async execute({ user_id, password }: IRequest): Promise&lt;void&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    const user = await this.usersRepository.findById(user_id);</span>
 <span class="cstat-no" title="statement not covered" >    if (!user) {</span>
 <span class="cstat-no" title="statement not covered" >      throw new AppError('User not found');</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
@@ -166,7 +166,7 @@
 <span class="cstat-no" title="statement not covered" >    if (!matchedPassword) {</span>
 <span class="cstat-no" title="statement not covered" >      throw new AppError('Password do not match');</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    await this.usersRepository.delete(userId);</span>
+<span class="cstat-no" title="statement not covered" >    await this.usersRepository.delete(user_id);</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" >export default DeleteUserProfileService;</span>

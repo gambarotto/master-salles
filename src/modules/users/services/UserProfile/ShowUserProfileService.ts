@@ -4,7 +4,7 @@ import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
-  userId: string;
+  user_id: string;
 }
 
 @injectable()
@@ -14,9 +14,9 @@ class ShowUserProfileService {
     private usersRepository: IUsersRepository,
   ) {}
 
-  public async execute({ userId }: IRequest): Promise<User> {
+  public async execute({ user_id }: IRequest): Promise<User> {
     const user = await this.usersRepository.findById({
-      userId,
+      user_id,
       address: true,
     });
     if (!user) {

@@ -134,14 +134,14 @@
 <span class="cstat-no" title="statement not covered" >import IUsersRepository from '../repositories/IUserRepository';</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >interface IRequest {</span>
-<span class="cstat-no" title="statement not covered" >  userId: string;</span>
+<span class="cstat-no" title="statement not covered" >  user_id: string;</span>
 <span class="cstat-no" title="statement not covered" >  street: string;</span>
 <span class="cstat-no" title="statement not covered" >  number: string;</span>
 <span class="cstat-no" title="statement not covered" >  district: string;</span>
 <span class="cstat-no" title="statement not covered" >  city: string;</span>
-<span class="cstat-no" title="statement not covered" >  zipCode: string;</span>
+<span class="cstat-no" title="statement not covered" >  zip_code: string;</span>
 <span class="cstat-no" title="statement not covered" >  complement: string;</span>
-<span class="cstat-no" title="statement not covered" >  referencePoint: string;</span>
+<span class="cstat-no" title="statement not covered" >  reference_point: string;</span>
 <span class="cstat-no" title="statement not covered" >  alias: string;</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -155,7 +155,7 @@
 <span class="cstat-no" title="statement not covered" >  ) {}</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  public async execute(data: IRequest): Promise&lt;UserAddress&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const userExists = await this.usersRepository.findById(data.userId);</span>
+<span class="cstat-no" title="statement not covered" >    const userExists = await this.usersRepository.findById(data.user_id);</span>
 <span class="cstat-no" title="statement not covered" >    if (!userExists) {</span>
 <span class="cstat-no" title="statement not covered" >      throw new Error('User non-exists');</span>
 <span class="cstat-no" title="statement not covered" >    }</span>

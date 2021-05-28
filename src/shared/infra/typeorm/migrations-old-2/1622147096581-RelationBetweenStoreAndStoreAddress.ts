@@ -6,9 +6,9 @@ export default class RelationBetweenStoreAndStoreAddress1622147096581
   name = 'RelationBetweenStoreAndStoreAddress1622147096581';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.query(`ALTER TABLE "storeAdresses" ADD "storeId" uuid`);
+    await queryRunner.query(`ALTER TABLE "storeAdresses" ADD "store_id" uuid`);
     await queryRunner.query(
-      `ALTER TABLE "storeAdresses" ADD CONSTRAINT "FK_9f6dee30c243dcacd3c60d992ef" FOREIGN KEY ("storeId") REFERENCES "stores"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`,
+      `ALTER TABLE "storeAdresses" ADD CONSTRAINT "FK_9f6dee30c243dcacd3c60d992ef" FOREIGN KEY ("store_id") REFERENCES "stores"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`,
     );
   }
 
@@ -17,7 +17,7 @@ export default class RelationBetweenStoreAndStoreAddress1622147096581
       `ALTER TABLE "storeAdresses" DROP CONSTRAINT "FK_9f6dee30c243dcacd3c60d992ef"`,
     );
     await queryRunner.query(
-      `ALTER TABLE "storeAdresses" DROP COLUMN "storeId"`,
+      `ALTER TABLE "storeAdresses" DROP COLUMN "store_id"`,
     );
   }
 }

@@ -125,13 +125,13 @@ class ListUserAdressesProvider {
     private userAdressesRepository: IUserAdressesRepository,
   ) {}
 &nbsp;
-  public async execute(userId: string): Promise&lt;UserAddress[] | undefined&gt; {
-    const userExists = await this.usersRepository.findById(userId);
+  public async execute(user_id: string): Promise&lt;UserAddress[] | undefined&gt; {
+    const userExists = await this.usersRepository.findById(user_id);
     if (!userExists) {
       throw new AppError('User non-exists');
     }
     const userAddress = await this.userAdressesRepository.findAllByUser(
-      userId,
+      user_id,
     );
     return userAddress;
   }

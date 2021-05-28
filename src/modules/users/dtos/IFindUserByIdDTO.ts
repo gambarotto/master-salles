@@ -1,4 +1,4 @@
 export default interface IFindUserByIdDTO {
-  userId: string;
+  user_id: string;
   address?: boolean;
 }

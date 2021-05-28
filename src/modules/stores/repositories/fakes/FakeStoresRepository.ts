@@ -31,18 +31,18 @@ class FakeStoresRepository implements IStoresRepository {
     return this.stores[storeIndex];
   }
 
-  public async delete(storeId: string): Promise<void> {
+  public async delete(store_id: string): Promise<void> {
     const storeIndex = this.stores.findIndex(
-      strIndex => strIndex.id === storeId,
+      strIndex => strIndex.id === store_id,
     );
     this.stores.splice(storeIndex, 1);
   }
 
   public async findById({
-    storeId,
+    store_id,
     address = false,
   }: IFindStoreByIdDTO): Promise<Store | undefined> {
-    const store = this.stores.find(str => str.id === storeId);
+    const store = this.stores.find(str => str.id === store_id);
     if (address && store?.address !== undefined) {
       store.address = { ...store.address };
     }

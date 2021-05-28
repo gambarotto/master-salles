@@ -1,10 +1,7 @@
-import Category from '@modules/categories/infra/typeorm/entities/Category';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinTable,
-  ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -20,19 +17,19 @@ class Product {
   description: string;
 
   @Column()
-  costPrice: number;
+  cost_price: number;
 
   @Column()
-  salePrice: number;
+  sale_price: number;
 
-  @ManyToMany(() => Category, category => category.products)
-  @JoinTable()
-  categories: Category[];
-
-  @CreateDateColumn()
-  createdAt: Date;
+  // @ManyToMany(() => Category, category => category.products)
+  // @JoinTable()
+  // categories: Category[];
 
   @CreateDateColumn()
-  updatedAt: Date;
+  created_at: Date;
+
+  @CreateDateColumn()
+  updated_at: Date;
 }
 export default Product;

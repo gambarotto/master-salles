@@ -3,11 +3,14 @@ import {
   CreateDateColumn,
   Entity,
   Generated,
+  JoinColumn,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import User from './User';
 
-@Entity('userTokens')
+@Entity('user_tokens')
 class UserToken {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -16,13 +19,14 @@ class UserToken {
   @Generated('uuid')
   token: string;
 
-  @Column()
-  userId: string;
+  @OneToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user_id: string;
 
   @CreateDateColumn()
-  createdAt: Date;
+  created_at: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updated_at: Date;
 }
 export default UserToken;

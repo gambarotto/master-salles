@@ -111,7 +111,7 @@
 <span class="cstat-no" title="statement not covered" >import IStoresRepository from '../repositories/IStoresRepository';</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >interface IRequest {</span>
-<span class="cstat-no" title="statement not covered" >  storeId: string;</span>
+<span class="cstat-no" title="statement not covered" >  store_id: string;</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >@injectable()</span>
@@ -121,13 +121,13 @@
 <span class="cstat-no" title="statement not covered" >    private storeRepository: IStoresRepository,</span>
 <span class="cstat-no" title="statement not covered" >  ) {}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  public async execute({ storeId }: IRequest): Promise&lt;void&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const store = await this.storeRepository.findById(storeId);</span>
+<span class="cstat-no" title="statement not covered" >  public async execute({ store_id }: IRequest): Promise&lt;void&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    const store = await this.storeRepository.findById(store_id);</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    if (!store) {</span>
 <span class="cstat-no" title="statement not covered" >      throw new AppError('Store not found');</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    await this.storeRepository.delete(storeId);</span>
+<span class="cstat-no" title="statement not covered" >    await this.storeRepository.delete(store_id);</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" >export default DeleteStoreService;</span>

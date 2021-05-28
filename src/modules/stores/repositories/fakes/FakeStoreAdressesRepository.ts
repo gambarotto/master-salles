@@ -43,10 +43,10 @@ class FakeStoreAdressesRepository implements IStoreAdressesRepository {
   }
 
   public async findByStoreId(
-    storeId: string,
+    store_id: string,
   ): Promise<StoreAddress | undefined> {
     const storeAddress = this.storeAdresses.find(
-      strAddress => strAddress.store.id === storeId,
+      strAddress => strAddress.store.id === store_id,
     );
     return storeAddress;
   }

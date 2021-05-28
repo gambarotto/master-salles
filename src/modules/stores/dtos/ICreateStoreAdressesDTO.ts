@@ -1,15 +1,12 @@
-import Store from '../infra/typeorm/entities/Store';
-
 export default interface ICreateStoreAdressesDTO {
-  storeId: string;
-  store: Store;
+  store_id: string;
   street: string;
   number: string;
   district: string;
   city: string;
-  zipCode: string;
+  zip_code: string;
   complement: string;
-  referencePoint: string;
+  reference_point: string;
   lat: number;
   long: number;
 }

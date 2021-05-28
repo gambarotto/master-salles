@@ -16,12 +16,12 @@ describe('Show UserProfile', () => {
       email: 'diego@diego.com',
       password: '123456',
     });
-    const findUser = await showUserProfileService.execute({ userId: user.id });
+    const findUser = await showUserProfileService.execute({ user_id: user.id });
     expect(findUser).toHaveProperty('id');
   });
   it('Should not be able get a user with a invalid id', async () => {
     await expect(
-      showUserProfileService.execute({ userId: 'invalid-id' }),
+      showUserProfileService.execute({ user_id: 'invalid-id' }),
     ).rejects.toBeInstanceOf(AppError);
   });
 });

@@ -160,7 +160,7 @@
 <span class="cstat-no" title="statement not covered" >import IStoresRepository from '../repositories/IStoresRepository';</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >interface IRequest {</span>
-<span class="cstat-no" title="statement not covered" >  storeId: string;</span>
+<span class="cstat-no" title="statement not covered" >  store_id: string;</span>
 <span class="cstat-no" title="statement not covered" >  name?: string;</span>
 <span class="cstat-no" title="statement not covered" >  description?: string;</span>
 <span class="cstat-no" title="statement not covered" >  cnpj?: string;</span>
@@ -174,12 +174,12 @@
 <span class="cstat-no" title="statement not covered" >  ) {}</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  public async execute({</span>
-<span class="cstat-no" title="statement not covered" >    storeId,</span>
+<span class="cstat-no" title="statement not covered" >    store_id,</span>
 <span class="cstat-no" title="statement not covered" >    name,</span>
 <span class="cstat-no" title="statement not covered" >    description,</span>
 <span class="cstat-no" title="statement not covered" >    cnpj,</span>
 <span class="cstat-no" title="statement not covered" >  }: IRequest): Promise&lt;Store&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const store = await this.storeRepository.findById(storeId);</span>
+<span class="cstat-no" title="statement not covered" >    const store = await this.storeRepository.findById(store_id);</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    if (!store) {</span>
 <span class="cstat-no" title="statement not covered" >      throw new AppError('Store not found');</span>

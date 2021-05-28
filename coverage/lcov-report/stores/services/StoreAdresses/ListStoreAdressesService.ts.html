@@ -131,13 +131,13 @@
 <span class="cstat-no" title="statement not covered" >    private storeRepository: IStoresRepository,</span>
 <span class="cstat-no" title="statement not covered" >  ) {}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  public async execute(storeId: string): Promise&lt;StoreAddress | undefined&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const storeAlreadyExists = await this.storeRepository.findById(storeId);</span>
+<span class="cstat-no" title="statement not covered" >  public async execute(store_id: string): Promise&lt;StoreAddress | undefined&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    const storeAlreadyExists = await this.storeRepository.findById(store_id);</span>
 <span class="cstat-no" title="statement not covered" >    if (!storeAlreadyExists) {</span>
 <span class="cstat-no" title="statement not covered" >      throw new AppError('Store non-exists');</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >    const storeAddress = await this.storeAdressesRepository.findByStoreId(</span>
-<span class="cstat-no" title="statement not covered" >      storeId,</span>
+<span class="cstat-no" title="statement not covered" >      store_id,</span>
 <span class="cstat-no" title="statement not covered" >    );</span>
 <span class="cstat-no" title="statement not covered" >    if (!storeAddress) {</span>
 <span class="cstat-no" title="statement not covered" >      throw new AppError('Store Address non-exists');</span>

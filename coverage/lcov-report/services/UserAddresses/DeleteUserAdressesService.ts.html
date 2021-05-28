@@ -132,7 +132,7 @@ import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 &nbsp;
 interface IRequest {
-  userId: string;
+  user_id: string;
   address_id: string;
 }
 &nbsp;
@@ -145,8 +145,8 @@ class DeleteUserAdressesService {
     private userAdressesRepository: IUserAdressesRepository,
   ) {}
 &nbsp;
-  public async execute({ userId, address_id }: IRequest): Promise&lt;void&gt; {
-    const userExists = await this.usersRepository.findById(userId);
+  public async execute({ user_id, address_id }: IRequest): Promise&lt;void&gt; {
+    const userExists = await this.usersRepository.findById(user_id);
     if (!userExists) {
       throw new AppError('User non-exists');
     }
@@ -154,7 +154,7 @@ class DeleteUserAdressesService {
     if (!userAddress) {
       throw new AppError('Address not found');
     }
-    if (userAddress.userId !== userExists.id) {
+    if (userAddress.user_id !== userExists.id) {
       throw new AppError('You can delete only yours adresses');
     }
     await this.userAdressesRepository.delete(userAddress);

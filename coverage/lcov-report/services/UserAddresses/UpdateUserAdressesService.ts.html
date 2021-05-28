@@ -163,15 +163,15 @@ import IUserAdressesRepository from '../../repositories/IUserAdressesRepository'
 import IUsersRepository from '../../repositories/IUserRepository';
 &nbsp;
 interface IRequest {
-  userId: string;
+  user_id: string;
   id: string;
   street?: string;
   number?: string;
   district?: string;
   city?: string;
-  zipCode?: string;
+  zip_code?: string;
   complement?: string;
-  referencePoint?: string;
+  reference_point?: string;
   alias?: string;
 }
 &nbsp;
@@ -185,7 +185,7 @@ class UpdateUserAdressesService {
   ) {}
 &nbsp;
   public async execute(data: IRequest): Promise&lt;UserAddress&gt; {
-    const userExists = await this.usersRepository.findById(data.userId);
+    const userExists = await this.usersRepository.findById(data.user_id);
     if (!userExists) {
       throw new AppError('User non-exists');
     }
@@ -195,7 +195,7 @@ class UpdateUserAdressesService {
     if (!userAddress || undefined) {
       throw new AppError('Address not found');
     }
-    if (userAddress.userId !== userExists.id) {
+    if (userAddress.user_id !== userExists.id) {
       throw new AppError('You can edit only yours adresses');
     }
     Object.assign(userAddress, data);

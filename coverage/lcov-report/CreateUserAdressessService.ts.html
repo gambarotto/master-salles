@@ -134,14 +134,14 @@ import IUserAddressRepository from '../repositories/IUserAddressRepository';
 import IUsersRepository from '../repositories/IUserRepository';
 &nbsp;
 interface IRequest {
-  userId: string;
+  user_id: string;
   street: string;
   number: string;
   district: string;
   city: string;
-  zipCode: string;
+  zip_code: string;
   complement: string;
-  referencePoint: string;
+  reference_point: string;
   alias: string;
 }
 &nbsp;
@@ -155,7 +155,7 @@ class CreateUserService {
   ) {}
 &nbsp;
   public async execute(data: IRequest): Promise&lt;UserAddress&gt; {
-    const userExists = await this.usersRepository.findById(data.userId);
+    const userExists = await this.usersRepository.findById(data.user_id);
     if (!userExists) {
       throw new Error('User non-exists');
     }

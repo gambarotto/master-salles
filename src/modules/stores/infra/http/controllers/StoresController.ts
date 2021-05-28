@@ -24,11 +24,11 @@ class StoreController {
   }
 
   public async update(request: Request, response: Response): Promise<Response> {
-    const { storeId } = request.params;
+    const { store_id } = request.params;
     const { name, description, cnpj } = request.body;
     const updateStoreService = container.resolve(UpdateStoreService);
     const storeUpdated = await updateStoreService.execute({
-      storeId,
+      store_id,
       name,
       description,
       cnpj,
@@ -37,9 +37,9 @@ class StoreController {
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
-    const { storeId } = request.params;
+    const { store_id } = request.params;
     const deleteStoreService = container.resolve(DeleteStoreService);
-    await deleteStoreService.execute({ storeId });
+    await deleteStoreService.execute({ store_id });
 
     return response.json({ message: 'Store was deleted' });
   }

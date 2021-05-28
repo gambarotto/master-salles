@@ -16,7 +16,7 @@ export default class CreateStoreAdresses1621284258054
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'storeId',
+            name: 'store_id',
             type: 'uuid',
           },
           {
@@ -38,7 +38,7 @@ export default class CreateStoreAdresses1621284258054
             type: 'varchar',
           },
           {
-            name: 'zipCode',
+            name: 'zip_code',
             type: 'varchar',
           },
           {
@@ -47,7 +47,7 @@ export default class CreateStoreAdresses1621284258054
             isNullable: true,
           },
           {
-            name: 'referencePoint',
+            name: 'reference_point',
             type: 'varchar',
             isNullable: true,
           },
@@ -62,12 +62,12 @@ export default class CreateStoreAdresses1621284258054
             isNullable: true,
           },
           {
-            name: 'createdAt',
+            name: 'created_at',
             type: 'timestamp',
             default: 'now()',
           },
           {
-            name: 'updatedAt',
+            name: 'updated_at',
             type: 'timestamp',
             default: 'now()',
           },
@@ -77,7 +77,7 @@ export default class CreateStoreAdresses1621284258054
             name: 'stores_adresses',
             referencedTableName: 'stores',
             referencedColumnNames: ['id'],
-            columnNames: ['storeId'],
+            columnNames: ['store_id'],
             onDelete: 'SET NULL',
             onUpdate: 'CASCADE',
           },

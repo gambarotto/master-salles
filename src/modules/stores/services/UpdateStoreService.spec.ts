@@ -18,7 +18,7 @@ describe('Update Store', () => {
       cnpj: '11.111.111/1111-11',
     });
     const storeUpdated = await updateStoreService.execute({
-      storeId: store.id,
+      store_id: store.id,
       description:
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
       cnpj: '21.111.111/1111-11',
@@ -35,7 +35,7 @@ describe('Update Store', () => {
       cnpj: '11.111.111/1111-11',
     });
     const storeUpdated = await updateStoreService.execute({
-      storeId: store.id,
+      store_id: store.id,
     });
 
     expect(storeUpdated.cnpj).toBe('11.111.111/1111-11');
@@ -44,7 +44,7 @@ describe('Update Store', () => {
   it('Should not be able update a store with invalid store id', async () => {
     await expect(
       updateStoreService.execute({
-        storeId: 'invalid-store-id',
+        store_id: 'invalid-store-id',
         description:
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
         cnpj: '21.111.111/1111-11',
@@ -66,7 +66,7 @@ describe('Update Store', () => {
     });
     await expect(
       updateStoreService.execute({
-        storeId: store.id,
+        store_id: store.id,
         description:
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry',
         cnpj: '22.222.222/2222-22',

@@ -24,14 +24,14 @@ describe('Create Store Address', () => {
       cnpj: '11.111.111/1111-11',
     });
     const storeAddress = await createStoreAdressesService.execute({
-      storeId: store.id,
+      store_id: store.id,
       street: 'rua da loja',
       number: '888',
       district: 'bairro da loja',
       city: 'jundiai',
-      zipCode: '13123123',
+      zip_code: '13123123',
       complement: 'prox. ao mercado',
-      referencePoint: 'igreja',
+      reference_point: 'igreja',
       lat: '40.7143528',
       long: '-74.0059731',
     });
@@ -40,14 +40,14 @@ describe('Create Store Address', () => {
   it('Should not be able create a new store address with invalid-store-id', async () => {
     await expect(
       createStoreAdressesService.execute({
-        storeId: 'invalid-store-id',
+        store_id: 'invalid-store-id',
         street: 'rua da loja',
         number: '888',
         district: 'bairro da loja',
         city: 'jundiai',
-        zipCode: '13123123',
+        zip_code: '13123123',
         complement: 'prox. ao mercado',
-        referencePoint: 'igreja',
+        reference_point: 'igreja',
         lat: '40.7143528',
         long: '-74.0059731',
       }),
@@ -61,14 +61,14 @@ describe('Create Store Address', () => {
       cnpj: '11.111.111/1111-11',
     });
     const storeAddress = await createStoreAdressesService.execute({
-      storeId: store.id,
+      store_id: store.id,
       street: 'rua da loja',
       number: '888',
       district: 'bairro da loja',
       city: 'jundiai',
-      zipCode: '13123123',
+      zip_code: '13123123',
       complement: 'prox. ao mercado',
-      referencePoint: 'igreja',
+      reference_point: 'igreja',
       lat: '40.7143528',
       long: '-74.0059731',
     });
@@ -77,14 +77,14 @@ describe('Create Store Address', () => {
 
     await expect(
       createStoreAdressesService.execute({
-        storeId: store.id,
+        store_id: store.id,
         street: 'rua da loja1',
         number: '888',
         district: 'bairro da loja1',
         city: 'jundiai',
-        zipCode: '13123123',
+        zip_code: '13123123',
         complement: 'prox. ao mercado1',
-        referencePoint: 'igreja',
+        reference_point: 'igreja',
         lat: '40.7143528',
         long: '-74.0059731',
       }),

@@ -25,7 +25,7 @@ describe('Delete UserProfile', () => {
 
     await expect(
       deleteUserProfileService.execute({
-        userId: user.id,
+        user_id: user.id,
         password: '123456',
       }),
     ).resolves.not.toBeInstanceOf(AppError);
@@ -39,7 +39,7 @@ describe('Delete UserProfile', () => {
 
     await expect(
       deleteUserProfileService.execute({
-        userId: user.id,
+        user_id: user.id,
         password: 'wrong-password',
       }),
     ).rejects.toBeInstanceOf(AppError);
@@ -53,14 +53,14 @@ describe('Delete UserProfile', () => {
 
     await expect(
       deleteUserProfileService.execute({
-        userId: user.id,
+        user_id: user.id,
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
   it('Should not be able delete a user passing wrong id', async () => {
     await expect(
       deleteUserProfileService.execute({
-        userId: 'wrong-id',
+        user_id: 'wrong-id',
         password: 'wrong-password',
       }),
     ).rejects.toBeInstanceOf(AppError);

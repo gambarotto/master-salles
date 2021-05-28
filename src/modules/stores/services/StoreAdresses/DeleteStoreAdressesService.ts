@@ -9,9 +9,9 @@ class DeleteStoreAdressesService {
     private storeAdressesRepository: IStoreAdressesRepository,
   ) {}
 
-  public async execute(storeId: string): Promise<void> {
+  public async execute(store_id: string): Promise<void> {
     const storeAddress = await this.storeAdressesRepository.findByStoreId(
-      storeId,
+      store_id,
     );
 
     if (!storeAddress) {

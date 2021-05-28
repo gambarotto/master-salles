@@ -1,3 +1,4 @@
+import { Expose } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
@@ -9,14 +10,15 @@ import {
 } from 'typeorm';
 import Store from './Store';
 
-@Entity('storeAdresses')
+@Entity('store_adresses')
 class StoreAddress {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @OneToOne(() => Store, store => store.address)
-  @JoinColumn({ name: 'storeId' })
-  store: Store;
+  @JoinColumn({ name: 'store_id' })
+  @Expose({ name: 'store' })
+  store_id: string;
 
   @Column()
   street: string;
@@ -31,13 +33,13 @@ class StoreAddress {
   city: string;
 
   @Column()
-  zipCode: string;
+  zip_code: string;
 
   @Column({ nullable: true })
   complement: string;
 
   @Column({ nullable: true })
-  referencePoint: string;
+  reference_point: string;
 
   @Column({ nullable: true, type: 'float8' })
   lat: number;
@@ -46,9 +48,9 @@ class StoreAddress {
   long: number;
 
   @CreateDateColumn()
-  createdAt: Date;
+  created_at: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updated_at: Date;
 }
 export default StoreAddress;

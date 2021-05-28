@@ -1,14 +1,16 @@
+import { Expose } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import User from './User';
 
-@Entity('userAdresses')
+@Entity('user_adresses')
 class UserAddress {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -18,7 +20,9 @@ class UserAddress {
     onUpdate: 'CASCADE',
     nullable: false,
   })
-  user: User;
+  @JoinColumn({ name: 'user_id' })
+  @Expose({ name: 'user' })
+  user_id: string;
 
   @Column()
   street: string;
@@ -33,21 +37,21 @@ class UserAddress {
   city: string;
 
   @Column()
-  zipCode: string;
+  zip_code: string;
 
   @Column({ nullable: true })
   complement: string;
 
   @Column({ nullable: true })
-  referencePoint: string;
+  reference_point: string;
 
   @Column({ nullable: true })
   alias: string;
 
   @CreateDateColumn()
-  createdAt: Date;
+  created_at: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updated_at: Date;
 }
 export default UserAddress;

@@ -7,11 +7,11 @@ import { container } from 'tsyringe';
 
 class UserProfilesController {
   public async update(request: Request, response: Response): Promise<Response> {
-    const userId = request.user.id;
+    const user_id = request.user.id;
     const { name, email, old_password, new_password } = request.body;
     const updateUserProfile = container.resolve(UpdateUserProfileService);
     const updatedUser = await updateUserProfile.execute({
-      userId,
+      user_id,
       name,
       email,
       old_password,
@@ -21,20 +21,20 @@ class UserProfilesController {
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
-    const userId = request.user.id;
+    const user_id = request.user.id;
     const { password } = request.body;
 
     const deleteProfileUser = container.resolve(DeleteUserProfileService);
-    await deleteProfileUser.execute({ userId, password });
+    await deleteProfileUser.execute({ user_id, password });
 
     return response.json({ message: 'Success on delete user' });
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
-    const userId = request.user.id;
+    const user_id = request.user.id;
 
     const showProfileUser = container.resolve(ShowUserProfileService);
-    const userProfile = await showProfileUser.execute({ userId });
+    const userProfile = await showProfileUser.execute({ user_id });
 
     return response.json(classToClass(userProfile));
   }
