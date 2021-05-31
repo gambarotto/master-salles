@@ -1,7 +1,10 @@
+import CategoryProduct from '@modules/categories/infra/typeorm/entities/CategoryProduct';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -22,9 +25,12 @@ class Product {
   @Column()
   sale_price: number;
 
-  // @ManyToMany(() => Category, category => category.products)
-  // @JoinTable()
-  // categories: Category[];
+  @OneToMany(
+    () => CategoryProduct,
+    categoryProduct => categoryProduct.product_id,
+  )
+  @JoinColumn({ name: 'categories_products' })
+  categories_products: CategoryProduct[];
 
   @CreateDateColumn()
   created_at: Date;
