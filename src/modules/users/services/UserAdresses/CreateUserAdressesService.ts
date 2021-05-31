@@ -25,15 +25,33 @@ class CreateUserService {
     private userAdressesRepository: IUserAdressesRepository,
   ) {}
 
-  public async execute(data: IRequest): Promise<UserAddress> {
-    const userExists = await this.usersRepository.findById({
-      user_id: data.user_id,
-    });
+  public async execute({
+    user_id,
+    street,
+    number,
+    district,
+    city,
+    zip_code,
+    complement,
+    reference_point,
+    alias,
+  }: IRequest): Promise<UserAddress> {
+    const userExists = await this.usersRepository.findById({ user_id });
 
     if (!userExists) {
       throw new AppError('User non-exists');
     }
-    const userAddress = await this.userAdressesRepository.create(data);
+    const userAddress = await this.userAdressesRepository.create({
+      user_id,
+      street,
+      number,
+      district,
+      city,
+      zip_code,
+      complement,
+      reference_point,
+      alias,
+    });
     return userAddress;
   }
 }

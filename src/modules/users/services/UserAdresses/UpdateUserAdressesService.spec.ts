@@ -33,6 +33,7 @@ describe('updateUserAddress', () => {
       reference_point: 'perto de',
       alias: 'casa',
     });
+
     const updatedUserAddress = await updateUserAddress.execute({
       user_id: user.id,
       id: userAddress.id,
@@ -45,6 +46,7 @@ describe('updateUserAddress', () => {
       reference_point: 'perto de',
       alias: 'casa',
     });
+
     expect(updatedUserAddress.street).toBe('rua um editado');
   });
   it('Should not be able update a user address with invalid user id', async () => {

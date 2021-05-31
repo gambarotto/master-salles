@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import { classToClass } from 'class-transformer';
-import CreateUserAdressesService from '@modules/users/services/UserAddresses/CreateUserAdressesService';
-import DeleteUserAdressesService from '@modules/users/services/UserAddresses/DeleteUserAdressesService';
-import ListUserAdressesProvider from '@modules/users/services/UserAddresses/ListUserAdressesProvider';
-import UpdateUserAdressesService from '@modules/users/services/UserAddresses/UpdateUserAdressesService';
+import CreateUserAdressesService from '@modules/users/services/UserAdresses/CreateUserAdressesService';
+import DeleteUserAdressesService from '@modules/users/services/UserAdresses/DeleteUserAdressesService';
+import ListUserAdressesProvider from '@modules/users/services/UserAdresses/ListUserAdressesProvider';
+import UpdateUserAdressesService from '@modules/users/services/UserAdresses/UpdateUserAdressesService';
 
 class UserAdressesController {
   public async create(request: Request, response: Response): Promise<Response> {
