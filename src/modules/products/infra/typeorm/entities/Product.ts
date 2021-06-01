@@ -1,10 +1,10 @@
-import CategoryProduct from '@modules/categories/infra/typeorm/entities/CategoryProduct';
+import Category from '@modules/categories/infra/typeorm/entities/Category';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  OneToMany,
+  JoinTable,
+  ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -13,24 +13,25 @@ class Product {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ unique: true })
   name: string;
 
   @Column()
   description: string;
 
-  @Column()
+  @Column({ type: 'float' })
   cost_price: number;
 
-  @Column()
+  @Column({ type: 'float' })
   sale_price: number;
 
-  @OneToMany(
-    () => CategoryProduct,
-    categoryProduct => categoryProduct.product_id,
-  )
-  @JoinColumn({ name: 'categories_products' })
-  categories_products: CategoryProduct[];
+  @ManyToMany(() => Category, category => category.product_id)
+  @JoinTable({
+    name: 'categories_products',
+    joinColumn: { name: 'product_id' },
+    inverseJoinColumn: { name: 'category_id' },
+  })
+  category_id: Category[];
 
   @CreateDateColumn()
   created_at: Date;

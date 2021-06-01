@@ -3,9 +3,9 @@ import uploadConfig from '@config/upload';
 import { celebrate, Segments, Joi } from 'celebrate';
 import multer from 'multer';
 import AppError from '@shared/errors/AppError';
+import ensureAuthenticatedEmployee from '@shared/infra/http/middlewares/ensureAuthenticatedEmployee';
 import EmployeeAvatarController from '../controllers/EmployeeAvatarController';
 import EmployeesController from '../controllers/EmployeesController';
-import ensureAuthenticatedEmployee from '../middlewares/ensureAuthenticatedEmployee';
 
 const employeesRoutes = Router();
 const upload = multer(uploadConfig);

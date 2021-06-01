@@ -25,7 +25,7 @@ class DeleteCategoryService {
     if (employee.responsibility !== 'admin') {
       throw new AppError('The Employee has no privilegies to do this');
     }
-    const category = await this.categoriesRepository.findById(category_id);
+    const category = await this.categoriesRepository.findById({ category_id });
 
     if (!category) {
       throw new AppError('Category not found');

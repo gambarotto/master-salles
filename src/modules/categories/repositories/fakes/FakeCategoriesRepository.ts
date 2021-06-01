@@ -1,4 +1,6 @@
+import IFindCategoryDTO from '@modules/categories/dtos/IFindCategoryDTO';
 import Category from '@modules/categories/infra/typeorm/entities/Category';
+import Product from '@modules/products/infra/typeorm/entities/Product';
 import { v4 } from 'uuid';
 import ICategoriesRepository from '../ICategoriesRepository';
 
@@ -36,8 +38,14 @@ class FakeCategoriesRepository implements ICategoriesRepository {
     return categoryFinded;
   }
 
-  async findById(category_id: string): Promise<Category | undefined> {
+  async findById({
+    category_id,
+    products = false,
+  }: IFindCategoryDTO): Promise<Category | undefined> {
     const categoryFinded = this.categories.find(cat => cat.id === category_id);
+    if (products && categoryFinded) {
+      categoryFinded.product_id = [] as Product[];
+    }
     return categoryFinded;
   }
 

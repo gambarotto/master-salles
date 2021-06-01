@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import ensureAuthenticatedEmployee from '@modules/employees/infra/http/middlewares/ensureAuthenticatedEmployee';
+import ensureAuthenticatedEmployee from '@shared/infra/http/middlewares/ensureAuthenticatedEmployee';
 import CategoryController from '../controllers/CategoryController';
 
 const categoriesRoutes = Router();

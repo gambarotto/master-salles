@@ -1,13 +1,12 @@
+import Product from '@modules/products/infra/typeorm/entities/Product';
 import { Expose } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  OneToMany,
+  ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import CategoryProduct from './CategoryProduct';
 
 @Entity('categories')
 class Category {
@@ -20,13 +19,9 @@ class Category {
   @Column({ nullable: true })
   image: string;
 
-  @OneToMany(
-    () => CategoryProduct,
-    categoryProduct => categoryProduct.category_id,
-  )
-  @JoinColumn({ name: 'products_categories' })
+  @ManyToMany(() => Product, product => product.category_id)
   @Expose({ name: 'products' })
-  products_categories: CategoryProduct[];
+  product_id: Product[];
 
   @CreateDateColumn()
   created_at: Date;

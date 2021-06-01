@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
+import ensureAuthenticatedEmployee from '@shared/infra/http/middlewares/ensureAuthenticatedEmployee';
 import EmployeeProfilesController from '../controllers/EmployeeProfilesController';
-import ensureAuthenticatedEmployee from '../middlewares/ensureAuthenticatedEmployee';
 
 const employeesProfilesRoutes = Router();
 const employeeProfilesController = new EmployeeProfilesController();

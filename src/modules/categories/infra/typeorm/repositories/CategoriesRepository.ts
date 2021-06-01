@@ -1,3 +1,4 @@
+import IFindCategoryDTO from '@modules/categories/dtos/IFindCategoryDTO';
 import ICategoriesRepository from '@modules/categories/repositories/ICategoriesRepository';
 import { getRepository, Repository } from 'typeorm';
 import Category from '../entities/Category';
@@ -29,10 +30,18 @@ class CategoriesRepository implements ICategoriesRepository {
     return category;
   }
 
-  async findById(category_id: string): Promise<Category | undefined> {
-    const category = await this.ormRepository.findOne(category_id, {
-      relations: ['products_categories'],
-    });
+  async findById({
+    category_id,
+    products = false,
+  }: IFindCategoryDTO): Promise<Category | undefined> {
+    let category;
+    if (products) {
+      category = await this.ormRepository.findOne(category_id, {
+        relations: ['product_id'],
+      });
+    } else {
+      category = await this.ormRepository.findOne(category_id);
+    }
     return category;
   }
 

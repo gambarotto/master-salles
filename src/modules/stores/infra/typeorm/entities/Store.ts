@@ -24,7 +24,7 @@ class Store {
   cnpj: string;
 
   @Column({ nullable: true })
-  imageLogo: string;
+  image_logo: string;
 
   @OneToOne(() => StoreAddress, storeAddress => storeAddress.store_id)
   address: StoreAddress;
@@ -37,8 +37,8 @@ class Store {
 
   @Expose({ name: 'logo_url' })
   getLogo(): string | null {
-    return this.imageLogo
-      ? `${process.env.APP_API_URL}/files/${this.imageLogo}`
+    return this.image_logo
+      ? `${process.env.APP_API_URL}/files/${this.image_logo}`
       : null;
   }
 }

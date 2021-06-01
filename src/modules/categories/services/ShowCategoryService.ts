@@ -11,7 +11,10 @@ class ShowCategoryService {
   ) {}
 
   async execute(category_id: string): Promise<Category> {
-    const category = await this.categoriesRepository.findById(category_id);
+    const category = await this.categoriesRepository.findById({
+      category_id,
+      products: true,
+    });
 
     if (!category) {
       throw new AppError('Category not found');
