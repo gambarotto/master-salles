@@ -15,14 +15,30 @@ class CategoriesRepository implements ICategoriesRepository {
     return category;
   }
 
-  async update(category: Category): Promise<Category> {}
+  async update(category: Category): Promise<Category> {
+    const categoryUpdated = await this.ormRepository.save(category);
+    return categoryUpdated;
+  }
 
-  async delete(category_id: string): Promise<void> {}
+  async delete(category_id: string): Promise<void> {
+    await this.ormRepository.delete(category_id);
+  }
 
-  async findByName(name: string): Promise<Category | undefined> {}
+  async findByName(name: string): Promise<Category | undefined> {
+    const category = await this.ormRepository.findOne({ where: { name } });
+    return category;
+  }
 
-  async findById(category_id: string): Promise<Category | undefined> {}
+  async findById(category_id: string): Promise<Category | undefined> {
+    const category = await this.ormRepository.findOne(category_id, {
+      relations: ['products_categories'],
+    });
+    return category;
+  }
 
-  async findAllCategories(): Promise<Category[]> {}
+  async findAllCategories(): Promise<Category[]> {
+    const categories = await this.ormRepository.find();
+    return categories;
+  }
 }
 export default CategoriesRepository;

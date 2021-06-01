@@ -16,6 +16,9 @@ import StoresRepository from '@modules/stores/infra/typeorm/repositories/StoresR
 import IStoreAdressesRepository from '@modules/stores/repositories/IStoreAdressesRepository';
 import StoreAdressesRepository from '@modules/stores/infra/typeorm/repositories/StoreAdressesRepository';
 
+import ICategoriesRepository from '@modules/categories/repositories/ICategoriesRepository';
+import CategoriesRepository from '@modules/categories/infra/typeorm/repositories/CategoriesRepository';
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
@@ -35,4 +38,8 @@ container.registerSingleton<IStoresRepository>(
 container.registerSingleton<IStoreAdressesRepository>(
   'StoreAdressesRepository',
   StoreAdressesRepository,
+);
+container.registerSingleton<ICategoriesRepository>(
+  'CategoriesRepository',
+  CategoriesRepository,
 );

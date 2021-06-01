@@ -25,6 +25,7 @@ class Category {
     categoryProduct => categoryProduct.category_id,
   )
   @JoinColumn({ name: 'products_categories' })
+  @Expose({ name: 'products' })
   products_categories: CategoryProduct[];
 
   @CreateDateColumn()
