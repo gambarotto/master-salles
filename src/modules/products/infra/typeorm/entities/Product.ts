@@ -1,4 +1,5 @@
 import Category from '@modules/categories/infra/typeorm/entities/Category';
+import { Expose } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
@@ -31,6 +32,7 @@ class Product {
     joinColumn: { name: 'product_id' },
     inverseJoinColumn: { name: 'category_id' },
   })
+  @Expose({ name: 'categories' })
   category_id: Category[];
 
   @CreateDateColumn()

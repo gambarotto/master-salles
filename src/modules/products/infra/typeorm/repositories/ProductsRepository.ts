@@ -1,4 +1,5 @@
 import ICreateProductDTO from '@modules/products/dtos/ICreateProductDTO';
+import IFindProductByIdDTO from '@modules/products/dtos/IFindProductByIdDTO';
 import Product from '@modules/products/infra/typeorm/entities/Product';
 import IProductsRepository from '@modules/products/repositories/IProductsRepository';
 import { getRepository, Repository } from 'typeorm';
@@ -16,14 +17,40 @@ class ProductsRepository implements IProductsRepository {
     return productCreated;
   }
 
-  async findById(product_id: string): Promise<Product | undefined> {
-    const product = await this.ormRepository.findOne(product_id);
+  async update(product: Product): Promise<Product> {
+    const productUpdated = await this.ormRepository.save(product);
+    return productUpdated;
+  }
+
+  async delete(product_id: string): Promise<void> {
+    await this.ormRepository.delete(product_id);
+  }
+
+  async findById({
+    product_id,
+    categories = false,
+  }: IFindProductByIdDTO): Promise<Product | undefined> {
+    let product;
+    if (categories) {
+      product = await this.ormRepository.findOne(product_id, {
+        relations: ['category_id'],
+      });
+    } else {
+      product = await this.ormRepository.findOne(product_id);
+    }
     return product;
   }
 
   async findByName(name: string): Promise<Product | undefined> {
     const product = await this.ormRepository.findOne({ where: { name } });
     return product;
+  }
+
+  async findAllProducts(): Promise<Product[]> {
+    const products = await this.ormRepository.find({
+      relations: ['category_id'],
+    });
+    return products;
   }
 }
 export default ProductsRepository;

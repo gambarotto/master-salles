@@ -11,7 +11,10 @@ class ShowProductService {
   ) {}
 
   async execute(product_id: string): Promise<Product> {
-    const product = await this.productRepository.findById({ product_id });
+    const product = await this.productRepository.findById({
+      product_id,
+      categories: true,
+    });
     if (!product) {
       throw new AppError('Product not found');
     }

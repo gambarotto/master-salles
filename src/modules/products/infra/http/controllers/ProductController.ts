@@ -2,6 +2,10 @@ import { container } from 'tsyringe';
 import { Request, Response } from 'express';
 import CreateProductService from '@modules/products/services/CreateProductService';
 import { classToClass } from 'class-transformer';
+import ShowProductService from '@modules/products/services/ShowProductsService';
+import ListProductService from '@modules/products/services/ListProductsService';
+import UpdateProductService from '@modules/products/services/UpdateProductService';
+import DeleteProductService from '@modules/products/services/DeleteProductService';
 
 class ProductController {
   async create(request: Request, response: Response): Promise<Response> {
@@ -19,6 +23,51 @@ class ProductController {
     });
 
     return response.json(classToClass(product));
+  }
+
+  async show(request: Request, response: Response): Promise<Response> {
+    const { product_id } = request.params;
+    const showProduct = container.resolve(ShowProductService);
+    const product = await showProduct.execute(product_id);
+
+    return response.json(product);
+  }
+
+  async index(request: Request, response: Response): Promise<Response> {
+    const listProducts = container.resolve(ListProductService);
+    const products = await listProducts.execute();
+
+    return response.json(classToClass(products));
+  }
+
+  async update(request: Request, response: Response): Promise<Response> {
+    const { name, description, cost_price, sale_price, categories_ids } =
+      request.body;
+    const { product_id } = request.params;
+    const employee_id = request.employee.id;
+
+    const updateProductn = container.resolve(UpdateProductService);
+    const product = await updateProductn.execute({
+      employee_id,
+      product_id,
+      name,
+      description,
+      cost_price,
+      sale_price,
+      categories_ids,
+    });
+    return response.json(classToClass(product));
+  }
+
+  async delete(request: Request, response: Response): Promise<Response> {
+    const { product_id } = request.params;
+    const employee_id = request.employee.id;
+
+    const deleteProduct = container.resolve(DeleteProductService);
+
+    await deleteProduct.execute({ employee_id, product_id });
+
+    return response.json({ message: 'Product was deleted' });
   }
 }
 export default ProductController;
