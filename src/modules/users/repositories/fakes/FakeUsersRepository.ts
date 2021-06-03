@@ -4,6 +4,7 @@ import User from '@modules/users/infra/typeorm/entities/User';
 import IUsersRepository from '@modules/users/repositories/IUserRepository';
 import IFindUserByIdDTO from '@modules/users/dtos/IFindUserByIdDTO';
 import UserAddress from '@modules/users/infra/typeorm/entities/UserAddress';
+import IFindByIdWithRelationsDTO from '@modules/users/dtos/IFindByIdWithRelationsDTO';
 
 class FakeUsersRepository implements IUsersRepository {
   private users: User[];
@@ -38,6 +39,16 @@ class FakeUsersRepository implements IUsersRepository {
     const user = this.users.find(u => u.id === user_id);
     if (address && user) {
       user.adresses = [{} as UserAddress];
+    }
+    return user;
+  }
+
+  public async findByIdWithRelations({
+    user_id,
+  }: IFindByIdWithRelationsDTO): Promise<User | undefined> {
+    const user = this.users.find(u => u.id === user_id);
+    if (user && user?.favorite_products === undefined) {
+      Object.assign(user, { favorite_products: [] });
     }
     return user;
   }

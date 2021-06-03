@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for users/services/UserAdresses/DeleteUserAdressesService.ts</title>
+    <title>Code coverage report for users/services/UserFavorites/CreateUserFavoritesService.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">users/services/UserAdresses</a> DeleteUserAdressesService.ts</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">users/services/UserFavorites</a> CreateUserFavoritesService.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/35</span>
+                <span class='fraction'>0/43</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/35</span>
+                <span class='fraction'>0/43</span>
             </div>
         
             
@@ -92,7 +92,15 @@
 <a name='L33'></a><a href='#L33'>33</a>
 <a name='L34'></a><a href='#L34'>34</a>
 <a name='L35'></a><a href='#L35'>35</a>
-<a name='L36'></a><a href='#L36'>36</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -127,41 +135,57 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import IUserAdressesRepository from '@modules/users/repositories/IUserAdressesRepository';</span></span></span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >import IProductsRepository from '@modules/products/repositories/IProductsRepository';</span></span></span>
+<span class="cstat-no" title="statement not covered" >import User from '@modules/users/infra/typeorm/entities/User';</span>
 <span class="cstat-no" title="statement not covered" >import IUsersRepository from '@modules/users/repositories/IUserRepository';</span>
 <span class="cstat-no" title="statement not covered" >import AppError from '@shared/errors/AppError';</span>
 <span class="cstat-no" title="statement not covered" >import { inject, injectable } from 'tsyringe';</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >interface IRequest {</span>
 <span class="cstat-no" title="statement not covered" >  user_id: string;</span>
-<span class="cstat-no" title="statement not covered" >  address_id: string;</span>
+<span class="cstat-no" title="statement not covered" >  product_id: string;</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >@injectable()</span>
-<span class="cstat-no" title="statement not covered" >class DeleteUserAdressesService {</span>
+<span class="cstat-no" title="statement not covered" >class CreateUserFavoritesService {</span>
 <span class="cstat-no" title="statement not covered" >  constructor(</span>
 <span class="cstat-no" title="statement not covered" >    @inject('UsersRepository')</span>
 <span class="cstat-no" title="statement not covered" >    private usersRepository: IUsersRepository,</span>
-<span class="cstat-no" title="statement not covered" >    @inject('UserAdressesRepository')</span>
-<span class="cstat-no" title="statement not covered" >    private userAdressesRepository: IUserAdressesRepository,</span>
+<span class="cstat-no" title="statement not covered" >    @inject('ProductsRepository')</span>
+<span class="cstat-no" title="statement not covered" >    private productRepository: IProductsRepository,</span>
 <span class="cstat-no" title="statement not covered" >  ) {}</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  public async execute({ user_id, address_id }: IRequest): Promise&lt;void&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const userExists = await this.usersRepository.findById({ user_id });</span>
+<span class="cstat-no" title="statement not covered" >  async execute({ user_id, product_id }: IRequest): Promise&lt;User&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    let userExists = await this.usersRepository.findByIdWithRelations({</span>
+<span class="cstat-no" title="statement not covered" >      user_id,</span>
+<span class="cstat-no" title="statement not covered" >      relations: ['favorite_products'],</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    if (!userExists) {</span>
-<span class="cstat-no" title="statement not covered" >      throw new AppError('User non-exists');</span>
+<span class="cstat-no" title="statement not covered" >      throw new AppError('Only authenticate users can change avatar', 401);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    const userAddress = await this.userAdressesRepository.findById(address_id);</span>
-<span class="cstat-no" title="statement not covered" >    if (!userAddress) {</span>
-<span class="cstat-no" title="statement not covered" >      throw new AppError('Address not found');</span>
+<span class="cstat-no" title="statement not covered" >    const product = await this.productRepository.findById({</span>
+<span class="cstat-no" title="statement not covered" >      product_id,</span>
+<span class="cstat-no" title="statement not covered" >    });</span>
+<span class="cstat-no" title="statement not covered" >    if (!product) {</span>
+<span class="cstat-no" title="statement not covered" >      throw new AppError('Product not found');</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    if (userAddress.user_id !== userExists.id) {</span>
-<span class="cstat-no" title="statement not covered" >      throw new AppError('You can delete only yours adresses');</span>
+<span class="cstat-no" title="statement not covered" >    if (userExists.favorite_products.indexOf(product) === -1) {</span>
+<span class="cstat-no" title="statement not covered" >      userExists.favorite_products = [...userExists.favorite_products, product];</span>
+<span class="cstat-no" title="statement not covered" >      userExists = await this.usersRepository.update(userExists);</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    await this.userAdressesRepository.delete(userAddress);</span>
+<span class="cstat-no" title="statement not covered" >    return userExists;</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >}</span>
-<span class="cstat-no" title="statement not covered" >export default DeleteUserAdressesService;</span>
+<span class="cstat-no" title="statement not covered" >export default CreateUserFavoritesService;</span>
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

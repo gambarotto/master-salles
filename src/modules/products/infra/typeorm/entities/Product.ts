@@ -1,4 +1,5 @@
 import Category from '@modules/categories/infra/typeorm/entities/Category';
+import User from '@modules/users/infra/typeorm/entities/User';
 import { Expose } from 'class-transformer';
 import {
   Column,
@@ -34,6 +35,9 @@ class Product {
   })
   @Expose({ name: 'categories' })
   category_id: Category[];
+
+  @ManyToMany(() => User, user => user.favorite_products)
+  favorite_users: User[];
 
   @CreateDateColumn()
   created_at: Date;

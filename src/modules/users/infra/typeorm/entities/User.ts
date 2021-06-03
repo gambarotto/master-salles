@@ -1,8 +1,11 @@
+import Product from '@modules/products/infra/typeorm/entities/Product';
 import { Exclude, Expose } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -29,6 +32,14 @@ class User {
 
   @OneToMany(() => UserAddress, userAddress => userAddress.user_id)
   adresses: UserAddress[];
+
+  @ManyToMany(() => Product, product => product.favorite_users)
+  @JoinTable({
+    name: 'favorities_users_products',
+    joinColumn: { name: 'user_id' },
+    inverseJoinColumn: { name: 'product_id' },
+  })
+  favorite_products: Product[];
 
   @CreateDateColumn()
   created_at: Date;
