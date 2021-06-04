@@ -8,7 +8,7 @@ import UpdateProductService from '@modules/products/services/UpdateProductServic
 import DeleteProductService from '@modules/products/services/DeleteProductService';
 
 class ProductController {
-  async create(request: Request, response: Response): Promise<Response> {
+  public async create(request: Request, response: Response): Promise<Response> {
     const { name, description, cost_price, sale_price, categories_ids } =
       request.body;
     const employee_id = request.employee.id;
@@ -25,7 +25,7 @@ class ProductController {
     return response.json(classToClass(product));
   }
 
-  async show(request: Request, response: Response): Promise<Response> {
+  public async show(request: Request, response: Response): Promise<Response> {
     const { product_id } = request.params;
     const showProduct = container.resolve(ShowProductService);
     const product = await showProduct.execute(product_id);
@@ -33,14 +33,14 @@ class ProductController {
     return response.json(product);
   }
 
-  async index(request: Request, response: Response): Promise<Response> {
+  public async index(request: Request, response: Response): Promise<Response> {
     const listProducts = container.resolve(ListProductService);
     const products = await listProducts.execute();
 
     return response.json(classToClass(products));
   }
 
-  async update(request: Request, response: Response): Promise<Response> {
+  public async update(request: Request, response: Response): Promise<Response> {
     const { name, description, cost_price, sale_price, categories_ids } =
       request.body;
     const { product_id } = request.params;
@@ -59,7 +59,7 @@ class ProductController {
     return response.json(classToClass(product));
   }
 
-  async delete(request: Request, response: Response): Promise<Response> {
+  public async delete(request: Request, response: Response): Promise<Response> {
     const { product_id } = request.params;
     const employee_id = request.employee.id;
 

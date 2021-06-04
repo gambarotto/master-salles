@@ -16,7 +16,7 @@ class DeleteUserFavoritesService {
   ) {}
 
   async execute({ user_id, product_id }: IRequest): Promise<User> {
-    let userExists = await this.usersRepository.findByIdWithRelations({
+    let userExists = await this.usersRepository.findById({
       user_id,
       relations: ['favorite_products'],
     });

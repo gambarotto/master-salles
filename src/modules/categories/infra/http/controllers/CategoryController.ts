@@ -8,7 +8,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 class CategoryController {
-  async create(request: Request, response: Response): Promise<Response> {
+  public async create(request: Request, response: Response): Promise<Response> {
     const { name } = request.body;
     const employee_id = request.employee.id;
 
@@ -18,7 +18,7 @@ class CategoryController {
     return response.json(category);
   }
 
-  async show(request: Request, response: Response): Promise<Response> {
+  public async show(request: Request, response: Response): Promise<Response> {
     const { category_id } = request.params;
     const showCategory = container.resolve(ShowCategoryService);
 
@@ -27,14 +27,14 @@ class CategoryController {
     return response.json(classToClass(category));
   }
 
-  async index(request: Request, response: Response): Promise<Response> {
+  public async index(request: Request, response: Response): Promise<Response> {
     const listCategories = container.resolve(ListCategoriesService);
 
     const categories = await listCategories.execute();
     return response.json(classToClass(categories));
   }
 
-  async update(request: Request, response: Response): Promise<Response> {
+  public async update(request: Request, response: Response): Promise<Response> {
     const { name } = request.body;
     const { category_id } = request.params;
     const employee_id = request.employee.id;
@@ -48,7 +48,7 @@ class CategoryController {
     return response.json(categoryUpdated);
   }
 
-  async delete(request: Request, response: Response): Promise<Response> {
+  public async delete(request: Request, response: Response): Promise<Response> {
     const { category_id } = request.params;
     const employee_id = request.employee.id;
     const deleteCategory = container.resolve(DeleteCategoryService);

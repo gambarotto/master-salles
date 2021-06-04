@@ -11,7 +11,7 @@ class ListUserFavoritesService {
   ) {}
 
   async execute(user_id: string): Promise<User> {
-    const userExists = await this.usersRepository.findByIdWithRelations({
+    const userExists = await this.usersRepository.findById({
       user_id,
       relations: ['favorite_products'],
     });
