@@ -5,6 +5,7 @@ import productsRoutes from '@modules/products/infra/http/routes/products.routes'
 import storeAdressesRoutes from '@modules/stores/infra/http/routes/adresses.routes';
 import storesRoutes from '@modules/stores/infra/http/routes/stores.routes';
 import userAdressesRoutes from '@modules/users/infra/http/routes/adresses.routes';
+import userFavoritesRoutes from '@modules/users/infra/http/routes/favorites.routes';
 import userProfilesRoutes from '@modules/users/infra/http/routes/profiles.routes';
 import usersRoutes from '@modules/users/infra/http/routes/users.routes';
 import { Router } from 'express';
@@ -17,6 +18,7 @@ routes.use('/sessions', sessionsRoutes);
 routes.use('/users', usersRoutes);
 routes.use('/adresses/users', userAdressesRoutes);
 routes.use('/profiles/users', userProfilesRoutes);
+routes.use('/favorites/users', userFavoritesRoutes);
 
 routes.use('/employees', employeesRoutes);
 routes.use('/profiles/employees', employeesProfilesRoutes);

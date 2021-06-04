@@ -33,7 +33,11 @@ class CreateUserFavoritesService {
     if (!product) {
       throw new AppError('Product not found');
     }
-    if (userExists.favorite_products.indexOf(product) === -1) {
+
+    const alreadyExists = userExists.favorite_products.findIndex(
+      prod => prod.id === product_id,
+    );
+    if (alreadyExists < 0) {
       userExists.favorite_products = [...userExists.favorite_products, product];
       userExists = await this.usersRepository.update(userExists);
     }
