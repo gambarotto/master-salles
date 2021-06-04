@@ -1,3 +1,4 @@
+import Order from '@modules/orders/infra/typeorm/entities/Order';
 import Product from '@modules/products/infra/typeorm/entities/Product';
 import { Exclude, Expose } from 'class-transformer';
 import {
@@ -40,6 +41,9 @@ class User {
     inverseJoinColumn: { name: 'product_id' },
   })
   favorite_products: Product[];
+
+  @OneToMany(() => Order, order => order.user_id)
+  orders: Order[];
 
   @CreateDateColumn()
   created_at: Date;
