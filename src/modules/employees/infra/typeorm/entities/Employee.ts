@@ -37,7 +37,7 @@ class Employee {
   @Expose({ name: 'avatar_url' })
   getAvatarUrl(): string | null {
     return this.avatar
-      ? `${process.env.APP_API_URL}/files/${this.avatar}`
+      ? `${process.env.APP_API_URL}/files/employees/${this.avatar}`
       : null;
   }
 }

@@ -50,6 +50,7 @@ class ProductsRepository implements IProductsRepository {
     const products = await this.ormRepository.find({
       relations: ['category_id'],
     });
+
     return products;
   }
 }

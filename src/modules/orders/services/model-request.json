@@ -1,0 +1,16 @@
+{
+    "user_id": "ghjnmjkml",
+    "total": 55.66,
+    "delivery": true,
+    "method_payment_id": "ghjnmjkml",
+    "transaction_id": "ghjnmjkml",
+    "status": [{ "id": "gghjugdeder" }],
+    "billing_address_id": "ghjnmjkml",
+    "shipping_address_id": "ghjnmjkml",
+    "products": [
+        { "id": "gghjugdeder" },
+        { "id": "gghjugdeder" },
+        { "id": "gghjugdeder" },
+        { "id": "gghjugdeder" }
+    ]
+}

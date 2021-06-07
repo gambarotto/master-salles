@@ -38,7 +38,7 @@ class Store {
   @Expose({ name: 'logo_url' })
   getLogo(): string | null {
     return this.image_logo
-      ? `${process.env.APP_API_URL}/files/${this.image_logo}`
+      ? `${process.env.APP_API_URL}/files/stores/${this.image_logo}`
       : null;
   }
 }
