@@ -34,6 +34,15 @@ describe('Category Update', () => {
     expect(categoryUpdated).toHaveProperty('id');
     expect(categoryUpdated.name).toBe('Doces');
   });
+  it('Should be able update a category without name', async () => {
+    const category = await fakeCategoriesRepository.create('Congelados');
+    const categoryUpdated = await updateCategoryService.execute({
+      employee_id: employee.id,
+      category_id: category.id,
+    });
+    expect(categoryUpdated).toHaveProperty('id');
+    expect(categoryUpdated.name).toBe('Congelados');
+  });
   it('Should not be able update a category with the same name', async () => {
     await fakeCategoriesRepository.create('Congelados');
     const cat = await fakeCategoriesRepository.create('Doces');

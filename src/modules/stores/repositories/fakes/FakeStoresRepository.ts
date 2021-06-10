@@ -40,11 +40,13 @@ class FakeStoresRepository implements IStoresRepository {
 
   public async findById({
     store_id,
-    address = false,
   }: IFindStoreByIdDTO): Promise<Store | undefined> {
     const store = this.stores.find(str => str.id === store_id);
-    if (address && store?.address !== undefined) {
+    if (store && store?.address !== undefined) {
       store.address = { ...store.address };
+    }
+    if (store && store?.photos !== undefined) {
+      store.photos = { ...store.photos };
     }
     return store;
   }

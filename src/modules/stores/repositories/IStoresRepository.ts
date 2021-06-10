@@ -8,7 +8,7 @@ export default interface IStoresRepository {
   findByCnpj(cnpj: string): Promise<Store | undefined>;
   findById({
     store_id,
-    address,
+    relations,
   }: IFindStoreByIdDTO): Promise<Store | undefined>;
   delete(store_id: string): Promise<void>;
   findAllStores(): Promise<Store[]>;

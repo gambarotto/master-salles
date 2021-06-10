@@ -20,6 +20,8 @@ import ICategoriesRepository from '@modules/categories/repositories/ICategoriesR
 import CategoriesRepository from '@modules/categories/infra/typeorm/repositories/CategoriesRepository';
 import IProductsRepository from '@modules/products/repositories/IProductsRepository';
 import ProductsRepository from '@modules/products/infra/typeorm/repositories/ProductsRepository';
+import IStoreImagesRepository from '@modules/stores/repositories/IStoreImagesRepository';
+import StoreImagesRepository from '@modules/stores/infra/typeorm/repositories/StoreImagesRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -48,4 +50,8 @@ container.registerSingleton<ICategoriesRepository>(
 container.registerSingleton<IProductsRepository>(
   'ProductsRepository',
   ProductsRepository,
+);
+container.registerSingleton<IStoreImagesRepository>(
+  'StoreImagesRepository',
+  StoreImagesRepository,
 );

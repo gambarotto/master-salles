@@ -32,16 +32,12 @@ class StoresRepository implements IStoresRepository {
 
   public async findById({
     store_id,
-    address = false,
+    relations = [],
   }: IFindStoreByIdDTO): Promise<Store | undefined> {
-    let store;
-    if (address) {
-      store = await this.ormRepository.findOne(store_id, {
-        relations: ['address'],
-      });
-    } else {
-      store = await this.ormRepository.findOne(store_id);
-    }
+    const store = await this.ormRepository.findOne(store_id, {
+      relations,
+    });
+
     return store;
   }
 
@@ -51,7 +47,9 @@ class StoresRepository implements IStoresRepository {
   }
 
   public async findAllStores(): Promise<Store[]> {
-    const stores = await this.ormRepository.find({ relations: ['address'] });
+    const stores = await this.ormRepository.find({
+      relations: ['address', 'photos'],
+    });
     return stores;
   }
 }

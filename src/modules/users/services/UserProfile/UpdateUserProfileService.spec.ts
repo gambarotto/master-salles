@@ -32,6 +32,19 @@ describe('Update UserProfile', () => {
     expect(updatedUser.name).toBe('Diego editado');
     expect(updatedUser.email).toBe('diegoeditado@diegoeditado.com');
   });
+  it('Should be able update a user with some fields missing', async () => {
+    const user = await usersRepository.create({
+      name: 'Diego',
+      email: 'diego@diego.com',
+      password: '123456',
+    });
+    const updatedUser = await updateUserProfileService.execute({
+      user_id: user.id,
+      name: 'Diego editado',
+      new_password: '1234567',
+    });
+    expect(updatedUser.name).toBe('Diego editado');
+  });
   it('Should not be able update a user with invalid id', async () => {
     await expect(
       updateUserProfileService.execute({

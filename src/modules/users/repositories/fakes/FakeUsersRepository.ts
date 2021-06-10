@@ -32,17 +32,6 @@ class FakeUsersRepository implements IUsersRepository {
     this.users.splice(userIndex, 1);
   }
 
-  // public async findById({
-  //   user_id,
-  //   address = false,
-  // }: IFindUserByIdDTO): Promise<User | undefined> {
-  //   const user = this.users.find(u => u.id === user_id);
-  //   if (address && user) {
-  //     user.adresses = [{} as UserAddress];
-  //   }
-  //   return user;
-  // }
-
   public async findById({
     user_id,
   }: IFindByIdWithRelationsDTO): Promise<User | undefined> {

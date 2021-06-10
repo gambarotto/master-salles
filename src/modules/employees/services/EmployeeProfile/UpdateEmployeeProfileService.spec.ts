@@ -33,6 +33,20 @@ describe('Update EmployeeProfile', () => {
     expect(updatedEmployee.name).toBe('Diego editado');
     expect(updatedEmployee.email).toBe('diegoeditado@diegoeditado.com');
   });
+  it('Should be able update with some fields missing', async () => {
+    const employee = await employeesRepository.create({
+      name: 'Diego',
+      email: 'diego@diego.com',
+      password: '123456',
+      responsibility: 'admin',
+    });
+    const updatedEmployee = await updateEmployeeProfileService.execute({
+      employee_id: employee.id,
+      name: 'Diego editado',
+      new_password: '1234567',
+    });
+    expect(updatedEmployee.name).toBe('Diego editado');
+  });
   it('Should not be able update a employee with invalid id', async () => {
     await expect(
       updateEmployeeProfileService.execute({

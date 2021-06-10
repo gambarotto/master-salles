@@ -3,11 +3,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import StoreAddress from './StoreAddress';
+import StoreImage from './StoreImage';
 
 @Entity('stores')
 class Store {
@@ -28,6 +30,9 @@ class Store {
 
   @OneToOne(() => StoreAddress, storeAddress => storeAddress.store_id)
   address: StoreAddress;
+
+  @OneToMany(() => StoreImage, storeImage => storeImage.store_id)
+  photos: StoreImage[];
 
   @CreateDateColumn()
   created_at: Date;

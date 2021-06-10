@@ -49,7 +49,10 @@ describe('EmployeeAvatar', () => {
 
     expect(employee.avatar).toBe('new-avatar.png');
     expect(deleteFile).toHaveBeenCalled();
-    expect(deleteFile).toHaveBeenCalledWith('avatarFileName.png');
+    expect(deleteFile).toHaveBeenCalledWith({
+      file: 'avatarFileName.png',
+      moduleName: 'employees',
+    });
   });
   it('Should not be able update avatar employee if his not logged', async () => {
     await expect(

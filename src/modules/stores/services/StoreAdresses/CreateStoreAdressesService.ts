@@ -40,7 +40,7 @@ class CreateStoreAdressesService {
   }: IRequest): Promise<StoreAddress> {
     const storeAlreadyExists = await this.storeRepository.findById({
       store_id,
-      address: true,
+      relations: ['address'],
     });
     if (!storeAlreadyExists) {
       throw new AppError('Store non-exists');

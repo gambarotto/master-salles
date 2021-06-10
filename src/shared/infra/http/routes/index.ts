@@ -3,6 +3,7 @@ import employeesRoutes from '@modules/employees/infra/http/routes/employees.rout
 import employeesProfilesRoutes from '@modules/employees/infra/http/routes/profiles.routes';
 import productsRoutes from '@modules/products/infra/http/routes/products.routes';
 import storeAdressesRoutes from '@modules/stores/infra/http/routes/adresses.routes';
+import storeImagesRoutes from '@modules/stores/infra/http/routes/images.routes';
 import storesRoutes from '@modules/stores/infra/http/routes/stores.routes';
 import userAdressesRoutes from '@modules/users/infra/http/routes/adresses.routes';
 import userFavoritesRoutes from '@modules/users/infra/http/routes/favorites.routes';
@@ -16,15 +17,16 @@ const routes = Router();
 routes.use('/sessions', sessionsRoutes);
 
 routes.use('/users', usersRoutes);
-routes.use('/adresses/users', userAdressesRoutes);
-routes.use('/profiles/users', userProfilesRoutes);
-routes.use('/favorites/users', userFavoritesRoutes);
+routes.use('/users/adresses', userAdressesRoutes);
+routes.use('/users/profiles', userProfilesRoutes);
+routes.use('/users/favorites', userFavoritesRoutes);
 
 routes.use('/employees', employeesRoutes);
-routes.use('/profiles/employees', employeesProfilesRoutes);
+routes.use('/employees/profiles', employeesProfilesRoutes);
 
 routes.use('/stores', storesRoutes);
-routes.use('/adresses/stores', storeAdressesRoutes);
+routes.use('/stores', storeAdressesRoutes);
+routes.use('/stores', storeImagesRoutes);
 
 routes.use('/categories', categoriesRoutes);
 
