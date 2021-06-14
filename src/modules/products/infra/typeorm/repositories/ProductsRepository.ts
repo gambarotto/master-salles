@@ -28,16 +28,11 @@ class ProductsRepository implements IProductsRepository {
 
   async findById({
     product_id,
-    categories = false,
+    relations = [],
   }: IFindProductByIdDTO): Promise<Product | undefined> {
-    let product;
-    if (categories) {
-      product = await this.ormRepository.findOne(product_id, {
-        relations: ['category_id'],
-      });
-    } else {
-      product = await this.ormRepository.findOne(product_id);
-    }
+    const product = await this.ormRepository.findOne(product_id, {
+      relations,
+    });
     return product;
   }
 

@@ -18,10 +18,15 @@ import StoreAdressesRepository from '@modules/stores/infra/typeorm/repositories/
 
 import ICategoriesRepository from '@modules/categories/repositories/ICategoriesRepository';
 import CategoriesRepository from '@modules/categories/infra/typeorm/repositories/CategoriesRepository';
+
 import IProductsRepository from '@modules/products/repositories/IProductsRepository';
 import ProductsRepository from '@modules/products/infra/typeorm/repositories/ProductsRepository';
+
 import IStoreImagesRepository from '@modules/stores/repositories/IStoreImagesRepository';
 import StoreImagesRepository from '@modules/stores/infra/typeorm/repositories/StoreImagesRepository';
+
+import IProductPhotosRepository from '@modules/products/repositories/IProductPhotosRepository';
+import ProductPhotosRepository from '@modules/products/infra/typeorm/repositories/ProductPhotoRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -54,4 +59,8 @@ container.registerSingleton<IProductsRepository>(
 container.registerSingleton<IStoreImagesRepository>(
   'StoreImagesRepository',
   StoreImagesRepository,
+);
+container.registerSingleton<IProductPhotosRepository>(
+  'ProductPhotosRepository',
+  ProductPhotosRepository,
 );

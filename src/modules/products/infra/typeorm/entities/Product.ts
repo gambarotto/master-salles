@@ -7,8 +7,10 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import ProductPhoto from './ProductPhoto';
 
 @Entity('products')
 class Product {
@@ -38,6 +40,9 @@ class Product {
 
   @ManyToMany(() => User, user => user.favorite_products)
   favorite_users: User[];
+
+  @OneToMany(() => ProductPhoto, productPhoto => productPhoto.product_id)
+  photos: ProductPhoto[];
 
   @CreateDateColumn()
   created_at: Date;

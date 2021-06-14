@@ -30,7 +30,7 @@ class ProductController {
     const showProduct = container.resolve(ShowProductService);
     const product = await showProduct.execute(product_id);
 
-    return response.json(product);
+    return response.json(classToClass(product));
   }
 
   public async index(request: Request, response: Response): Promise<Response> {

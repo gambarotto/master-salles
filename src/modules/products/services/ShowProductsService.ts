@@ -13,7 +13,7 @@ class ShowProductService {
   async execute(product_id: string): Promise<Product> {
     const product = await this.productRepository.findById({
       product_id,
-      categories: true,
+      relations: ['category_id', 'photos'],
     });
     if (!product) {
       throw new AppError('Product not found');

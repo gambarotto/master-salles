@@ -9,13 +9,13 @@ export default {
     users: path.resolve(tempFolder, 'uploads', 'users'),
     employees: path.resolve(tempFolder, 'uploads', 'employees'),
     stores: path.resolve(tempFolder, 'uploads', 'stores'),
-    products: path.resolve(tempFolder, 'uploads', 'users'),
+    products: path.resolve(tempFolder, 'uploads', 'products'),
   },
   storage: multer.diskStorage({
     destination: tempFolder,
     filename(request, file, callback) {
       const fileHash = crypto.randomBytes(10).toString('hex');
-      const fileName = `${fileHash}-${file.originalname}`;
+      const fileName = `${fileHash}-${file.originalname}`.replace(/ /g, '-');
       return callback(null, fileName);
     },
   }),
