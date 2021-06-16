@@ -5,13 +5,12 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  JoinTable,
-  ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import MethodPayment from './MethodPayment';
-import Status from './Status';
+import OrderStatus from './OrderStatus';
 
 @Entity('orders')
 class Order {
@@ -39,13 +38,15 @@ class Order {
   @JoinColumn({ name: 'shipping_address_id' })
   shipping_address_id: string;
 
-  @ManyToMany(() => Status, status => status.orders)
-  @JoinTable({
-    name: 'orders_status',
-    joinColumn: { name: 'order_id' },
-    inverseJoinColumn: { name: 'status_id' },
-  })
-  status: Status[];
+  // @ManyToMany(() => Status, status => status.orders)
+  // @JoinTable({
+  //   name: 'orders_status',
+  //   joinColumn: { name: 'order_id' },
+  //   inverseJoinColumn: { name: 'status_id' },
+  // })
+  // status: Status[];
+  @OneToMany(() => OrderStatus, orderStatus => orderStatus.order_id)
+  status: OrderStatus[];
 
   @ManyToOne(() => MethodPayment, methodPayment => methodPayment.orders)
   @JoinColumn({ name: 'method_payment_id' })

@@ -27,6 +27,8 @@ import StoreImagesRepository from '@modules/stores/infra/typeorm/repositories/St
 
 import IProductPhotosRepository from '@modules/products/repositories/IProductPhotosRepository';
 import ProductPhotosRepository from '@modules/products/infra/typeorm/repositories/ProductPhotoRepository';
+import IStatusRepository from '@modules/orders/repositories/IStatusRepository';
+import StatusRepository from '@modules/orders/infra/typeorm/repositories/StatusRepository';
 import IHandleImageProvider from './providers/handleImageProvider/model/IHandleImageProvider';
 import SharpHandleImageProvider from './providers/handleImageProvider/implementations/SharpHandleImageProvider';
 
@@ -69,4 +71,8 @@ container.registerSingleton<IProductPhotosRepository>(
 container.registerSingleton<IHandleImageProvider>(
   'SharpHandleImageProvider',
   SharpHandleImageProvider,
+);
+container.registerSingleton<IStatusRepository>(
+  'StatusRepository',
+  StatusRepository,
 );
