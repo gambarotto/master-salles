@@ -48,7 +48,7 @@ class UpdateProductService {
 
     const product = await this.productRepository.findById({
       product_id,
-      categories: true,
+      relations: ['category_id'],
     });
     if (!product) {
       throw new AppError('Product not found');

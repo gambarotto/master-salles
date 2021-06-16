@@ -50,6 +50,7 @@ class CreateProductPhotoService {
       file: nameFile,
       moduleName: 'products',
     });
+
     const productPhoto = await this.productPhotoRepository.create({
       name: originalName,
       path: fileName,

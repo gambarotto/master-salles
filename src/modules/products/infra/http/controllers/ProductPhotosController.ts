@@ -9,6 +9,7 @@ class ProductPhotosController {
     const employee_id = request.employee.id;
     const { originalname, filename } = request.file;
     const { product_id } = request.params;
+    console.log(request.file);
 
     const productPhotoService = container.resolve(CreateProductPhotoService);
     const productPhoto = await productPhotoService.execute({

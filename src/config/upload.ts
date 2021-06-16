@@ -15,7 +15,7 @@ export default {
     destination: tempFolder,
     filename(request, file, callback) {
       const fileHash = crypto.randomBytes(10).toString('hex');
-      const fileName = `${fileHash}-${file.originalname}`.replace(/ /g, '-');
+      const fileName = `${fileHash}-${file.originalname}`.replace(/ /g, '');
       return callback(null, fileName);
     },
   }),
