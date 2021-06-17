@@ -4,7 +4,7 @@ import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
-  id: string;
+  status_id: string;
   name?: string;
   description?: string;
 }
@@ -15,8 +15,12 @@ class UpdateStatusService {
     private statusRepository: IStatusRepository,
   ) {}
 
-  public async execute({ id, name, description }: IRequest): Promise<Status> {
-    const status = await this.statusRepository.findById(id);
+  public async execute({
+    status_id,
+    name,
+    description,
+  }: IRequest): Promise<Status> {
+    const status = await this.statusRepository.findById(status_id);
     if (!status) {
       throw new AppError('Status not found');
     }

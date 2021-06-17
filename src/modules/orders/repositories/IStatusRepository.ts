@@ -7,4 +7,5 @@ export default interface IStatusRepository {
   findAll(): Promise<Status[]>;
   create({ name, description }: ICreateStatusDTO): Promise<Status>;
   update(status: Status): Promise<Status>;
+  delete(status_id: string): Promise<void>;
 }

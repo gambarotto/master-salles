@@ -19,7 +19,7 @@ describe('Status Update', () => {
   });
   it('Should be able create a new status', async () => {
     const statusUp = await updateStatusService.execute({
-      id: status.id,
+      status_id: status.id,
       name: 'Processando',
       description: 'jyhgtffddfjhjkkkkkkkkkkgggggggggrrrrrrrr',
     });
@@ -27,14 +27,14 @@ describe('Status Update', () => {
   });
   it('Should be able update a status without pass name or description', async () => {
     const statusUp = await updateStatusService.execute({
-      id: status.id,
+      status_id: status.id,
     });
     expect(statusUp.name).toBe('Processando o Pagamento');
   });
   it('Should not be able update a status with invalid id', async () => {
     await expect(
       updateStatusService.execute({
-        id: 'invalid-id',
+        status_id: 'invalid-id',
         name: 'Processando o Pagamento',
         description: 'jyhgtffddfjhjkkkkkkkkkkgggggggggrrrrrrrr',
       }),
@@ -47,7 +47,7 @@ describe('Status Update', () => {
     });
     await expect(
       updateStatusService.execute({
-        id: status.id,
+        status_id: status.id,
         name: 'Processando',
         description: 'jyhgtffddfjhjkkkkkkkkkkgggggggggrrrrrrrr',
       }),

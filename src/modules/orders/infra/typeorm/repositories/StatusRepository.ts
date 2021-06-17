@@ -38,5 +38,9 @@ class StatusRepository implements IStatusRepository {
     const statusUpdated = await this.ormRepository.save(status);
     return statusUpdated;
   }
+
+  public async delete(status_id: string): Promise<void> {
+    await this.ormRepository.delete(status_id);
+  }
 }
 export default StatusRepository;

@@ -39,5 +39,10 @@ class FakeStatusRepository implements IStatusRepository {
     this.statuses[index] = status;
     return this.statuses[index];
   }
+
+  public async delete(status_id: string): Promise<void> {
+    const index = this.statuses.findIndex(st => st.id === status_id);
+    this.statuses.splice(index, 1);
+  }
 }
 export default FakeStatusRepository;
