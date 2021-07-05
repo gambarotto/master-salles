@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import Order from './Order';
 
-@Entity('methods_payments')
+@Entity('payments_methods')
 class MethodPayment {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -16,7 +16,7 @@ class MethodPayment {
   @Column()
   name: string;
 
-  @OneToMany(() => Order, order => order.method_payment_id)
+  @OneToMany(() => Order, order => order.payment_method_id)
   @JoinColumn({ name: 'order_id' })
   orders: Order[];
 

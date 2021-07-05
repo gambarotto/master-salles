@@ -13,7 +13,10 @@ class FakeUsersRepository implements IUsersRepository {
     this.users = [];
   }
 
-  public async create(data: ICreateUserDTO): Promise<User> {
+  public async create(
+    data: ICreateUserDTO,
+    fabebook_login = false,
+  ): Promise<User> {
     const user = new User();
     Object.assign(user, { id: v4() }, data);
 

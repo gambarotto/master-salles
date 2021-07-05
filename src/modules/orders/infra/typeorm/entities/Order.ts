@@ -50,7 +50,7 @@ class Order {
 
   @ManyToOne(() => MethodPayment, methodPayment => methodPayment.orders)
   @JoinColumn({ name: 'method_payment_id' })
-  method_payment_id: string;
+  payment_method_id: string;
 
   @CreateDateColumn()
   created_at: Date;

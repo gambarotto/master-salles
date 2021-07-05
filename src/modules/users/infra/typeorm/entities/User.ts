@@ -29,7 +29,12 @@ class User {
   password: string;
 
   @Column({ nullable: true })
+  @Exclude()
   avatar?: string;
+
+  @Column({ nullable: true })
+  @Exclude()
+  avatar_social_media?: string;
 
   @OneToMany(() => UserAddress, userAddress => userAddress.user_id)
   adresses: UserAddress[];
@@ -53,9 +58,13 @@ class User {
 
   @Expose({ name: 'avatar_url' })
   getAvatarUrl(): string | null {
-    return this.avatar
-      ? `${process.env.APP_API_URL}/files/users/${this.avatar}`
-      : null;
+    if (this.avatar) {
+      return `${process.env.APP_API_URL}/files/users/${this.avatar}`;
+    }
+    if (this.avatar_social_media) {
+      return this.avatar_social_media;
+    }
+    return null;
   }
 }
 export default User;
