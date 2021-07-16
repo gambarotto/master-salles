@@ -2,6 +2,7 @@ import CreateUserFavoritesService from '@modules/users/services/UserFavorites/Cr
 import DeleteUserFavoritesService from '@modules/users/services/UserFavorites/DeleteUserFavoritesService';
 import ListUserFavoritesService from '@modules/users/services/UserFavorites/ListUserFavoritesService';
 import ShowUserFavoritesService from '@modules/users/services/UserFavorites/ShowUserFavoritesService';
+import { classToClass } from 'class-transformer';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
@@ -14,7 +15,7 @@ class UserFavoritesController {
 
     const user = await userFavoritesCreate.execute({ user_id, product_id });
 
-    return response.json(user);
+    return response.json(classToClass(user));
   }
 
   public async delete(request: Request, response: Response): Promise<Response> {
@@ -35,7 +36,7 @@ class UserFavoritesController {
 
     const user = await userFavoritesList.execute(user_id);
 
-    return response.json(user.favorite_products);
+    return response.json(classToClass(user.favorite_products));
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
@@ -46,7 +47,7 @@ class UserFavoritesController {
 
     const product = await showUserFavorites.execute({ user_id, product_id });
 
-    return response.json(product);
+    return response.json(classToClass(product));
   }
 }
 export default UserFavoritesController;

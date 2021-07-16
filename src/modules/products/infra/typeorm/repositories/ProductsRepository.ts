@@ -43,7 +43,7 @@ class ProductsRepository implements IProductsRepository {
 
   async findAllProducts(): Promise<Product[]> {
     const products = await this.ormRepository.find({
-      relations: ['category_id'],
+      relations: ['category_id', 'photos'],
     });
 
     return products;
