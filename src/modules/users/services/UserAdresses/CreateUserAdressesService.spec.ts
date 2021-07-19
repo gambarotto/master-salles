@@ -35,6 +35,56 @@ describe('CreateUserAddress', () => {
     });
     expect(userAddress).toHaveProperty('id');
   });
+  it('Should be able create a new user address with default field must be true', async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'Diego',
+      email: 'diego@diego.com',
+      password: '123456',
+    });
+    const userAddress = await createUserAddress.execute({
+      user_id: user.id,
+      street: 'rua um',
+      number: '34',
+      district: 'bairro1',
+      city: 'cidade1',
+      zip_code: '13132132',
+      complement: 'condominio',
+      reference_point: 'perto de',
+      alias: 'casa',
+    });
+    expect(userAddress).toHaveProperty('id');
+    expect(userAddress.default).toBe(true);
+  });
+  it('Should be able create a new user address with default field must be false', async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'Diego',
+      email: 'diego@diego.com',
+      password: '123456',
+    });
+    await createUserAddress.execute({
+      user_id: user.id,
+      street: 'rua um',
+      number: '34',
+      district: 'bairro1',
+      city: 'cidade1',
+      zip_code: '13132132',
+      complement: 'condominio',
+      reference_point: 'perto de',
+      alias: 'casa',
+    });
+    const userAddress = await createUserAddress.execute({
+      user_id: user.id,
+      street: 'rua um',
+      number: '34',
+      district: 'bairro1',
+      city: 'cidade1',
+      zip_code: '13132132',
+      complement: 'condominio',
+      reference_point: 'perto de',
+      alias: 'casa',
+    });
+    expect(userAddress.default).toBe(false);
+  });
   it('Should not be able create a new user address with a invalid id', async () => {
     await expect(
       createUserAddress.execute({

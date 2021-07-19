@@ -2,9 +2,11 @@ import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 import UserAdressesController from '../controllers/UserAdressesController';
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
+import UserAdressesSetDefaultController from '../controllers/UserAdressesSetDefaultController';
 
 const userAdressesRoutes = Router();
 const userAdressesController = new UserAdressesController();
+const userAdressesSetDefaultController = new UserAdressesSetDefaultController();
 
 const validationRequestCreate = celebrate({
   [Segments.BODY]: {
@@ -31,6 +33,11 @@ const validationRequestUpdate = celebrate({
     alias: Joi.string(),
   },
 });
+const validationRequestSetAsDefault = celebrate({
+  [Segments.PARAMS]: {
+    address_id: Joi.string().required(),
+  },
+});
 userAdressesRoutes.use(ensureAuthenticated);
 
 userAdressesRoutes.get('/me', userAdressesController.index);
@@ -46,4 +53,9 @@ userAdressesRoutes.put(
 );
 userAdressesRoutes.delete('/me/:address_id', userAdressesController.delete);
 
+userAdressesRoutes.patch(
+  '/me/:address_id/default',
+  validationRequestSetAsDefault,
+  userAdressesSetDefaultController.update,
+);
 export default userAdressesRoutes;

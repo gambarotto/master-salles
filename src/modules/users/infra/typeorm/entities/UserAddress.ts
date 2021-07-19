@@ -46,6 +46,11 @@ class UserAddress {
   @Column({ nullable: true })
   alias: string;
 
+  @Column({
+    nullable: true,
+  })
+  default: boolean;
+
   @CreateDateColumn()
   created_at: Date;
 

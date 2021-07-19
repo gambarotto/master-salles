@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import UserAddress from '@modules/users/infra/typeorm/entities/UserAddress';
 import IUserAdressesRepository from '@modules/users/repositories/IUserAdressesRepository';
 import IUsersRepository from '@modules/users/repositories/IUserRepository';
@@ -6,18 +7,11 @@ import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
   user_id: string;
-  street: string;
-  number: string;
-  district: string;
-  city: string;
-  zip_code: string;
-  complement: string;
-  reference_point: string;
-  alias: string;
+  userAddress_id: string;
 }
 
 @injectable()
-class CreateUserService {
+class SetUserAdressesAsDefaultService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -26,41 +20,29 @@ class CreateUserService {
   ) {}
 
   public async execute({
+    userAddress_id,
     user_id,
-    street,
-    number,
-    district,
-    city,
-    zip_code,
-    complement,
-    reference_point,
-    alias,
-  }: IRequest): Promise<UserAddress> {
+  }: IRequest): Promise<UserAddress | undefined> {
     const userExists = await this.usersRepository.findById({
       user_id,
-      relations: ['adresses'],
     });
 
     if (!userExists) {
       throw new AppError('User non-exists');
     }
-    let defaultAddress = false;
-    if (userExists.adresses.length === 0) {
-      defaultAddress = true;
+    const adresses = await this.userAdressesRepository.findAllByUser(user_id);
+    if (adresses && adresses.length <= 0) {
+      throw new AppError('No adresses found');
     }
-    const userAddress = await this.userAdressesRepository.create({
-      user_id,
-      street,
-      number,
-      district,
-      city,
-      zip_code,
-      complement,
-      reference_point,
-      alias,
-      default: defaultAddress,
-    });
-    return userAddress;
+
+    for await (const address of adresses as UserAddress[]) {
+      Object.assign(address, { default: address.id === userAddress_id });
+      await this.userAdressesRepository.update(address);
+    }
+
+    const address = await this.userAdressesRepository.findById(userAddress_id);
+
+    return address;
   }
 }
-export default CreateUserService;
+export default SetUserAdressesAsDefaultService;

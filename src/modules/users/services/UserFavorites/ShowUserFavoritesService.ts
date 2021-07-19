@@ -18,7 +18,11 @@ class ShowUserFavoritesService {
   async execute({ user_id, product_id }: IRequest): Promise<Product> {
     const userExists = await this.usersRepository.findById({
       user_id,
-      relations: ['favorite_products', 'favorite_products.photo'],
+      relations: [
+        'favorite_products',
+        'favorite_products.photo',
+        'favorite_products.category_id',
+      ],
     });
 
     if (!userExists) {

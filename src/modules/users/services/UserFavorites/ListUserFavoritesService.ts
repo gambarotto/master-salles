@@ -13,7 +13,11 @@ class ListUserFavoritesService {
   async execute(user_id: string): Promise<User> {
     const userExists = await this.usersRepository.findById({
       user_id,
-      relations: ['favorite_products', 'favorite_products.photos'],
+      relations: [
+        'favorite_products',
+        'favorite_products.photos',
+        'favorite_products.category_id',
+      ],
     });
 
     if (!userExists) {
