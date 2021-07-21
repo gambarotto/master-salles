@@ -22,7 +22,6 @@ const validationRequestCreate = celebrate({
 });
 const validationRequestUpdate = celebrate({
   [Segments.BODY]: {
-    id: Joi.string().uuid().required(),
     street: Joi.string(),
     number: Joi.string(),
     district: Joi.string(),
@@ -31,6 +30,9 @@ const validationRequestUpdate = celebrate({
     complement: Joi.string(),
     reference_point: Joi.string(),
     alias: Joi.string(),
+  },
+  [Segments.PARAMS]: {
+    address_id: Joi.string().uuid().required(),
   },
 });
 const validationRequestSetAsDefault = celebrate({
@@ -47,7 +49,7 @@ userAdressesRoutes.post(
   userAdressesController.create,
 );
 userAdressesRoutes.put(
-  '/me',
+  '/me/:address_id',
   validationRequestUpdate,
   userAdressesController.update,
 );

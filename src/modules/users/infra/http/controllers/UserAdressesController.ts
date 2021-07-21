@@ -38,8 +38,8 @@ class UserAdressesController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const user_id = request.user.id;
+    const { address_id: id } = request.params;
     const {
-      id,
       street,
       number,
       district,

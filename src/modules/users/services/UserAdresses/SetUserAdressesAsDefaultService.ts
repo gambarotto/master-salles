@@ -30,6 +30,12 @@ class SetUserAdressesAsDefaultService {
     if (!userExists) {
       throw new AppError('User non-exists');
     }
+    const addressExists = await this.userAdressesRepository.findById(
+      userAddress_id,
+    );
+    if (addressExists?.user_id !== userExists.id) {
+      throw new AppError('You do not have privilegies to do this');
+    }
     const adresses = await this.userAdressesRepository.findAllByUser(user_id);
     if (adresses && adresses.length <= 0) {
       throw new AppError('No adresses found');
@@ -39,10 +45,9 @@ class SetUserAdressesAsDefaultService {
       Object.assign(address, { default: address.id === userAddress_id });
       await this.userAdressesRepository.update(address);
     }
+    const addressUpdated = adresses?.find(adrs => adrs.id === addressExists.id);
 
-    const address = await this.userAdressesRepository.findById(userAddress_id);
-
-    return address;
+    return addressUpdated;
   }
 }
 export default SetUserAdressesAsDefaultService;
