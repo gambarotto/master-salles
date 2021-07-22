@@ -46,5 +46,14 @@ class UserAddressessRepository implements IUserAddressRepository {
     });
     return userAdresses;
   }
+
+  public async findDefaultUserAddress(
+    user_id: string,
+  ): Promise<UserAddress | undefined> {
+    const userAddressDefault = await this.ormRepository.findOne({
+      where: { user_id, default: true },
+    });
+    return userAddressDefault;
+  }
 }
 export default UserAddressessRepository;

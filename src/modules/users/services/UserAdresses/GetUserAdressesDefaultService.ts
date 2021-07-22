@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import UserAddress from '@modules/users/infra/typeorm/entities/UserAddress';
 import IUserAdressesRepository from '@modules/users/repositories/IUserAdressesRepository';
 import IUsersRepository from '@modules/users/repositories/IUserRepository';
@@ -6,18 +7,10 @@ import { inject, injectable } from 'tsyringe';
 
 interface IRequest {
   user_id: string;
-  street: string;
-  number: string;
-  district: string;
-  city: string;
-  zip_code: string;
-  complement: string;
-  reference_point: string;
-  alias: string;
 }
 
 @injectable()
-class CreateUserService {
+class GetUserAdressesDefaultService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -27,41 +20,17 @@ class CreateUserService {
 
   public async execute({
     user_id,
-    street,
-    number,
-    district,
-    city,
-    zip_code,
-    complement,
-    reference_point,
-    alias,
-  }: IRequest): Promise<UserAddress> {
+  }: IRequest): Promise<UserAddress | undefined> {
     const userExists = await this.usersRepository.findById({
       user_id,
-      relations: ['adresses'],
     });
-
     if (!userExists) {
       throw new AppError('User non-exists');
     }
-    let defaultAddress = false;
-    if (userExists.adresses.length === 0) {
-      defaultAddress = true;
-    }
+    const defaultUserAddress =
+      await this.userAdressesRepository.findDefaultUserAddress(user_id);
 
-    const userAddress = await this.userAdressesRepository.create({
-      user_id,
-      street,
-      number,
-      district,
-      city,
-      zip_code,
-      complement,
-      reference_point,
-      alias,
-      default: defaultAddress,
-    });
-    return userAddress;
+    return defaultUserAddress;
   }
 }
-export default CreateUserService;
+export default GetUserAdressesDefaultService;

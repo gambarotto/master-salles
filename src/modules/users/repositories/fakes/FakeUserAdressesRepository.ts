@@ -53,6 +53,16 @@ class FakeUserAddressessRepository implements IUserAddressRepository {
     );
     return userAdresses;
   }
+
+  public async findDefaultUserAddress(
+    user_id: string,
+  ): Promise<UserAddress | undefined> {
+    const userAdresses = this.userAdresses.filter(
+      address => address.user_id === user_id,
+    );
+
+    return userAdresses.find(adrs => adrs.default === true);
+  }
 }
 
 export default FakeUserAddressessRepository;
