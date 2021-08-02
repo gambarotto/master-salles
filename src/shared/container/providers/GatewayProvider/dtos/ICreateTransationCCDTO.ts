@@ -4,20 +4,18 @@ interface ICreditCardPagarme {
   card_expiration_date: string;
   card_cvv: string;
 }
+interface IDocuments {
+  type: string;
+  number: string;
+}
 interface ICustomerPagarme {
   external_id: string;
   name: string;
   type: string;
   country: string;
   email: string;
-  documents: [
-    {
-      type: 'cpf' | 'cnpj';
-      number: string;
-    },
-  ];
+  documents: IDocuments[];
   phone_numbers: string[];
-  birthday: Date;
 }
 interface IAddressPagarme {
   country: string;
@@ -46,8 +44,6 @@ export default interface ICreateTransationCCDTO {
   shipping: {
     name: string;
     fee: number;
-    delivery_date: Date;
-    expedited: boolean;
     address: IAddressPagarme;
   };
   items: IItemsPagarme[];

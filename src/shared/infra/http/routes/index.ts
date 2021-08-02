@@ -1,6 +1,7 @@
 import categoriesRoutes from '@modules/categories/infra/http/routes/categories.routes';
 import employeesRoutes from '@modules/employees/infra/http/routes/employees.routes';
 import employeesProfilesRoutes from '@modules/employees/infra/http/routes/profiles.routes';
+import ordersRoutes from '@modules/orders/infra/http/routes/orders.routes';
 import statusRoutes from '@modules/orders/infra/http/routes/status.routes';
 import productsRoutes from '@modules/products/infra/http/routes/products.routes';
 import storeAdressesRoutes from '@modules/stores/infra/http/routes/adresses.routes';
@@ -34,5 +35,7 @@ routes.use('/categories', categoriesRoutes);
 routes.use('/products', productsRoutes);
 
 routes.use('/status', statusRoutes);
+
+routes.use('/orders', ordersRoutes);
 
 export default routes;

@@ -27,17 +27,19 @@ class UpdateUserProfileService {
     email,
     old_password,
     new_password,
-  }: IRequest): Promise<User> {
+  }: IRequest): Promise<User | undefined> {
     const user = await this.usersRepository.findById({ user_id });
     if (!user) {
       throw new AppError('User not found');
     }
+
     if (email && email !== user.email) {
       const alreadyExistsEmail = await this.usersRepository.findByEmail(email);
       if (alreadyExistsEmail) {
         throw new AppError('Email already exists');
       }
     }
+
     if (old_password) {
       const matchedPassword = await this.hashProvider.compareHash(
         old_password,
@@ -52,8 +54,10 @@ class UpdateUserProfileService {
       const passwordHashed = await this.hashProvider.generateHash(new_password);
       user.password = passwordHashed;
     }
+
     Object.assign(user, { name, email });
     const updatedUser = await this.usersRepository.update(user);
+
     return updatedUser;
   }
 }

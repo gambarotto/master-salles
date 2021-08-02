@@ -16,14 +16,14 @@ class Pagarme implements IGatewayProvider {
     this.api_key = process.env.API_KEY_PAGARME;
   }
 
-  public async create({
+  public async createTransaction({
     amount,
     credit_card,
     customer,
     billing,
     shipping,
     items,
-  }: ICreateTransationCCDTO): Promise<IResponseTransactionDTO> {
+  }: ICreateTransationCCDTO): Promise<IResponseTransactionDTO | undefined> {
     const data = {
       api_key: this.api_key,
       amount,
@@ -34,16 +34,22 @@ class Pagarme implements IGatewayProvider {
       items,
     };
     const response = await this.gateway.post('/transactions', data);
-    console.log(response);
+    console.log('--------------------', response.data);
     if (!response.data) throw new AppError('Error on gateway');
 
     const {
+      amount,
       status,
       refuse_reason,
       status_reason,
       authorization_code,
       tid,
       payment_method,
+      card_first_digits,
+      card_last_digits,
+      card_brand,
+      data_created,
+      data_updated,
     } = response.data;
     return {
       status,
