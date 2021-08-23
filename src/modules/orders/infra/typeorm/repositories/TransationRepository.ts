@@ -1,12 +1,20 @@
-/**
- *     const products = await getManager().transaction(
-      async transactionalEntityManager => {
-        console.log('oooi');
+import ITransactionRepository from '@modules/orders/repositories/ITransactionRepository';
+import IResponseTransactionDTO from '@shared/container/providers/GatewayProvider/dtos/IResponseTransaction';
+import { getRepository, Repository } from 'typeorm';
+import Transaction from '../entities/Transaction';
 
-        const prds = await transactionalEntityManager.find(Product);
-        const usrs = await transactionalEntityManager.find(User);
+class TransactionRepository implements ITransactionRepository {
+  private ormRepository: Repository<Transaction>;
 
-        return { products: prds, users: usrs };
-      },
-    );
- */
+  constructor() {
+    this.ormRepository = getRepository(Transaction);
+  }
+
+  async create(data: IResponseTransactionDTO): Promise<Transaction> {
+    const transactionCreated = this.ormRepository.create(data);
+    const transactionDB = await this.ormRepository.save(transactionCreated);
+    return transactionDB;
+  }
+}
+
+export default TransactionRepository;

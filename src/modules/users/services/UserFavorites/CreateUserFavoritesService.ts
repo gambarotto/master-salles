@@ -18,7 +18,7 @@ class CreateUserFavoritesService {
     private productRepository: IProductsRepository,
   ) {}
 
-  async execute({ user_id, product_id }: IRequest): Promise<User> {
+  async execute({ user_id, product_id }: IRequest): Promise<User | undefined> {
     let userExists = await this.usersRepository.findById({
       user_id,
       relations: ['favorite_products'],

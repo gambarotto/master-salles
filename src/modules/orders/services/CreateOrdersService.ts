@@ -1,12 +1,11 @@
 import IUserAdressesRepository from '@modules/users/repositories/IUserAdressesRepository';
 import IUsersRepository from '@modules/users/repositories/IUserRepository';
 import { ICreditCardPagarme } from '@shared/container/providers/GatewayProvider/dtos/ICreateTransationCCDTO';
+import IResponseTransactionDTO from '@shared/container/providers/GatewayProvider/dtos/IResponseTransaction';
 import IGatewayProvider from '@shared/container/providers/GatewayProvider/models/IGatewayProvider';
 import AppError from '@shared/errors/AppError';
 import formatValue from '@shared/helpers/handleValues';
 import { inject, injectable } from 'tsyringe';
-import StatusRepository from '../infra/typeorm/repositories/StatusRepository';
-import OrdersTransactions from '../infra/typeorm/transactions/OrdersTransactions';
 import IPaymentCardRepository from '../repositories/IPaymentCardRepository';
 
 interface IItem {
@@ -40,10 +39,6 @@ class CreateOrdersService {
     private usersRepository: IUsersRepository,
     @inject('UserAdressesRepository')
     private userAdressesRepository: IUserAdressesRepository,
-    @inject('StatusRepository')
-    private statusRepository: StatusRepository,
-    @inject('OrdersTransactions')
-    private ordersTransactions: OrdersTransactions,
     @inject('PaymentCardRepository')
     private paymentCard: IPaymentCardRepository,
   ) {}
@@ -51,7 +46,6 @@ class CreateOrdersService {
   async execute({
     amount,
     delivery_fee,
-    delivery,
     card_hash,
     card_id,
     card,
@@ -59,7 +53,7 @@ class CreateOrdersService {
     shipping_address_id,
     billing_address_id,
     itemsRequest,
-  }: IRequest): Promise<void> {
+  }: IRequest): Promise<IResponseTransactionDTO> {
     const user = await this.usersRepository.findById({ user_id });
     if (!user) {
       throw new AppError('Invalid user');
@@ -145,28 +139,7 @@ class CreateOrdersService {
       throw new AppError('Transaction error');
     }
 
-    const status = await this.statusRepository.findByName('Concluído');
-    if (!status) {
-      throw new AppError('Invalid Status');
-    }
-
-    const orderData = {
-      user_id: user.id,
-      amount,
-      status: [status],
-      delivery,
-      delivery_fee,
-      billing_address_id,
-      shipping_address_id,
-      order_product: itemsRequest.map(item => item.product.id),
-    };
-
-    await this.ordersTransactions.createSale({
-      user_id,
-      cardId: card_id,
-      transactionData: transaction,
-      orderData,
-    });
+    return transaction;
   }
 }
 

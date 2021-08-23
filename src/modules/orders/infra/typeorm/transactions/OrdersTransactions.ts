@@ -1,30 +1,61 @@
 import ICreateSaleDTO from '@modules/orders/dtos/ICreateSaleDTO';
 import IOrdersTransactions from '@modules/orders/transactions/IOrdersTransactions';
-import { getManager, getRepository, Repository } from 'typeorm';
+import AppError from '@shared/errors/AppError';
+import { inject, injectable } from 'tsyringe';
+import { getManager } from 'typeorm';
 import Order from '../entities/Order';
 import PaymentCard from '../entities/PaymentCard';
 import Transaction from '../entities/Transaction';
+import StatusRepository from '../repositories/StatusRepository';
 
+@injectable()
 class OrdersTransactions implements IOrdersTransactions {
-  private transactionRepo: Repository<Transaction>;
-
-  constructor() {
-    this.transactionRepo = getRepository(Transaction);
-  }
+  constructor(
+    @inject('StatusRepository')
+    private statusRepository: StatusRepository,
+  ) {}
 
   async createSale({
     user_id,
+    amount,
+    delivery,
+    delivery_fee,
+    billing_address_id,
+    shipping_address_id,
     cardId,
     transactionData,
-    orderData,
-  }: ICreateSaleDTO): Promise<void> {
+    items,
+  }: ICreateSaleDTO): Promise<Order | undefined> {
     try {
+      let order = {} as Order;
+      const status = await this.statusRepository.findByName('Concluído');
+      if (!status) {
+        throw new AppError('Invalid Status');
+      }
+
+      const orderData = {
+        user_id,
+        amount,
+        status: [status],
+        delivery,
+        delivery_fee,
+        billing_address_id,
+        shipping_address_id,
+        order_product: items.map(item => item.product.id),
+      };
+
       await getManager().transaction(async transactionalEntityManager => {
-        Object.assign(transactionData, { card_id: transactionData.card.id });
-        const transactionCreated = this.transactionRepo.create(transactionData);
+        const transaction = new Transaction();
+        Object.assign(
+          transaction,
+          { ...transactionData },
+          {
+            card_id: transactionData.card.id,
+          },
+        );
         const transactionDB = await transactionalEntityManager.save(
           Transaction,
-          transactionCreated,
+          transaction,
         );
         if (!cardId) {
           await transactionalEntityManager.save(PaymentCard, {
@@ -33,10 +64,12 @@ class OrdersTransactions implements IOrdersTransactions {
           });
         }
         Object.assign(orderData, { transaction_id: transactionDB.id });
-        await transactionalEntityManager.save(Order, orderData);
+
+        order = await transactionalEntityManager.save(Order, orderData);
       });
+      return order;
     } catch (error) {
-      console.log(error);
+      throw new AppError('Error on create sale');
     }
   }
 }

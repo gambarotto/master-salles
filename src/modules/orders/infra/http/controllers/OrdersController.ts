@@ -1,6 +1,7 @@
 import CreateOrdersService from '@modules/orders/services/CreateOrdersService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
+import OrdersTransactions from '../../typeorm/transactions/OrdersTransactions';
 
 class OrdersController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -18,7 +19,7 @@ class OrdersController {
       items,
     } = request.body;
     const createOrder = container.resolve(CreateOrdersService);
-    await createOrder.execute({
+    const transaction = await createOrder.execute({
       amount,
       user_id,
       delivery,
@@ -30,7 +31,21 @@ class OrdersController {
       billing_address_id,
       itemsRequest: items,
     });
-    return response.json({ message: 'ok' });
+
+    const createTransaction = container.resolve(OrdersTransactions);
+    const order = await createTransaction.createSale({
+      user_id,
+      amount,
+      delivery_fee,
+      delivery,
+      shipping_address_id,
+      billing_address_id,
+      cardId: card_id,
+      transactionData: transaction,
+      items,
+    });
+
+    return response.json(order);
   }
 }
 export default OrdersController;
