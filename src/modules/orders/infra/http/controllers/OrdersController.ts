@@ -9,20 +9,23 @@ class OrdersController {
     const {
       amount,
       delivery_fee,
+      delivery,
       card_hash,
       card_id,
+      card,
       shipping_address_id,
       billing_address_id,
       items,
     } = request.body;
-
     const createOrder = container.resolve(CreateOrdersService);
     await createOrder.execute({
       amount,
       user_id,
+      delivery,
       delivery_fee,
       card_hash,
       card_id,
+      card,
       shipping_address_id,
       billing_address_id,
       itemsRequest: items,

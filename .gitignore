@@ -6,6 +6,6 @@ tmp/*
 !temp/.gitkeep
 temp/
 src/config/auth.ts
-
+src/shared/infra/typeorm/*-*
 .env
 

@@ -27,8 +27,16 @@ import StoreImagesRepository from '@modules/stores/infra/typeorm/repositories/St
 
 import IProductPhotosRepository from '@modules/products/repositories/IProductPhotosRepository';
 import ProductPhotosRepository from '@modules/products/infra/typeorm/repositories/ProductPhotoRepository';
+
 import IStatusRepository from '@modules/orders/repositories/IStatusRepository';
 import StatusRepository from '@modules/orders/infra/typeorm/repositories/StatusRepository';
+
+import IOrdersTransactions from '@modules/orders/transactions/IOrdersTransactions';
+import OrdersTransactions from '@modules/orders/infra/typeorm/transactions/OrdersTransactions';
+
+import IPaymentCardRepository from '@modules/orders/repositories/IPaymentCardRepository';
+import PaymentCardRepository from '@modules/orders/infra/typeorm/repositories/PaymentCardRepository';
+
 import IHandleImageProvider from './providers/handleImageProvider/model/IHandleImageProvider';
 import SharpHandleImageProvider from './providers/handleImageProvider/implementations/SharpHandleImageProvider';
 
@@ -75,4 +83,12 @@ container.registerSingleton<IHandleImageProvider>(
 container.registerSingleton<IStatusRepository>(
   'StatusRepository',
   StatusRepository,
+);
+container.registerSingleton<IOrdersTransactions>(
+  'OrdersTransactions',
+  OrdersTransactions,
+);
+container.registerSingleton<IPaymentCardRepository>(
+  'PaymentCardRepository',
+  PaymentCardRepository,
 );

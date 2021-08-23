@@ -12,6 +12,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import UserAddress from './UserAddress';
+import PaymentCards from '../../../../orders/infra/typeorm/entities/PaymentCard';
 
 @Entity('users')
 class User {
@@ -49,6 +50,9 @@ class User {
 
   @OneToMany(() => Order, order => order.user_id)
   orders: Order[];
+
+  @OneToMany(() => PaymentCards, paymentCards => paymentCards.user_id)
+  payment_cards: PaymentCards[];
 
   @CreateDateColumn()
   created_at: Date;

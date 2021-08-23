@@ -1,4 +1,5 @@
 import Category from '@modules/categories/infra/typeorm/entities/Category';
+import OrderProduct from '@modules/orders/infra/typeorm/entities/OrderProduct';
 import User from '@modules/users/infra/typeorm/entities/User';
 import { Expose } from 'class-transformer';
 import {
@@ -43,6 +44,9 @@ class Product {
 
   @OneToMany(() => ProductPhoto, productPhoto => productPhoto.product_id)
   photos: ProductPhoto[];
+
+  @OneToMany(() => OrderProduct, orderProduct => orderProduct.product_id)
+  product_order: string;
 
   @CreateDateColumn()
   created_at: Date;

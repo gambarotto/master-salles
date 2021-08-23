@@ -1,4 +1,4 @@
-interface ICreditCardPagarme {
+export interface ICreditCardPagarme {
   card_number: string;
   card_holder_name: string;
   card_expiration_date: string;
@@ -34,8 +34,10 @@ interface IItemsPagarme {
   tangible: boolean;
 }
 export default interface ICreateTransationCCDTO {
-  amount: string;
-  credit_card: ICreditCardPagarme;
+  amount: number;
+  credit_card?: ICreditCardPagarme | undefined;
+  card_hash?: string | undefined;
+  card_id?: string | undefined;
   customer: ICustomerPagarme;
   billing: {
     name: string;

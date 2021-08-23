@@ -1,8 +1,13 @@
 import IUserAdressesRepository from '@modules/users/repositories/IUserAdressesRepository';
 import IUsersRepository from '@modules/users/repositories/IUserRepository';
+import { ICreditCardPagarme } from '@shared/container/providers/GatewayProvider/dtos/ICreateTransationCCDTO';
 import IGatewayProvider from '@shared/container/providers/GatewayProvider/models/IGatewayProvider';
 import AppError from '@shared/errors/AppError';
+import formatValue from '@shared/helpers/handleValues';
 import { inject, injectable } from 'tsyringe';
+import StatusRepository from '../infra/typeorm/repositories/StatusRepository';
+import OrdersTransactions from '../infra/typeorm/transactions/OrdersTransactions';
+import IPaymentCardRepository from '../repositories/IPaymentCardRepository';
 
 interface IItem {
   product: {
@@ -14,10 +19,12 @@ interface IItem {
   quantity: number;
 }
 interface IRequest {
-  amount: string;
+  amount: number;
   delivery_fee: number;
+  delivery: boolean;
   card_hash?: string;
   card_id?: string;
+  card?: ICreditCardPagarme;
   user_id: string;
   shipping_address_id: string;
   billing_address_id: string;
@@ -33,13 +40,21 @@ class CreateOrdersService {
     private usersRepository: IUsersRepository,
     @inject('UserAdressesRepository')
     private userAdressesRepository: IUserAdressesRepository,
+    @inject('StatusRepository')
+    private statusRepository: StatusRepository,
+    @inject('OrdersTransactions')
+    private ordersTransactions: OrdersTransactions,
+    @inject('PaymentCardRepository')
+    private paymentCard: IPaymentCardRepository,
   ) {}
 
   async execute({
     amount,
     delivery_fee,
+    delivery,
     card_hash,
     card_id,
+    card,
     user_id,
     shipping_address_id,
     billing_address_id,
@@ -91,12 +106,6 @@ class CreateOrdersService {
       };
     }
 
-    const credit_card = {
-      card_number: '4111111111111111',
-      card_cvv: '754',
-      card_expiration_date: '1122',
-      card_holder_name: 'Morpheus Fishburne',
-    };
     const customer = {
       external_id: user.id,
       name: user.name,
@@ -115,22 +124,60 @@ class CreateOrdersService {
       return {
         id: item.product.id,
         title: item.product.name,
-        unit_price: item.product.sale_price,
+        unit_price: formatValue(item.product.sale_price),
         quantity: item.quantity,
         tangible: true,
       };
     });
-
+    // criando transaction no pagarme
     const transaction = await this.gatewayProvider.createTransaction({
-      amount,
-      credit_card,
+      amount: formatValue(amount),
+      credit_card: card,
+      card_hash,
+      card_id,
       customer,
       billing,
       shipping,
       items,
     });
-    console.log(transaction);
+
+    if (!transaction) {
+      throw new AppError('Transaction error');
+    }
+
+    const status = await this.statusRepository.findByName('Concluído');
+    if (!status) {
+      throw new AppError('Invalid Status');
+    }
+
+    const orderData = {
+      user_id: user.id,
+      amount,
+      status: [status],
+      delivery,
+      delivery_fee,
+      billing_address_id,
+      shipping_address_id,
+      order_product: itemsRequest.map(item => item.product.id),
+    };
+
+    await this.ordersTransactions.createSale({
+      user_id,
+      cardId: card_id,
+      transactionData: transaction,
+      orderData,
+    });
   }
 }
 
 export default CreateOrdersService;
+
+/**
+ * criar uma transação com gateway
+ * ------ TRANSACTION DB ----------------------------------
+ * criar um registro transaction no bd
+ * criar um registro card no bd se for a primeira compra
+ * criar um registro order no bd
+ * ------ FIM TRANSACTION DB ------------------------------
+ * retornar order
+ */

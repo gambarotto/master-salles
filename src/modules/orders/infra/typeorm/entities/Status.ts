@@ -2,10 +2,10 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToMany,
+  ManyToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import OrderStatus from './OrderStatus';
+import Order from './Order';
 
 @Entity('status')
 class Status {
@@ -18,10 +18,8 @@ class Status {
   @Column()
   description: string;
 
-  // @ManyToMany(() => Order, order => order.status)
-  // orders: Order[];
-  @OneToMany(() => OrderStatus, orderStatus => orderStatus.status_id)
-  orders: OrderStatus[];
+  @ManyToMany(() => Order, order => order.status)
+  orders: Order[];
 
   @CreateDateColumn()
   created_at: Date;
