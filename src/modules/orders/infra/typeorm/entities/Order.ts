@@ -57,7 +57,7 @@ class Order {
   shipping_address_id: string;
 
   @OneToMany(() => OrderProduct, orderProduct => orderProduct.order_id)
-  order_product: string[];
+  order_product: OrderProduct[];
 
   @CreateDateColumn()
   created_at: Date;

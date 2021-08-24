@@ -16,6 +16,9 @@ class OrderProduct {
   @Column({ type: 'int' })
   quantity: number;
 
+  @Column({ type: 'float' })
+  price: number;
+
   @ManyToOne(() => Order, order => order.order_product)
   @JoinColumn({ name: 'order_id' })
   order_id: string;

@@ -157,7 +157,9 @@ class CreateOrdersService {
       delivery_fee,
       billing_address_id,
       shipping_address_id,
-      order_product: itemsRequest.map(item => item.product.id),
+      order_product: items.map((item, index) => {
+        return { ...item, unit_price: itemsRequest[index].product.sale_price };
+      }),
     };
 
     const order = await this.ordersTransactions.createSale({
@@ -172,13 +174,3 @@ class CreateOrdersService {
 }
 
 export default CreateOrdersService;
-
-/**
- * criar uma transação com gateway
- * ------ TRANSACTION DB ----------------------------------
- * criar um registro transaction no bd
- * criar um registro card no bd se for a primeira compra
- * criar um registro order no bd
- * ------ FIM TRANSACTION DB ------------------------------
- * retornar order
- */
