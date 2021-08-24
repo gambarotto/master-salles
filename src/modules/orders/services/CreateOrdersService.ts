@@ -1,12 +1,13 @@
 import IUserAdressesRepository from '@modules/users/repositories/IUserAdressesRepository';
 import IUsersRepository from '@modules/users/repositories/IUserRepository';
 import { ICreditCardPagarme } from '@shared/container/providers/GatewayProvider/dtos/ICreateTransationCCDTO';
-import IResponseTransactionDTO from '@shared/container/providers/GatewayProvider/dtos/IResponseTransaction';
 import IGatewayProvider from '@shared/container/providers/GatewayProvider/models/IGatewayProvider';
 import AppError from '@shared/errors/AppError';
 import formatValue from '@shared/helpers/handleValues';
 import { inject, injectable } from 'tsyringe';
-import IPaymentCardRepository from '../repositories/IPaymentCardRepository';
+import Order from '../infra/typeorm/entities/Order';
+import IStatusRepository from '../repositories/IStatusRepository';
+import IOrdersTransactions from '../transactions/IOrdersTransactions';
 
 interface IItem {
   product: {
@@ -39,13 +40,16 @@ class CreateOrdersService {
     private usersRepository: IUsersRepository,
     @inject('UserAdressesRepository')
     private userAdressesRepository: IUserAdressesRepository,
-    @inject('PaymentCardRepository')
-    private paymentCard: IPaymentCardRepository,
+    @inject('StatusRepository')
+    private statusRepository: IStatusRepository,
+    @inject('OrdersTransactions')
+    private ordersTransactions: IOrdersTransactions,
   ) {}
 
   async execute({
     amount,
     delivery_fee,
+    delivery,
     card_hash,
     card_id,
     card,
@@ -53,13 +57,13 @@ class CreateOrdersService {
     shipping_address_id,
     billing_address_id,
     itemsRequest,
-  }: IRequest): Promise<IResponseTransactionDTO> {
+  }: IRequest): Promise<Order | undefined> {
     const user = await this.usersRepository.findById({ user_id });
     if (!user) {
       throw new AppError('Invalid user');
     }
     const billingAddress = await this.userAdressesRepository.findById(
-      shipping_address_id,
+      billing_address_id,
     );
     if (!billingAddress) {
       throw new AppError('Address not found');
@@ -80,7 +84,7 @@ class CreateOrdersService {
 
     if (shipping_address_id !== billing_address_id) {
       const addressDB = await this.userAdressesRepository.findById(
-        billing_address_id,
+        shipping_address_id,
       );
       if (!addressDB) {
         throw new AppError('Address not found');
@@ -114,6 +118,7 @@ class CreateOrdersService {
       ],
       phone_numbers: ['+5511999998888', '+5511888889999'],
     };
+
     const items = itemsRequest.map(item => {
       return {
         id: item.product.id,
@@ -139,7 +144,30 @@ class CreateOrdersService {
       throw new AppError('Transaction error');
     }
 
-    return transaction;
+    const status = await this.statusRepository.findByName('Concluído');
+    if (!status) {
+      throw new AppError('Invalid Status');
+    }
+
+    const orderData = {
+      user_id,
+      amount,
+      status: [status],
+      delivery,
+      delivery_fee,
+      billing_address_id,
+      shipping_address_id,
+      order_product: itemsRequest.map(item => item.product.id),
+    };
+
+    const order = await this.ordersTransactions.createSale({
+      user_id,
+      orderData,
+      cardId: card_id,
+      transactionData: transaction,
+    });
+
+    return order;
   }
 }
 
