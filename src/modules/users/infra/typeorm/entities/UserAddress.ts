@@ -49,7 +49,7 @@ class UserAddress {
   @Column({
     nullable: true,
   })
-  default: boolean;
+  default?: boolean;
 
   @CreateDateColumn()
   created_at: Date;

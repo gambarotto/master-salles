@@ -32,6 +32,7 @@ describe('CreateUserAddress', () => {
       complement: 'condominio',
       reference_point: 'perto de',
       alias: 'casa',
+      default: true,
     });
     await fakeUserAdressesRepository.create({
       user_id: user.id,
@@ -43,6 +44,7 @@ describe('CreateUserAddress', () => {
       complement: 'condominio',
       reference_point: 'perto de',
       alias: 'casa',
+      default: true,
     });
     const listUserAdresses = await listUserAdressesProvider.execute(user.id);
     expect(listUserAdresses).toHaveLength(2);

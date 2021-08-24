@@ -32,6 +32,7 @@ describe('updateUserAddress', () => {
       complement: 'condominio',
       reference_point: 'perto de',
       alias: 'casa',
+      default: false,
     });
 
     const updatedUserAddress = await updateUserAddress.execute({
@@ -81,6 +82,7 @@ describe('updateUserAddress', () => {
       complement: 'condominio',
       reference_point: 'perto de',
       alias: 'casa',
+      default: false,
     });
     await expect(
       updateUserAddress.execute({
@@ -118,6 +120,7 @@ describe('updateUserAddress', () => {
       complement: 'condominio',
       reference_point: 'perto de',
       alias: 'casa',
+      default: false,
     });
     await expect(
       updateUserAddress.execute({

@@ -6,6 +6,6 @@ export default interface IAddressRepository {
   update(updateData: UserAddress): Promise<UserAddress>;
   delete(userAddress: UserAddress): Promise<void>;
   findById(address_id: string): Promise<UserAddress | undefined>;
-  findAllByUser(user_id: string): Promise<UserAddress[] | undefined>;
+  findAllByUser(user_id: string): Promise<UserAddress[]>;
   findDefaultUserAddress(user_id: string): Promise<UserAddress | undefined>;
 }

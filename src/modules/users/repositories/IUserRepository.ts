@@ -10,7 +10,7 @@ export default interface IUsersRepository {
   // findByIdWithRelations(: IFindByIdWithRelationsDTO): Promise<User | undefined>;
   findByEmail(email: string): Promise<User | undefined>;
   create(data: ICreateUserDTO): Promise<User>;
-  update(user: User): Promise<User | undefined>;
+  update(user: User): Promise<User>;
   delete(user_id: string): Promise<void>;
 
   // addFavoriteProduct(user: User): Promise<User>;

@@ -32,6 +32,7 @@ describe('Delete UserAdresses', () => {
       complement: 'condominio',
       reference_point: 'perto de',
       alias: 'casa',
+      default: true,
     });
     await expect(
       deleteUserAdressesService.execute({
@@ -80,6 +81,7 @@ describe('Delete UserAdresses', () => {
       complement: 'condominio',
       reference_point: 'perto de',
       alias: 'casa',
+      default: true,
     });
     await expect(
       deleteUserAdressesService.execute({

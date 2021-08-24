@@ -45,9 +45,7 @@ class FakeUserAddressessRepository implements IUserAddressRepository {
     return addressFinded;
   }
 
-  public async findAllByUser(
-    user_id: string,
-  ): Promise<UserAddress[] | undefined> {
+  public async findAllByUser(user_id: string): Promise<UserAddress[]> {
     const userAdresses = this.userAdresses.filter(
       address => address.user_id === user_id,
     );

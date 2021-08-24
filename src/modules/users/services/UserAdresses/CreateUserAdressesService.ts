@@ -44,8 +44,12 @@ class CreateUserService {
     if (!userExists) {
       throw new AppError('User non-exists');
     }
+
+    const userAddressExistents =
+      await this.userAdressesRepository.findAllByUser(user_id);
+
     let defaultAddress = false;
-    if (userExists.adresses.length === 0) {
+    if (userAddressExistents.length === 0) {
       defaultAddress = true;
     }
 
