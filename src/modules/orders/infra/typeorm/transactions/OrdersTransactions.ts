@@ -23,7 +23,7 @@ class OrdersTransactions implements IOrdersTransactions {
     orderData,
     cardId,
     transactionData,
-  }: ICreateSaleDTO): Promise<Order | undefined> {
+  }: ICreateSaleDTO): Promise<Order> {
     try {
       let order = {} as Order;
 

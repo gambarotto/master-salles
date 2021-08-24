@@ -17,7 +17,7 @@ export default interface IResponseTransactionDTO {
   acquirer_response_code: string;
   transaction_amount: number;
   status: string;
-  refuse_reason: string;
+  refuse_reason: string | null;
   status_reason: string;
   authorization_code: string;
   tid: number;

@@ -43,7 +43,7 @@ class Pagarme implements IGatewayProvider {
       );
 
       if (!response.data.authorization_code) {
-        throw new AppError('Transaction refused');
+        throw new AppError('Transaction refused, verify data card', 401);
       }
 
       const {
@@ -76,7 +76,8 @@ class Pagarme implements IGatewayProvider {
       if (error instanceof AppError) {
         throw new AppError(error.message, error.statusCode);
       }
-      throw new AppError(error.response.data);
+
+      throw new AppError(error.response.data, 400);
     }
   }
 }
