@@ -16,5 +16,6 @@ export default interface ICreateOrderDTO {
   delivery_fee: number;
   billing_address_id: string;
   shipping_address_id: string;
+  transaction_id?: string;
   order_product: IOrderProduct[];
 }

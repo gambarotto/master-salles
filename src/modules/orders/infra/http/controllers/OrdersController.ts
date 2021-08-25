@@ -1,4 +1,4 @@
-import CreateOrdersService from '@modules/orders/services/CreateOrdersService';
+import CreateOrderService from '@modules/orders/services/CreateOrderService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
@@ -17,7 +17,7 @@ class OrdersController {
       billing_address_id,
       items,
     } = request.body;
-    const createOrder = container.resolve(CreateOrdersService);
+    const createOrder = container.resolve(CreateOrderService);
     const order = await createOrder.execute({
       amount,
       user_id,

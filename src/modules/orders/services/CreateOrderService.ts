@@ -32,7 +32,7 @@ interface IRequest {
 }
 
 @injectable()
-class CreateOrdersService {
+class CreateOrderService {
   constructor(
     @inject('GatewayProvider')
     private gatewayProvider: IGatewayProvider,
@@ -169,4 +169,4 @@ class CreateOrdersService {
   }
 }
 
-export default CreateOrdersService;
+export default CreateOrderService;

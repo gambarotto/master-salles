@@ -29,7 +29,7 @@ class Order {
   @OneToOne(() => Transaction)
   @JoinColumn({ name: 'transaction_id' })
   @Expose({ name: 'transaction' })
-  transaction_id: number;
+  transaction_id: string;
 
   @Column({ type: 'float' })
   amount: number;

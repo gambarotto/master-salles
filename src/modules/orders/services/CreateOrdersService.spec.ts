@@ -6,14 +6,14 @@ import FakeGatewayProvider from '@shared/container/providers/GatewayProvider/fak
 import AppError from '@shared/errors/AppError';
 import FakeStatusRepository from '../repositories/fakes/FakeStatusRepository';
 import FakeOrdersTransactions from '../transactions/fakes/FakeOrdersTransactions';
-import CreateOrdersService from './CreateOrdersService';
+import CreateOrderService from './CreateOrderService';
 
 let fakeGatewayProvider: FakeGatewayProvider;
 let fakeUsersRepository: FakeUsersRepository;
 let fakeUserAdressesRepository: FakeUserAdressesRepository;
 let fakeStatusRepository: FakeStatusRepository;
 let fakeOrdersTransactions: FakeOrdersTransactions;
-let createOrdersService: CreateOrdersService;
+let createOrderService: CreateOrderService;
 
 let user: User;
 let address: UserAddress;
@@ -25,7 +25,7 @@ describe('Orders create', () => {
     fakeUserAdressesRepository = new FakeUserAdressesRepository();
     fakeStatusRepository = new FakeStatusRepository();
     fakeOrdersTransactions = new FakeOrdersTransactions();
-    createOrdersService = new CreateOrdersService(
+    createOrderService = new CreateOrderService(
       fakeGatewayProvider,
       fakeUsersRepository,
       fakeUserAdressesRepository,
@@ -57,7 +57,7 @@ describe('Orders create', () => {
   });
 
   it('Should be able create a new order', async () => {
-    const order = await createOrdersService.execute({
+    const order = await createOrderService.execute({
       amount: 120.54,
       delivery_fee: 10,
       delivery: true,
@@ -99,7 +99,7 @@ describe('Orders create', () => {
       alias: 'trabalhar',
       default: false,
     });
-    const order = await createOrdersService.execute({
+    const order = await createOrderService.execute({
       amount: 120.54,
       delivery_fee: 10,
       delivery: true,
@@ -130,7 +130,7 @@ describe('Orders create', () => {
   });
   it('Should not be able create a new order if user id is invalid', async () => {
     await expect(
-      createOrdersService.execute({
+      createOrderService.execute({
         amount: 120.54,
         delivery_fee: 10,
         delivery: true,
@@ -161,7 +161,7 @@ describe('Orders create', () => {
   });
   it('Should not be able create a new order if shipping address id is invalid', async () => {
     await expect(
-      createOrdersService.execute({
+      createOrderService.execute({
         amount: 120.54,
         delivery_fee: 10,
         delivery: true,
@@ -192,7 +192,7 @@ describe('Orders create', () => {
   });
   it('Should not be able create a new order if billing address id is invalid', async () => {
     await expect(
-      createOrdersService.execute({
+      createOrderService.execute({
         amount: 120.54,
         delivery_fee: 10,
         delivery: true,
@@ -228,7 +228,7 @@ describe('Orders create', () => {
       await fakeStatusRepository.delete(st.id);
     }
     await expect(
-      createOrdersService.execute({
+      createOrderService.execute({
         amount: 120.54,
         delivery_fee: 10,
         delivery: true,
