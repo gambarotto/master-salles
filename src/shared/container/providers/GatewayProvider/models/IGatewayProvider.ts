@@ -4,5 +4,5 @@ import IResponseTransactionDTO from '../dtos/IResponseTransaction';
 export default interface IGatewayProvider {
   createTransaction(
     data: ICreateTransationCCDTO,
-  ): Promise<IResponseTransactionDTO | undefined>;
+  ): Promise<IResponseTransactionDTO>;
 }

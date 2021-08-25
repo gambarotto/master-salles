@@ -6,7 +6,7 @@ import IGatewayProvider from '../models/IGatewayProvider';
 class FakeGatewayProvider implements IGatewayProvider {
   async createTransaction(
     data: ICreateTransationCCDTO,
-  ): Promise<IResponseTransactionDTO | undefined> {
+  ): Promise<IResponseTransactionDTO> {
     if (data.credit_card && data.credit_card.card_number.length !== 16) {
       throw new AppError('Invalid card');
     }

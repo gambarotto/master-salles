@@ -23,7 +23,7 @@ class Pagarme implements IGatewayProvider {
     billing,
     shipping,
     items,
-  }: ICreateTransationCCDTO): Promise<IResponseTransactionDTO | undefined> {
+  }: ICreateTransationCCDTO): Promise<IResponseTransactionDTO> {
     try {
       const transactionData = {
         api_key: this.api_key,

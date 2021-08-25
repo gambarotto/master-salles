@@ -140,10 +140,6 @@ class CreateOrdersService {
       items,
     });
 
-    if (!transaction) {
-      throw new AppError('Transaction error');
-    }
-
     const status = await this.statusRepository.findByName('Concluído');
     if (!status) {
       throw new AppError('Invalid Status');
