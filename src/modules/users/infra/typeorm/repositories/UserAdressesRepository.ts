@@ -36,9 +36,7 @@ class UserAddressessRepository implements IUserAddressRepository {
     return userAddress;
   }
 
-  public async findAllByUser(
-    user_id: string,
-  ): Promise<UserAddress[] | undefined> {
+  public async findAllByUser(user_id: string): Promise<UserAddress[]> {
     const userAdresses = await this.ormRepository.find({
       where: { user_id },
       relations: ['user_id'],

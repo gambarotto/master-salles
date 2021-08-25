@@ -1,6 +1,6 @@
 import User from '@modules/users/infra/typeorm/entities/User';
 import UserAddress from '@modules/users/infra/typeorm/entities/UserAddress';
-import { Expose } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
@@ -50,19 +50,23 @@ class Order {
 
   @ManyToOne(() => UserAddress)
   @JoinColumn({ name: 'billing_address_id' })
+  @Expose({ name: 'billing_address' })
   billing_address_id: string;
 
   @ManyToOne(() => UserAddress)
   @JoinColumn({ name: 'shipping_address_id' })
+  @Expose({ name: 'shipping_address' })
   shipping_address_id: string;
 
   @OneToMany(() => OrderProduct, orderProduct => orderProduct.order_id)
+  @Expose({ name: 'products' })
   order_product: OrderProduct[];
 
   @CreateDateColumn()
   created_at: Date;
 
   @CreateDateColumn()
+  @Exclude()
   updated_at: Date;
 }
 export default Order;

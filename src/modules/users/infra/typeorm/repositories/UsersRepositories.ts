@@ -17,12 +17,12 @@ class UsersRepository implements IUsersRepository {
     return user;
   }
 
-  public async update(user: User): Promise<User | undefined> {
+  public async update(user: User): Promise<User> {
     const userUpdated = await this.ormRepository.save(user);
     const userResponse = await this.ormRepository.findOne(userUpdated.id, {
       relations: ['favorite_products', 'adresses'],
     });
-    return userResponse;
+    return userResponse as User;
   }
 
   public async delete(user_id: string): Promise<void> {

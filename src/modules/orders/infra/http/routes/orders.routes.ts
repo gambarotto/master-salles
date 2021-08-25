@@ -6,5 +6,7 @@ const ordersRoutes = Router();
 const ordersController = new OrdersController();
 
 ordersRoutes.post('/', ensureAuthenticated, ordersController.create);
+ordersRoutes.get('/', ensureAuthenticated, ordersController.index);
+ordersRoutes.get('/:order_id', ensureAuthenticated, ordersController.show);
 
 export default ordersRoutes;

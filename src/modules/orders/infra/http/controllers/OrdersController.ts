@@ -1,4 +1,7 @@
 import CreateOrderService from '@modules/orders/services/CreateOrderService';
+import ListOrderService from '@modules/orders/services/ListOrderService';
+import ShowOrderService from '@modules/orders/services/ShowOrderService';
+import { classToClass } from 'class-transformer';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
@@ -31,7 +34,26 @@ class OrdersController {
       itemsRequest: items,
     });
 
-    return response.json(order);
+    return response.json(classToClass(order));
+  }
+
+  public async show(request: Request, response: Response): Promise<Response> {
+    const user_id = request.user.id;
+    const { order_id } = request.params;
+
+    const showOrderService = container.resolve(ShowOrderService);
+    const order = await showOrderService.execute({ user_id, order_id });
+
+    return response.json(classToClass(order));
+  }
+
+  public async index(request: Request, response: Response): Promise<Response> {
+    const user_id = request.user.id;
+
+    const listOrderService = container.resolve(ListOrderService);
+    const orders = await listOrderService.execute({ user_id });
+
+    return response.json(classToClass(orders));
   }
 }
 export default OrdersController;

@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
@@ -52,9 +53,11 @@ class UserAddress {
   default?: boolean;
 
   @CreateDateColumn()
+  @Exclude()
   created_at: Date;
 
   @UpdateDateColumn()
+  @Exclude()
   updated_at: Date;
 }
 export default UserAddress;

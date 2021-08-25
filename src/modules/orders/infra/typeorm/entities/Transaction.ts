@@ -1,4 +1,5 @@
 import User from '@modules/users/infra/typeorm/entities/User';
+import { Exclude } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
@@ -14,30 +15,38 @@ class Transaction {
   id: string;
 
   @Column()
+  @Exclude()
   acquirer_id: string;
 
   @Column()
+  @Exclude()
   acquirer_name: string;
 
   @Column()
+  @Exclude()
   acquirer_response_code: string;
 
   @Column()
+  @Exclude()
   transaction_amount: number;
 
   @Column()
   status: string;
 
   @Column({ nullable: true, type: 'character varying' })
+  @Exclude()
   refuse_reason: string | null;
 
   @Column()
+  @Exclude()
   status_reason: string;
 
   @Column({ nullable: true, type: 'character varying' })
+  @Exclude()
   authorization_code: string | null;
 
   @Column()
+  @Exclude()
   tid: number;
 
   @Column()
@@ -51,9 +60,11 @@ class Transaction {
   user_id: User;
 
   @CreateDateColumn()
+  @Exclude()
   created_at: Date;
 
   @CreateDateColumn()
+  @Exclude()
   updated_at: Date;
 }
 export default Transaction;

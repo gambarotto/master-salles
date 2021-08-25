@@ -1,4 +1,5 @@
 import ICreateOrderDTO from '@modules/orders/dtos/ICreateOrderDTO';
+import IFindByIdAndUserDTO from '@modules/orders/dtos/IFindByIdAndUserDTO';
 import IOrderRepository from '@modules/orders/repositories/IOrderRepository';
 import { getRepository, Repository } from 'typeorm';
 import Order from '../entities/Order';
@@ -16,6 +17,27 @@ class OrderRepository implements IOrderRepository {
     // const orderCreated = this.ormRepository.create(data);
     const order = await this.ormRepository.save([orderCreated]);
     return order[0];
+  }
+
+  async findByIdAndUserId({
+    user_id,
+    order_id,
+  }: IFindByIdAndUserDTO): Promise<Order | undefined> {
+    const order = await this.ormRepository.findOne({
+      where: { id: order_id, user_id },
+      relations: [
+        'transaction_id',
+        'order_product',
+        'billing_address_id',
+        'shipping_address_id',
+      ],
+    });
+    return order;
+  }
+
+  async findAllByUser(user_id: string): Promise<Order[]> {
+    const orders = await this.ormRepository.find({ where: { user_id } });
+    return orders;
   }
 }
 export default OrderRepository;
