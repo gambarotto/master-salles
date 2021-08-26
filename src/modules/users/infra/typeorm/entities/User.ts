@@ -13,6 +13,7 @@ import {
 } from 'typeorm';
 import UserAddress from './UserAddress';
 import PaymentCards from '../../../../orders/infra/typeorm/entities/PaymentCard';
+import UserPhone from './UserPhone';
 
 @Entity('users')
 class User {
@@ -29,6 +30,9 @@ class User {
   @Exclude()
   password: string;
 
+  @Column({ unique: true, nullable: true })
+  cpf?: string;
+
   @Column({ nullable: true })
   @Exclude()
   avatar?: string;
@@ -36,6 +40,9 @@ class User {
   @Column({ nullable: true })
   @Exclude()
   avatar_social_media?: string;
+
+  @OneToMany(() => UserPhone, userPhone => userPhone.user_id)
+  phones?: string;
 
   @OneToMany(() => UserAddress, userAddress => userAddress.user_id)
   adresses: UserAddress[];

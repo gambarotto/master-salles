@@ -39,6 +39,10 @@ import PaymentCardRepository from '@modules/orders/infra/typeorm/repositories/Pa
 
 import OrderRepository from '@modules/orders/infra/typeorm/repositories/OrderRepository';
 import IOrderRepository from '@modules/orders/repositories/IOrderRepository';
+
+import IUserPhoneRepository from '@modules/users/repositories/IUserPhoneRepository';
+import UserPhoneRepository from '@modules/users/infra/typeorm/repositories/UserPhoneRepository';
+
 import IHandleImageProvider from './providers/handleImageProvider/model/IHandleImageProvider';
 import SharpHandleImageProvider from './providers/handleImageProvider/implementations/SharpHandleImageProvider';
 
@@ -97,4 +101,8 @@ container.registerSingleton<IPaymentCardRepository>(
 container.registerSingleton<IOrderRepository>(
   'OrderRepository',
   OrderRepository,
+);
+container.registerSingleton<IUserPhoneRepository>(
+  'UserPhoneRepository',
+  UserPhoneRepository,
 );
