@@ -31,18 +31,26 @@ class CreateUserPhoneService {
     if (phone_number.length < 10 || phone_number.length > 11) {
       throw new AppError('Phone number invalid');
     }
+    let isFirst = false;
     if (isDefault) {
       const userPhones = await this.userPhoneRepository.findAllByUser(user_id);
-      const promisesUserPhones = userPhones.map(uPhone => {
-        Object.assign(uPhone, { default: false });
-        return this.userPhoneRepository.updateDefault(uPhone);
-      });
-      await Promise.all(promisesUserPhones);
+      if (userPhones.length > 0) {
+        const promisesUserPhones = userPhones.map(uPhone => {
+          Object.assign(uPhone, { default: false });
+          return this.userPhoneRepository.updateDefault(uPhone);
+        });
+        await Promise.all(promisesUserPhones);
+      }
+    } else {
+      const userPhones = await this.userPhoneRepository.findAllByUser(user_id);
+      if (userPhones.length === 0) {
+        isFirst = true;
+      }
     }
     const userPhone = await this.userPhoneRepository.create({
       user_id,
       phone_number,
-      default: isDefault,
+      default: isDefault || isFirst,
     });
 
     return userPhone;
