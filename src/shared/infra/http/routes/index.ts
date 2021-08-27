@@ -9,6 +9,7 @@ import storeImagesRoutes from '@modules/stores/infra/http/routes/images.routes';
 import storesRoutes from '@modules/stores/infra/http/routes/stores.routes';
 import userAdressesRoutes from '@modules/users/infra/http/routes/adresses.routes';
 import userFavoritesRoutes from '@modules/users/infra/http/routes/favorites.routes';
+import userPhonesRoutes from '@modules/users/infra/http/routes/phones.routes';
 import userProfilesRoutes from '@modules/users/infra/http/routes/profiles.routes';
 import usersRoutes from '@modules/users/infra/http/routes/users.routes';
 import { Router } from 'express';
@@ -22,6 +23,7 @@ routes.use('/users', usersRoutes);
 routes.use('/users/adresses', userAdressesRoutes);
 routes.use('/users/profiles', userProfilesRoutes);
 routes.use('/users/favorites', userFavoritesRoutes);
+routes.use('/users/phones', userPhonesRoutes);
 
 routes.use('/employees', employeesRoutes);
 routes.use('/employees/profiles', employeesProfilesRoutes);
