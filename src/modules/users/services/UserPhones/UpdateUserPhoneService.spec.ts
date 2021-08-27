@@ -173,57 +173,36 @@ describe('Update user phone', () => {
       expect(userPhone.phone_number).toBe('1133337779');
       expect(userPhone.default).toBe(true);
     });
-    // it('isDefault: true / phoneDB: true', async () => {
-    //   const uPhone2 = await fakeUserPhoneRepository.create({
-    //     user_id: user.id,
-    //     phone_number: '1133337773',
-    //     default: false,
-    //   });
-    //   expect(uPhone2.default).toBe(false);
-    //   const userPhone = await updateUserPhoneService.execute({
-    //     user_id: user.id,
-    //     phone_number_id: uPhone.id,
-    //     phone_number: '1133337779',
-    //     isDefault: true,
-    //   });
-    //   expect(userPhone.phone_number).toBe('1133337779');
-    //   expect(userPhone.default).toBe(true);
-    //   expect(uPhone2.default).toBe(false);
-    // });
-    // it('isDefault: false / phoneDB: true', async () => {
-    //   const uPhone2 = await fakeUserPhoneRepository.create({
-    //     user_id: user.id,
-    //     phone_number: '1133337773',
-    //     default: false,
-    //   });
-    //   expect(uPhone2.default).toBe(false);
-    //   const userPhone = await updateUserPhoneService.execute({
-    //     user_id: user.id,
-    //     phone_number_id: uPhone.id,
-    //     phone_number: '1133337779',
-    //     isDefault: false,
-    //   });
-    //   expect(userPhone.phone_number).toBe('1133337779');
-    //   expect(userPhone.default).toBe(false);
-    //   expect(uPhone2.default).toBe(true);
-    // });
-    // it('isDefault: false / phoneDB: false', async () => {
-    //   uPhone.default = false;
-    //   const uPhone2 = await fakeUserPhoneRepository.create({
-    //     user_id: user.id,
-    //     phone_number: '1133337773',
-    //     default: false,
-    //   });
-    //   expect(uPhone2.default).toBe(false);
-    //   const userPhone = await updateUserPhoneService.execute({
-    //     user_id: user.id,
-    //     phone_number_id: uPhone.id,
-    //     phone_number: '1133337779',
-    //     isDefault: false,
-    //   });
-    //   expect(userPhone.phone_number).toBe('1133337779');
-    //   expect(userPhone.default).toBe(false);
-    //   expect(uPhone2.default).toBe(false);
-    // });
+    it('isDefault: true / phoneDB: true', async () => {
+      const userPhone = await updateUserPhoneService.execute({
+        user_id: user.id,
+        phone_number_id: uPhone.id,
+        phone_number: '1133337779',
+        isDefault: true,
+      });
+      expect(userPhone.phone_number).toBe('1133337779');
+      expect(userPhone.default).toBe(true);
+    });
+    it('isDefault: false / phoneDB: true', async () => {
+      await expect(
+        updateUserPhoneService.execute({
+          user_id: user.id,
+          phone_number_id: uPhone.id,
+          phone_number: '1133337779',
+          isDefault: false,
+        }),
+      ).rejects.toBeInstanceOf(AppError);
+    });
+    it('isDefault: false / phoneDB: false', async () => {
+      uPhone.default = false;
+      await expect(
+        updateUserPhoneService.execute({
+          user_id: user.id,
+          phone_number_id: uPhone.id,
+          phone_number: '1133337779',
+          isDefault: false,
+        }),
+      ).rejects.toBeInstanceOf(AppError);
+    });
   });
 });

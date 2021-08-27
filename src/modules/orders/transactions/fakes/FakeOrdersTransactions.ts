@@ -22,29 +22,10 @@ class FakeOrdersTransactions implements IOrdersTransactions {
   }
 
   async createSale({ user_id }: ICreateSaleDTO): Promise<Order> {
-    // const transaction = new Transaction();
-    // Object.assign(
-    //   transaction,
-    //   { ...transactionData },
-    //   {
-    //     card_id: transactionData.card.id,
-    //   },
-    // );
-    // this.transactions.push(transaction);
-
-    // if (!cardId) {
-    //   const card = new PaymentCard();
-    //   Object.assign(card, {
-    //     id: v4(),
-    //     user_id,
-    //     card_id: transactionData.card.id,
-    //   });
-    //   this.paymentCards.push(card);
-    // }
     return {
       id: 'jtfjhgfulloççklokj',
       user_id,
-      transaction_id: 667890943354,
+      transaction_id: '667890943354',
       amount: 290.54,
       status: [],
       delivery: true,

@@ -30,10 +30,7 @@ class UpdateUserPhoneService {
     if (!user) {
       throw new AppError('User not found');
     }
-    if (
-      (phone_number && phone_number.length < 10) ||
-      phone_number.length > 11
-    ) {
+    if (phone_number.length < 10 || phone_number.length > 11) {
       throw new AppError('Phone number invalid');
     }
     const uPhone = await this.userPhoneRepository.findByUserAndId({
@@ -65,11 +62,9 @@ class UpdateUserPhoneService {
     }
 
     if (!isDefault && !uPhone.default && userPhones.length === 1) {
-      throw new AppError(
-        'You need to set another phone number as default before setting this one as non-default',
-      );
+      throw new AppError('Please inform the administrator');
     }
-    uPhone.phone_number = phone_number || uPhone.phone_number;
+    uPhone.phone_number = phone_number;
     uPhone.default = isDefault;
 
     const userPhone = await this.userPhoneRepository.update(uPhone);
