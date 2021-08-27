@@ -11,4 +11,5 @@ export default interface IUserPhoneRepository {
     phone_number_id,
   }: IFindByUserAndIdPhoneDTO): Promise<UserPhone | undefined>;
   updateDefault(data: UserPhone): Promise<void>;
+  delete(data: IFindByUserAndIdPhoneDTO): Promise<void>;
 }

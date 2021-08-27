@@ -1,26 +1,8 @@
 import ICreateSaleDTO from '@modules/orders/dtos/ICreateSaleDTO';
 import Order from '@modules/orders/infra/typeorm/entities/Order';
-import OrderProduct from '@modules/orders/infra/typeorm/entities/OrderProduct';
-import PaymentCard from '@modules/orders/infra/typeorm/entities/PaymentCard';
-import Transaction from '@modules/orders/infra/typeorm/entities/Transaction';
 import IOrdersTransactions from '../IOrdersTransactions';
 
 class FakeOrdersTransactions implements IOrdersTransactions {
-  private transactions: Transaction[];
-
-  private paymentCards: PaymentCard[];
-
-  private orders: Order[];
-
-  private orderProducts: OrderProduct[];
-
-  constructor() {
-    this.transactions = [];
-    this.paymentCards = [];
-    this.orders = [];
-    this.orderProducts = [];
-  }
-
   async createSale({ user_id }: ICreateSaleDTO): Promise<Order> {
     return {
       id: 'jtfjhgfulloççklokj',

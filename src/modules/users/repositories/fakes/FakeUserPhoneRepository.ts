@@ -46,5 +46,15 @@ class FakeUserPhoneRepository implements IUserPhoneRepository {
     );
     return userPhone;
   }
+
+  async delete({
+    user_id,
+    phone_number_id,
+  }: IFindByUserAndIdPhoneDTO): Promise<void> {
+    const findIndex = this.userPhones.findIndex(
+      uPhone => uPhone.id === phone_number_id && uPhone.user_id === user_id,
+    );
+    this.userPhones.splice(findIndex, 1);
+  }
 }
 export default FakeUserPhoneRepository;
