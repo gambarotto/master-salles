@@ -26,6 +26,7 @@ describe('Update UserProfile', () => {
       user_id: user.id,
       name: 'Diego editado',
       email: 'diegoeditado@diegoeditado.com',
+      cpf: '44455577788',
       old_password: '123456',
       new_password: '1234567',
     });
@@ -40,10 +41,9 @@ describe('Update UserProfile', () => {
     });
     const updatedUser = await updateUserProfileService.execute({
       user_id: user.id,
-      name: 'Diego editado',
       new_password: '1234567',
     });
-    expect(updatedUser.name).toBe('Diego editado');
+    expect(updatedUser.name).toBe('Diego');
   });
   it('Should not be able update a user with invalid id', async () => {
     await expect(
@@ -51,6 +51,7 @@ describe('Update UserProfile', () => {
         user_id: 'invalid-id',
         name: 'Diego editado',
         email: 'diegoeditado@diegoeditado.com',
+        cpf: '44455577788',
         old_password: '123456',
         new_password: '1234567',
       }),
@@ -68,6 +69,7 @@ describe('Update UserProfile', () => {
         user_id: user.id,
         name: 'Diego editado',
         email: 'diegoeditado@diegoeditado.com',
+        cpf: '44455577788',
         old_password: 'incorrect-password',
         new_password: '1234567',
       }),
@@ -85,6 +87,7 @@ describe('Update UserProfile', () => {
         user_id: user.id,
         name: 'Diego editado',
         email: 'diegoeditado@diegoeditado.com',
+        cpf: '44455577788',
         old_password: '123456',
       }),
     ).rejects.toBeInstanceOf(AppError);
@@ -106,6 +109,7 @@ describe('Update UserProfile', () => {
         user_id: user.id,
         name: 'Diego editado',
         email: 'diego2@diego2.com',
+        cpf: '44455577788',
         old_password: '123456',
         new_password: '1234567',
       }),

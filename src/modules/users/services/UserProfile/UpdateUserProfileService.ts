@@ -8,6 +8,7 @@ interface IRequest {
   user_id: string;
   name?: string;
   email?: string;
+  cpf?: string;
   old_password?: string;
   new_password?: string;
 }
@@ -25,6 +26,7 @@ class UpdateUserProfileService {
     user_id,
     name,
     email,
+    cpf,
     old_password,
     new_password,
   }: IRequest): Promise<User> {
@@ -55,7 +57,10 @@ class UpdateUserProfileService {
       user.password = passwordHashed;
     }
 
-    Object.assign(user, { name, email });
+    user.name = name || user.name;
+    user.email = email || user.email;
+    user.cpf = cpf || user.cpf;
+
     const updatedUser = await this.usersRepository.update(user);
 
     return updatedUser;
