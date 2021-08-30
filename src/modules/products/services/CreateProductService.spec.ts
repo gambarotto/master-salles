@@ -38,6 +38,7 @@ describe('Product Create', () => {
     const product = await createProductService.execute({
       employee_id: employee.id,
       name: 'Doce de Leite',
+      package_quantity: '500g',
       description:
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       cost_price: 7.9,
@@ -51,6 +52,7 @@ describe('Product Create', () => {
       createProductService.execute({
         employee_id: 'invalid-id',
         name: 'Doce de Leite',
+        package_quantity: '500g',
         description:
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
         cost_price: 7.9,
@@ -64,6 +66,7 @@ describe('Product Create', () => {
       createProductService.execute({
         employee_id: employee.id,
         name: 'Doce de Leite',
+        package_quantity: '500g',
         description:
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
         cost_price: 7.9,
@@ -78,6 +81,7 @@ describe('Product Create', () => {
       createProductService.execute({
         employee_id: employee.id,
         name: 'Doce de Leite',
+        package_quantity: '500g',
         description:
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
         cost_price: 7.9,
@@ -90,6 +94,7 @@ describe('Product Create', () => {
     await createProductService.execute({
       employee_id: employee.id,
       name: 'Doce de Leite',
+      package_quantity: '500g',
       description:
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       cost_price: 7.9,
@@ -100,6 +105,7 @@ describe('Product Create', () => {
       createProductService.execute({
         employee_id: employee.id,
         name: 'Doce de Leite',
+        package_quantity: '500g',
         description:
           'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
         cost_price: 7.9,

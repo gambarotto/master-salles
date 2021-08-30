@@ -9,6 +9,7 @@ import IProductsRepository from '../repositories/IProductsRepository';
 interface IRequest {
   employee_id: string;
   name: string;
+  package_quantity: string;
   description: string;
   cost_price: number;
   sale_price: number;
@@ -29,6 +30,7 @@ class CreateProductService {
   async execute({
     employee_id,
     name,
+    package_quantity,
     description,
     cost_price,
     sale_price,
@@ -59,6 +61,7 @@ class CreateProductService {
 
     const product = await this.productRepository.create({
       name,
+      package: package_quantity,
       description,
       cost_price,
       sale_price,

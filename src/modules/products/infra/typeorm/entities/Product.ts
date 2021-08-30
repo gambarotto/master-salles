@@ -22,6 +22,9 @@ class Product {
   name: string;
 
   @Column()
+  package: string;
+
+  @Column()
   description: string;
 
   @Column({ type: 'float' })

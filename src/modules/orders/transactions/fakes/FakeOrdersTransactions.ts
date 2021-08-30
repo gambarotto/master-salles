@@ -7,6 +7,7 @@ class FakeOrdersTransactions implements IOrdersTransactions {
     return {
       id: 'jtfjhgfulloççklokj',
       user_id,
+      order_number: 3,
       transaction_id: '667890943354',
       amount: 290.54,
       status: [],

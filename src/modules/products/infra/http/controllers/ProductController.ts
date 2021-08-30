@@ -9,13 +9,20 @@ import DeleteProductService from '@modules/products/services/DeleteProductServic
 
 class ProductController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { name, description, cost_price, sale_price, categories_ids } =
-      request.body;
+    const {
+      name,
+      package_quantity,
+      description,
+      cost_price,
+      sale_price,
+      categories_ids,
+    } = request.body;
     const employee_id = request.employee.id;
     const createProduct = container.resolve(CreateProductService);
     const product = await createProduct.execute({
       employee_id,
       name,
+      package_quantity,
       description,
       cost_price,
       sale_price,

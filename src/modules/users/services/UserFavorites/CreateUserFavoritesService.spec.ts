@@ -27,6 +27,7 @@ describe('User Favorite Create', () => {
     });
     product = await fakeProductsRepository.create({
       name: 'Doce de Leite',
+      package: '500g',
       description:
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       cost_price: 7.9,

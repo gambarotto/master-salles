@@ -36,6 +36,7 @@ describe('ProductPhoto Delete', () => {
     });
     product = await fakeProductsRepository.create({
       name: 'Produto 1',
+      package: '500g',
       description: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9',
       cost_price: 16.5,
       sale_price: 33.9,

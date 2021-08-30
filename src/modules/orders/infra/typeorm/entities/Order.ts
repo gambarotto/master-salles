@@ -12,6 +12,7 @@ import {
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
+  Generated,
 } from 'typeorm';
 import OrderProduct from './OrderProduct';
 import Status from './Status';
@@ -21,6 +22,10 @@ import Transaction from './Transaction';
 class Order {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @Column()
+  @Generated('increment')
+  order_number: number;
 
   @ManyToOne(() => User, user => user.orders)
   @JoinColumn({ name: 'user_id' })

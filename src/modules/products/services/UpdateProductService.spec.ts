@@ -39,6 +39,7 @@ describe('Product Update', () => {
 
     const product = await fakeProductsRepository.create({
       name: 'Doce de Leite',
+      package: '500g',
       description:
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       cost_price: 7.9,
@@ -57,6 +58,7 @@ describe('Product Update', () => {
   it('Should be able update a product even if some field are not informed', async () => {
     const product = await fakeProductsRepository.create({
       name: 'Doce de Leite',
+      package: '500g',
       description:
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       cost_price: 7.9,
@@ -74,6 +76,7 @@ describe('Product Update', () => {
     employee.responsibility = 'seller';
     const product = await fakeProductsRepository.create({
       name: 'Doce de Leite',
+      package: '500g',
       description:
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       cost_price: 7.9,
@@ -92,6 +95,7 @@ describe('Product Update', () => {
   it('Should not be able update a product if one id category is invalid', async () => {
     const product = await fakeProductsRepository.create({
       name: 'Doce de Leite',
+      package: '500g',
       description:
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       cost_price: 7.9,
@@ -111,6 +115,7 @@ describe('Product Update', () => {
   it('Should not be able update a product if employee id is invalid', async () => {
     const product = await fakeProductsRepository.create({
       name: 'Doce de Leite',
+      package: '500g',
       description:
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       cost_price: 7.9,

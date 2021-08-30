@@ -12,6 +12,7 @@ interface IRequest {
   employee_id: string;
   product_id: string;
   name?: string;
+  package_quantity?: string;
   description?: string;
   cost_price?: number;
   sale_price?: number;
@@ -33,6 +34,7 @@ class UpdateProductService {
     employee_id,
     product_id,
     name,
+    package_quantity,
     description,
     cost_price,
     sale_price,
@@ -70,6 +72,7 @@ class UpdateProductService {
 
     Object.assign(product, {
       name: name || product.name,
+      package: package_quantity || product.package,
       description: description || product.description,
       cost_price: cost_price || product.cost_price,
       sale_price: sale_price || product.sale_price,

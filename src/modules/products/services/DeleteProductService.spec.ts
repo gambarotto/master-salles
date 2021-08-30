@@ -36,6 +36,7 @@ describe('Product Create', () => {
   it('Should be able delete a product', async () => {
     const product = await fakeProductsRepository.create({
       name: 'Doce de Leite',
+      package: '500g',
       description:
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       cost_price: 7.9,
@@ -53,6 +54,7 @@ describe('Product Create', () => {
     employee.responsibility = 'seller';
     const product = await fakeProductsRepository.create({
       name: 'Doce de Leite',
+      package: '500g',
       description:
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       cost_price: 7.9,
@@ -69,6 +71,7 @@ describe('Product Create', () => {
   it('Should not be able delete a product if the employee id is invalid', async () => {
     const product = await fakeProductsRepository.create({
       name: 'Doce de Leite',
+      package: '500g',
       description:
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       cost_price: 7.9,
