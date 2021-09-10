@@ -15,6 +15,11 @@ class PaymentCardRepository implements IPaymentCardRepository {
     const cardPagarme = await this.ormRepository.save(cardPagarmeObject);
     return cardPagarme;
   }
+
+  async findAllByUser(user_id: string): Promise<PaymentCard[]> {
+    const cards = await this.ormRepository.find({ where: { user_id } });
+    return cards;
+  }
 }
 
 export default PaymentCardRepository;

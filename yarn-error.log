@@ -40,17 +40,19 @@ npm manifest:
           "test": "jest"
       },
       "dependencies": {
+          "axios": "^0.21.1",
           "bcryptjs": "^2.4.3",
           "celebrate": "^14.0.0",
           "class-transformer": "^0.4.0",
           "cors": "^2.8.5",
+          "crypto-js": "^4.1.1",
           "date-fns": "^2.19.0",
           "dotenv": "^9.0.2",
           "express": "^4.17.1",
           "express-async-errors": "^3.1.1",
           "jsonwebtoken": "^8.5.1",
           "multer": "^1.4.2",
-          "pagarme": "^4.18.0",
+          "pagarme": "^4.19.5",
           "pg": "^8.5.1",
           "reflect-metadata": "^0.1.13",
           "sharp": "^0.28.3",
@@ -63,6 +65,7 @@ npm manifest:
       "devDependencies": {
           "@types/bcryptjs": "^2.4.2",
           "@types/cors": "^2.8.10",
+          "@types/crypto-js": "^4.0.2",
           "@types/express": "^4.17.11",
           "@types/hapi__joi": "^17.1.6",
           "@types/jest": "^26.0.23",
@@ -724,6 +727,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/@types/cors/-/cors-2.8.10.tgz#61cc8469849e5bcdd0c7044122265c39cec10cf4"
     integrity sha512-C7srjHiVG3Ey1nR6d511dtDkCEjxuN9W1HWAEjGq8kpcwmNM6JJkpC0xvabM7BXTG2wDq8Eu33iH9aQKa7IvLQ==
   
+  "@types/crypto-js@^4.0.2":
+    version "4.0.2"
+    resolved "https://registry.yarnpkg.com/@types/crypto-js/-/crypto-js-4.0.2.tgz#4524325a175bf819fec6e42560c389ce1fb92c97"
+    integrity sha512-sCVniU+h3GcGqxOmng11BRvf9TfN9yIs8KKjB8C8d75W69cpTfZG80gau9yTx5SxF3gvHGbJhdESzzvnjtf3Og==
+  
   "@types/express-serve-static-core@^4.17.18":
     version "4.17.19"
     resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.17.19.tgz#00acfc1632e729acac4f1530e9e16f6dd1508a1d"
@@ -1222,6 +1230,13 @@ Lockfile:
     version "1.11.0"
     resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.11.0.tgz#d61f46d83b2519250e2784daf5b09479a8b41c59"
     integrity sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
+  
+  axios@^0.21.1:
+    version "0.21.1"
+    resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
+    integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
+    dependencies:
+      follow-redirects "^1.10.0"
   
   babel-jest@^26.6.3:
     version "26.6.3"
@@ -1820,6 +1835,11 @@ Lockfile:
       path-key "^3.1.0"
       shebang-command "^2.0.0"
       which "^2.0.1"
+  
+  crypto-js@^4.1.1:
+    version "4.1.1"
+    resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.1.1.tgz#9e485bcf03521041bd85844786b83fb7619736cf"
+    integrity sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==
   
   cssom@^0.4.4:
     version "0.4.4"
@@ -2631,6 +2651,11 @@ Lockfile:
     version "3.1.1"
     resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.1.1.tgz#c4b489e80096d9df1dfc97c79871aea7c617c469"
     integrity sha512-zAoAQiudy+r5SvnSw3KJy5os/oRJYHzrzja/tBDqrZtNhUw8bt6y8OBzMWcjWr+8liV8Eb6yOhw8WZ7VFZ5ZzA==
+  
+  follow-redirects@^1.10.0:
+    version "1.14.1"
+    resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.1.tgz#d9114ded0a1cfdd334e164e6662ad02bfd91ff43"
+    integrity sha512-HWqDgT7ZEkqRzBvc2s64vSZ/hfOceEol3ac/7tKwzuvEyWx3/4UegXh5oBOIotkGsObyk3xznnSRVADBgWSQVg==
   
   for-in@^1.0.2:
     version "1.0.2"
@@ -4568,10 +4593,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/packet-reader/-/packet-reader-1.0.0.tgz#9238e5480dedabacfe1fe3f2771063f164157d74"
     integrity sha512-HAKu/fG3HpHFO0AA8WE8q2g+gBJaZ9MG7fcKk+IJPLTGAD6Psw4443l+9DGRbOIh3/aXr7Phy0TjilYivJo5XQ==
   
-  pagarme@^4.18.0:
-    version "4.18.0"
-    resolved "https://registry.yarnpkg.com/pagarme/-/pagarme-4.18.0.tgz#fdd117e4984c72135d0cc2a1d59d39d99781e9d7"
-    integrity sha512-ciwXpTGtLmctT5zuvpUxV8DOHdcfKKjlyL+UnGIukeIc4wfGHl04J+23GNM95zaXK4zT/+falN85uj1UVYf1OA==
+  pagarme@^4.19.5:
+    version "4.19.5"
+    resolved "https://registry.yarnpkg.com/pagarme/-/pagarme-4.19.5.tgz#781f837f041cbb7906b171463aa36f087e143eab"
+    integrity sha512-QyI1GfRIPoU7Ho1Z+UEy4sJYWL1IEceHIOcSs6C+PzyU8SBY/uTUBRvqPY76BBSj7dxlo+zWK6pHMtaR/rws6w==
   
   parent-module@^1.0.0:
     version "1.0.1"

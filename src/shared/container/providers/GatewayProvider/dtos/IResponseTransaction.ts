@@ -1,4 +1,4 @@
-interface ICardPagarme {
+export interface ICardPagarme {
   id: string;
   date_created: string;
   date_updated: string;

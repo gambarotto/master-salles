@@ -631,6 +631,11 @@
   resolved "https://registry.yarnpkg.com/@types/cors/-/cors-2.8.10.tgz#61cc8469849e5bcdd0c7044122265c39cec10cf4"
   integrity sha512-C7srjHiVG3Ey1nR6d511dtDkCEjxuN9W1HWAEjGq8kpcwmNM6JJkpC0xvabM7BXTG2wDq8Eu33iH9aQKa7IvLQ==
 
+"@types/crypto-js@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@types/crypto-js/-/crypto-js-4.0.2.tgz#4524325a175bf819fec6e42560c389ce1fb92c97"
+  integrity sha512-sCVniU+h3GcGqxOmng11BRvf9TfN9yIs8KKjB8C8d75W69cpTfZG80gau9yTx5SxF3gvHGbJhdESzzvnjtf3Og==
+
 "@types/express-serve-static-core@^4.17.18":
   version "4.17.19"
   resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.17.19.tgz#00acfc1632e729acac4f1530e9e16f6dd1508a1d"
@@ -1734,6 +1739,11 @@ cross-spawn@^7.0.0, cross-spawn@^7.0.2:
     path-key "^3.1.0"
     shebang-command "^2.0.0"
     which "^2.0.1"
+
+crypto-js@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.1.1.tgz#9e485bcf03521041bd85844786b83fb7619736cf"
+  integrity sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==
 
 cssom@^0.4.4:
   version "0.4.4"
@@ -4486,6 +4496,11 @@ packet-reader@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/packet-reader/-/packet-reader-1.0.0.tgz#9238e5480dedabacfe1fe3f2771063f164157d74"
   integrity sha512-HAKu/fG3HpHFO0AA8WE8q2g+gBJaZ9MG7fcKk+IJPLTGAD6Psw4443l+9DGRbOIh3/aXr7Phy0TjilYivJo5XQ==
+
+pagarme@^4.19.5:
+  version "4.19.5"
+  resolved "https://registry.yarnpkg.com/pagarme/-/pagarme-4.19.5.tgz#781f837f041cbb7906b171463aa36f087e143eab"
+  integrity sha512-QyI1GfRIPoU7Ho1Z+UEy4sJYWL1IEceHIOcSs6C+PzyU8SBY/uTUBRvqPY76BBSj7dxlo+zWK6pHMtaR/rws6w==
 
 parent-module@^1.0.0:
   version "1.0.1"

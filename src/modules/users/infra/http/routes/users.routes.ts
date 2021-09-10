@@ -34,5 +34,6 @@ usersRoutes.post(
   validationRequestCreate,
   usersFacebookController.create,
 );
+usersRoutes.get('/secret', ensureAuthenticated, usersControllers.getSecret);
 
 export default usersRoutes;

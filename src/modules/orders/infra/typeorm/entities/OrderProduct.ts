@@ -1,5 +1,5 @@
 import Product from '@modules/products/infra/typeorm/entities/Product';
-import { Exclude } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 import {
   Column,
   Entity,
@@ -27,6 +27,7 @@ class OrderProduct {
 
   @ManyToOne(() => Product, product => product.product_order, { eager: true })
   @JoinColumn({ name: 'product_id' })
+  @Expose({ name: 'product' })
   product_id: string;
 }
 export default OrderProduct;

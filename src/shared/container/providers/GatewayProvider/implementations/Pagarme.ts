@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import PaymentCard from '@modules/orders/infra/typeorm/entities/PaymentCard';
 import AppError from '@shared/errors/AppError';
 import axios from 'axios';
 import ICreateTransationCCDTO from '../dtos/ICreateTransationCCDTO';
+import IResponsePaymentCardDTO from '../dtos/IResponsePaymentCardDTO';
 import IResponseTransactionDTO from '../dtos/IResponseTransaction';
 import IGatewayProvider from '../models/IGatewayProvider';
 
@@ -16,7 +19,6 @@ class Pagarme implements IGatewayProvider {
 
   public async createTransaction({
     amount,
-    credit_card,
     card_hash,
     card_id,
     customer,
@@ -24,11 +26,13 @@ class Pagarme implements IGatewayProvider {
     shipping,
     items,
   }: ICreateTransationCCDTO): Promise<IResponseTransactionDTO> {
+    if (!card_hash && !card_id) {
+      throw new AppError('Missing card data', 400);
+    }
     try {
       const transactionData = {
         api_key: this.api_key,
         amount,
-        ...credit_card,
         card_hash,
         card_id,
         customer,
@@ -76,7 +80,49 @@ class Pagarme implements IGatewayProvider {
       if (error instanceof AppError) {
         throw new AppError(error.message, error.statusCode);
       }
+      // @ts-ignore
+      throw new AppError(error.response.data, 400);
+    }
+  }
 
+  public async getCreditCards(
+    payment_cards: PaymentCard[],
+  ): Promise<IResponsePaymentCardDTO[]> {
+    const data = { api_key: this.api_key };
+    try {
+      const cardsPagarme = payment_cards.map(async card => {
+        const cardPagarme = await axios.get(
+          `${this.urlPagarme}/cards/${card.card_id}`,
+          { params: data },
+        );
+        return cardPagarme;
+      });
+      const promises = await Promise.all(cardsPagarme);
+      const response = promises.map(promise => {
+        const {
+          id,
+          brand,
+          holder_name,
+          first_digits,
+          last_digits,
+          expiration_date,
+        } = promise.data;
+        return {
+          id,
+          brand,
+          holder_name,
+          first_digits,
+          last_digits,
+          expiration_date,
+        };
+      });
+
+      return response;
+    } catch (error) {
+      if (error instanceof AppError) {
+        throw new AppError(error.message, error.statusCode);
+      }
+      // @ts-ignore
       throw new AppError(error.response.data, 400);
     }
   }

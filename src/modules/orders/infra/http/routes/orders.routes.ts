@@ -10,17 +10,7 @@ const validationRequestCreate = celebrate({
   [Segments.BODY]: {
     amount: Joi.number().positive().required(),
     card_hash: Joi.string().allow(''),
-    card_id: Joi.string()
-      .regex(/^card_([a-zA-Z]+([0-9]+[a-zA-Z]+)+)$/)
-      .allow(''),
-    card: Joi.object()
-      .keys({
-        card_number: Joi.string().length(16).required(),
-        card_cvv: Joi.string().length(3).required(),
-        card_expiration_date: Joi.string().length(4).required(),
-        card_holder_name: Joi.string(),
-      })
-      .unknown(),
+    card_id: Joi.string().allow(''),
     delivery_fee: Joi.number().required(),
     delivery: Joi.boolean().required(),
     billing_address_id: Joi.string().uuid().required(),

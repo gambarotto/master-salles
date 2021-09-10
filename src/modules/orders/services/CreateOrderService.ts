@@ -1,8 +1,8 @@
 import IUserAdressesRepository from '@modules/users/repositories/IUserAdressesRepository';
 import IUsersRepository from '@modules/users/repositories/IUserRepository';
-import { ICreditCardPagarme } from '@shared/container/providers/GatewayProvider/dtos/ICreateTransationCCDTO';
 import IGatewayProvider from '@shared/container/providers/GatewayProvider/models/IGatewayProvider';
 import AppError from '@shared/errors/AppError';
+import createCardHashPagarme from '@shared/helpers/createCardHashPagarme';
 import formatValue from '@shared/helpers/handleValues';
 import { inject, injectable } from 'tsyringe';
 import Order from '../infra/typeorm/entities/Order';
@@ -24,7 +24,6 @@ interface IRequest {
   delivery: boolean;
   card_hash?: string;
   card_id?: string;
-  card?: ICreditCardPagarme;
   user_id: string;
   shipping_address_id: string;
   billing_address_id: string;
@@ -52,7 +51,6 @@ class CreateOrderService {
     delivery,
     card_hash,
     card_id,
-    card,
     user_id,
     shipping_address_id,
     billing_address_id,
@@ -128,11 +126,17 @@ class CreateOrderService {
         tangible: true,
       };
     });
+
+    // Decoding cardHash
+    let card_hash_pagarme;
+    if (card_hash) {
+      card_hash_pagarme = await createCardHashPagarme(card_hash, user.id);
+    }
+
     // criando transaction no pagarme
     const transaction = await this.gatewayProvider.createTransaction({
       amount: formatValue(amount),
-      credit_card: card,
-      card_hash,
+      card_hash: card_hash_pagarme || '',
       card_id,
       customer,
       billing,
