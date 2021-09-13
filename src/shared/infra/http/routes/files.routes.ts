@@ -18,5 +18,9 @@ filesRoutes.use(
   '/files/products',
   express.static(uploadConfig.uploadFolder.products),
 );
+filesRoutes.use(
+  '/files/categories',
+  express.static(uploadConfig.uploadFolder.categories),
+);
 
 export default filesRoutes;

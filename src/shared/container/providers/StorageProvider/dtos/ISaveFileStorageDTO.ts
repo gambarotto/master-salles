@@ -1,4 +1,4 @@
 export default interface ISaveFileStorageDTO {
   file: string;
-  moduleName: 'users' | 'employees' | 'stores' | 'products';
+  moduleName: 'users' | 'employees' | 'stores' | 'products' | 'categories';
 }

@@ -46,6 +46,9 @@ import UserPhoneRepository from '@modules/users/infra/typeorm/repositories/UserP
 import IHandleImageProvider from './providers/handleImageProvider/model/IHandleImageProvider';
 import SharpHandleImageProvider from './providers/handleImageProvider/implementations/SharpHandleImageProvider';
 
+import ICompressImageProvider from './providers/CompressImageProvider/models/ICompressImageProvider';
+import ImageminProvider from './providers/CompressImageProvider/implementations/ImageminProvider';
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
@@ -105,4 +108,8 @@ container.registerSingleton<IOrderRepository>(
 container.registerSingleton<IUserPhoneRepository>(
   'UserPhoneRepository',
   UserPhoneRepository,
+);
+container.registerSingleton<ICompressImageProvider>(
+  'CompressImageProvider',
+  ImageminProvider,
 );
