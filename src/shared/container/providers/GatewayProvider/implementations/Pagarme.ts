@@ -2,17 +2,24 @@
 import PaymentCard from '@modules/orders/infra/typeorm/entities/PaymentCard';
 import AppError from '@shared/errors/AppError';
 import axios from 'axios';
+import pagarme from 'pagarme';
+import { inject, injectable } from 'tsyringe';
 import ICreateTransationCCDTO from '../dtos/ICreateTransationCCDTO';
 import IResponsePaymentCardDTO from '../dtos/IResponsePaymentCardDTO';
 import IResponseTransactionDTO from '../dtos/IResponseTransaction';
 import IGatewayProvider from '../models/IGatewayProvider';
+import IEncryptProvider from '../../encryptProvider/models/IEncryptProvider';
 
+@injectable()
 class Pagarme implements IGatewayProvider {
   private urlPagarme: string;
 
   private api_key: string | undefined;
 
-  constructor() {
+  constructor(
+    @inject('EncryptProvider')
+    private encryptProvider: IEncryptProvider,
+  ) {
     this.urlPagarme = 'https://api.pagar.me/1';
     this.api_key = process.env.API_KEY_PAGARME;
   }
@@ -124,6 +131,26 @@ class Pagarme implements IGatewayProvider {
       }
       // @ts-ignore
       throw new AppError(error.response.data, 400);
+    }
+  }
+
+  public async createCardHash(hash: string): Promise<string> {
+    try {
+      const cardDecoded = this.encryptProvider.decrypt({
+        data: hash,
+        key: process.env.APP_SECRET_CRYPTOJS_MOBILE as string,
+      });
+
+      const client = await pagarme.client.connect({
+        encryption_key: process.env.API_KEY_PAGARME,
+      });
+
+      const card_hash = client.security.encrypt(JSON.parse(cardDecoded));
+
+      return card_hash;
+    } catch (error) {
+      console.log(error);
+      throw new AppError('Error while decrypt card');
     }
   }
 }

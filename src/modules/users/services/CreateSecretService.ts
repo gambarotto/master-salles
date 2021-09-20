@@ -1,5 +1,5 @@
+import IEncryptProvider from '@shared/container/providers/encryptProvider/models/IEncryptProvider';
 import AppError from '@shared/errors/AppError';
-import CryptoJS from 'crypto-js';
 import { inject, injectable } from 'tsyringe';
 import IUsersRepository from '../repositories/IUserRepository';
 
@@ -11,6 +11,8 @@ class CreateSecretService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+    @inject('EncryptProvider')
+    private encryptProvider: IEncryptProvider,
   ) {}
 
   public async execute(user_id: string): Promise<IResponse> {
@@ -19,10 +21,11 @@ class CreateSecretService {
       throw new AppError('Only authenticate users', 401);
     }
 
-    const secretHash = CryptoJS.AES.encrypt(
-      process.env.APP_SECRET_CRYPTOJS_MOBILE as string,
-      process.env.APP_SECRET_CRYPTOJS as string,
-    ).toString();
+    const secretHash = this.encryptProvider.encrypt({
+      data: process.env.APP_SECRET_CRYPTOJS_MOBILE || 'secret-mobile-jest',
+      key: process.env.APP_SECRET_CRYPTOJS || 'secret-crypto-jest',
+    });
+    console.log('secretHash', secretHash);
 
     return { secret: secretHash };
   }

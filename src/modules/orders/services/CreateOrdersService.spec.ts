@@ -63,12 +63,6 @@ describe('Orders create', () => {
       delivery: true,
       card_hash: '',
       card_id: '',
-      card: {
-        card_number: '4111111111111111',
-        card_cvv: '553',
-        card_expiration_date: '0423',
-        card_holder_name: 'Diego Carvalho',
-      },
       user_id: user.id,
       shipping_address_id: address.id,
       billing_address_id: address.id,
@@ -105,14 +99,32 @@ describe('Orders create', () => {
       delivery: true,
       card_hash: '',
       card_id: '',
-      card: {
-        card_number: '4111111111111111',
-        card_cvv: '553',
-        card_expiration_date: '0423',
-        card_holder_name: 'Diego Carvalho',
-      },
       user_id: user.id,
       shipping_address_id: userAddress.id,
+      billing_address_id: address.id,
+      itemsRequest: [
+        {
+          product: {
+            id: 'd2943219-d686-4f67-8547-8fe279f2512e',
+            name: 'Queijo Frescal',
+            description: 'bnnjkmlj',
+            sale_price: 29.7,
+          },
+          quantity: 4,
+        },
+      ],
+    });
+    expect(order).toHaveProperty('id');
+  });
+  it('Should be able create a new order passing card_hash', async () => {
+    const order = await createOrderService.execute({
+      amount: 120.54,
+      delivery_fee: 10,
+      delivery: true,
+      card_hash: 'ykio8753efgghuhlKuge7ijkfr5',
+      card_id: '',
+      user_id: user.id,
+      shipping_address_id: address.id,
       billing_address_id: address.id,
       itemsRequest: [
         {
@@ -136,12 +148,6 @@ describe('Orders create', () => {
         delivery: true,
         card_hash: '',
         card_id: '',
-        card: {
-          card_number: '4111111111111111',
-          card_cvv: '553',
-          card_expiration_date: '0423',
-          card_holder_name: 'Diego Carvalho',
-        },
         user_id: 'invalid-id',
         shipping_address_id: address.id,
         billing_address_id: address.id,
@@ -167,12 +173,6 @@ describe('Orders create', () => {
         delivery: true,
         card_hash: '',
         card_id: '',
-        card: {
-          card_number: '4111111111111111',
-          card_cvv: '553',
-          card_expiration_date: '0423',
-          card_holder_name: 'Diego Carvalho',
-        },
         user_id: user.id,
         shipping_address_id: 'invalid-id',
         billing_address_id: address.id,
@@ -198,12 +198,6 @@ describe('Orders create', () => {
         delivery: true,
         card_hash: '',
         card_id: '',
-        card: {
-          card_number: '4111111111111111',
-          card_cvv: '553',
-          card_expiration_date: '0423',
-          card_holder_name: 'Diego Carvalho',
-        },
         user_id: user.id,
         shipping_address_id: address.id,
         billing_address_id: 'invalid-id',
@@ -234,12 +228,6 @@ describe('Orders create', () => {
         delivery: true,
         card_hash: '',
         card_id: '',
-        card: {
-          card_number: '4111111111111111',
-          card_cvv: '553',
-          card_expiration_date: '0423',
-          card_holder_name: 'Diego Carvalho',
-        },
         user_id: user.id,
         shipping_address_id: address.id,
         billing_address_id: address.id,

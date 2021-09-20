@@ -1,4 +1,4 @@
-import PaymentCardRepository from '@modules/orders/infra/typeorm/repositories/PaymentCardRepository';
+import IPaymentCardRepository from '@modules/orders/repositories/IPaymentCardRepository';
 import IUsersRepository from '@modules/users/repositories/IUserRepository';
 import IResponsePaymentCardDTO from '@shared/container/providers/GatewayProvider/dtos/IResponsePaymentCardDTO';
 import IGatewayProvider from '@shared/container/providers/GatewayProvider/models/IGatewayProvider';
@@ -11,7 +11,7 @@ class ListPaymentCardsService {
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
     @inject('PaymentCardRepository')
-    private paymentCardRepository: PaymentCardRepository,
+    private paymentCardRepository: IPaymentCardRepository,
     @inject('GatewayProvider')
     private gatewayProvider: IGatewayProvider,
   ) {}

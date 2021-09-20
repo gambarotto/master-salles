@@ -1,5 +1,7 @@
+import PaymentCard from '@modules/orders/infra/typeorm/entities/PaymentCard';
 import AppError from '@shared/errors/AppError';
 import ICreateTransationCCDTO from '../dtos/ICreateTransationCCDTO';
+import IResponsePaymentCardDTO from '../dtos/IResponsePaymentCardDTO';
 import IResponseTransactionDTO from '../dtos/IResponseTransaction';
 import IGatewayProvider from '../models/IGatewayProvider';
 
@@ -39,6 +41,24 @@ class FakeGatewayProvider implements IGatewayProvider {
     };
 
     return response;
+  }
+
+  async getCreditCards(
+    payment_cards: PaymentCard[],
+  ): Promise<IResponsePaymentCardDTO[]> {
+    const response = payment_cards.map(payment_card => ({
+      id: '87yjii9',
+      brand: 'visa',
+      holder_name: 'di gambarotto',
+      first_digits: '4111',
+      last_digits: '22222',
+      expiration_date: '0628',
+    }));
+    return response;
+  }
+
+  public async createCardHash(hash: string): Promise<string> {
+    return hash;
   }
 }
 

@@ -1,4 +1,5 @@
 import './providers';
+
 import { container } from 'tsyringe';
 
 import UserAddressRepository from '@modules/users/infra/typeorm/repositories/UserAdressesRepository';
@@ -43,11 +44,10 @@ import IOrderRepository from '@modules/orders/repositories/IOrderRepository';
 import IUserPhoneRepository from '@modules/users/repositories/IUserPhoneRepository';
 import UserPhoneRepository from '@modules/users/infra/typeorm/repositories/UserPhoneRepository';
 
+import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';
+import UserTokensRepository from '@modules/users/infra/typeorm/repositories/UserTokensRepository';
 import IHandleImageProvider from './providers/handleImageProvider/model/IHandleImageProvider';
 import SharpHandleImageProvider from './providers/handleImageProvider/implementations/SharpHandleImageProvider';
-
-import ICompressImageProvider from './providers/CompressImageProvider/models/ICompressImageProvider';
-import ImageminProvider from './providers/CompressImageProvider/implementations/ImageminProvider';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -109,7 +109,7 @@ container.registerSingleton<IUserPhoneRepository>(
   'UserPhoneRepository',
   UserPhoneRepository,
 );
-container.registerSingleton<ICompressImageProvider>(
-  'CompressImageProvider',
-  ImageminProvider,
+container.registerSingleton<IUserTokensRepository>(
+  'UserTokensRepository',
+  UserTokensRepository,
 );

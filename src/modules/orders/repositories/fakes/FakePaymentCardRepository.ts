@@ -16,6 +16,13 @@ class FakePaymentCardRepository implements IPaymentCardRepository {
     this.paymentCards.push(paymentCardCreated);
     return paymentCardCreated;
   }
+
+  async findAllByUser(user_id: string): Promise<PaymentCard[]> {
+    const paymentCards = this.paymentCards.filter(
+      paymentCard => paymentCard.user_id === user_id,
+    );
+    return paymentCards;
+  }
 }
 
 export default FakePaymentCardRepository;

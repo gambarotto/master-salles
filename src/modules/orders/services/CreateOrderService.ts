@@ -2,7 +2,6 @@ import IUserAdressesRepository from '@modules/users/repositories/IUserAdressesRe
 import IUsersRepository from '@modules/users/repositories/IUserRepository';
 import IGatewayProvider from '@shared/container/providers/GatewayProvider/models/IGatewayProvider';
 import AppError from '@shared/errors/AppError';
-import createCardHashPagarme from '@shared/helpers/createCardHashPagarme';
 import formatValue from '@shared/helpers/handleValues';
 import { inject, injectable } from 'tsyringe';
 import Order from '../infra/typeorm/entities/Order';
@@ -130,7 +129,7 @@ class CreateOrderService {
     // Decoding cardHash
     let card_hash_pagarme;
     if (card_hash) {
-      card_hash_pagarme = await createCardHashPagarme(card_hash, user.id);
+      card_hash_pagarme = await this.gatewayProvider.createCardHash(card_hash);
     }
 
     // criando transaction no pagarme

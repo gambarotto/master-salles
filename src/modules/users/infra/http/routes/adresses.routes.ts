@@ -42,6 +42,14 @@ const validationRequestSetAsDefault = celebrate({
 });
 userAdressesRoutes.use(ensureAuthenticated);
 
+// Default
+userAdressesRoutes.get('/me/default', userAdressesDefaultController.get);
+
+userAdressesRoutes.patch(
+  '/me/:address_id/default',
+  validationRequestSetAsDefault,
+  userAdressesDefaultController.set,
+);
 userAdressesRoutes.get('/me', userAdressesController.index);
 userAdressesRoutes.post(
   '/me',
@@ -53,12 +61,7 @@ userAdressesRoutes.put(
   validationRequestUpdate,
   userAdressesController.update,
 );
+userAdressesRoutes.get('/me/:address_id', userAdressesController.show);
 userAdressesRoutes.delete('/me/:address_id', userAdressesController.delete);
 
-userAdressesRoutes.patch(
-  '/me/:address_id/default',
-  validationRequestSetAsDefault,
-  userAdressesDefaultController.set,
-);
-userAdressesRoutes.get('/me/default', userAdressesDefaultController.get);
 export default userAdressesRoutes;

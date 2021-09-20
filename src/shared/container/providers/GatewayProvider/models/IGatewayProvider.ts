@@ -10,4 +10,5 @@ export default interface IGatewayProvider {
   getCreditCards(
     payment_cards: PaymentCard[],
   ): Promise<IResponsePaymentCardDTO[]>;
+  createCardHash(hash: string): Promise<string>;
 }

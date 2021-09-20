@@ -30,6 +30,7 @@ class OrdersTransactions implements IOrdersTransactions {
       // Start transaction
       await getManager().transaction(async transactionalEntityManager => {
         // Save transaction Response on DB
+
         const transaction = new Transaction();
         Object.assign(
           transaction,
@@ -38,6 +39,7 @@ class OrdersTransactions implements IOrdersTransactions {
             card_id: transactionData.card.id,
           },
         );
+
         const transactionDB = await transactionalEntityManager.save(
           Transaction,
           transaction,
@@ -50,7 +52,9 @@ class OrdersTransactions implements IOrdersTransactions {
           });
         }
 
-        Object.assign(orderData, { transaction_id: transactionDB.id });
+        Object.assign(orderData, {
+          transaction_id: transactionDB.id,
+        });
 
         // Save order on DB
         order = await transactionalEntityManager.save(Order, orderData);
@@ -69,6 +73,7 @@ class OrdersTransactions implements IOrdersTransactions {
             orderProductObject,
           );
         });
+
         await Promise.all(orderProducts);
       });
       return order;

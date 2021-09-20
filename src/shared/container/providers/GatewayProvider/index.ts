@@ -3,10 +3,10 @@ import Pagarme from './implementations/Pagarme';
 import IGatewayProvider from './models/IGatewayProvider';
 
 const providers = {
-  pagarme: Pagarme,
+  pagarme: container.resolve(Pagarme),
 };
 
-container.registerSingleton<IGatewayProvider>(
+container.registerInstance<IGatewayProvider>(
   'GatewayProvider',
   providers.pagarme,
 );
