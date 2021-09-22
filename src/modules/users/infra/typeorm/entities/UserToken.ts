@@ -2,7 +2,6 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  Generated,
   JoinColumn,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -15,9 +14,8 @@ class UserToken {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  @Generated('uuid')
-  token: string;
+  @Column({ type: 'int' })
+  verification_code: number;
 
   @OneToOne(() => User)
   @JoinColumn({ name: 'user_id' })

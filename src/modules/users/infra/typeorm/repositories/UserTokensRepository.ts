@@ -10,14 +10,28 @@ class UserTokensRepository implements IUserTokensRepository {
   }
 
   public async generate(user_id: string): Promise<UserToken> {
-    const userTokenCreated = this.ormRepository.create({ user_id });
+    const userTokenCreated = this.ormRepository.create({
+      user_id,
+      verification_code: Math.floor(Math.random() * 899999 + 100000),
+    });
     const userToken = await this.ormRepository.save(userTokenCreated);
     return userToken;
   }
 
-  public async findByToken(token: string): Promise<UserToken | undefined> {
-    const userToken = await this.ormRepository.findOne({ where: { token } });
+  public async findByCode(code: number): Promise<UserToken | undefined> {
+    const userToken = await this.ormRepository.findOne({
+      where: { verification_code: code },
+    });
     return userToken;
+  }
+
+  public async findByUser(user_id: string): Promise<UserToken | undefined> {
+    const userToken = await this.ormRepository.findOne({ where: { user_id } });
+    return userToken;
+  }
+
+  public async delete(userToken_id: string): Promise<void> {
+    await this.ormRepository.delete(userToken_id);
   }
 }
 export default UserTokensRepository;

@@ -2,11 +2,15 @@ import path from 'path';
 import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
 import AppError from '@shared/errors/AppError';
 import { inject, injectable } from 'tsyringe';
-import IUsersRepository from '../repositories/IUserRepository';
-import IUserTokensRepository from '../repositories/IUserTokensRepository';
+import IUsersRepository from '@modules/users/repositories/IUserRepository';
+import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';
+
+interface IRequest {
+  email: string;
+}
 
 @injectable()
-class SendForgotPasswordMail {
+class SendForgotPasswordEmailService {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
@@ -16,12 +20,18 @@ class SendForgotPasswordMail {
     private mailProvider: IMailProvider,
   ) {}
 
-  public async execute(email: string): Promise<void> {
+  public async execute({ email }: IRequest): Promise<void> {
     const user = await this.usersRepository.findByEmail(email);
     if (!user) {
       throw new AppError('User not found');
     }
-    const { token } = await this.userTokensRepository.generate(user.id);
+    const alreadyCode = await this.userTokensRepository.findByUser(user.id);
+    if (alreadyCode) {
+      await this.userTokensRepository.delete(alreadyCode.id);
+    }
+    const { verification_code } = await this.userTokensRepository.generate(
+      user.id,
+    );
     const forgotPasswordtemplateEmail = path.resolve(
       __dirname,
       '..',
@@ -33,15 +43,15 @@ class SendForgotPasswordMail {
         name: user.name,
         email: user.email,
       },
-      subject: '[Master Sale] Recuperação de senha',
+      subject: '[Master Sales] Recuperação de senha',
       templateData: {
         file: forgotPasswordtemplateEmail,
         variables: {
           name: user.name,
-          link: `${process.env.APP_WEB_URL}/reset-password?token=${token}`,
+          verification_code,
         },
       },
     });
   }
 }
-export default SendForgotPasswordMail;
+export default SendForgotPasswordEmailService;
