@@ -9,7 +9,7 @@ userProfilesRoutes.use(ensureAuthenticated);
 
 const validationRequestUpdate = celebrate({
   [Segments.BODY]: {
-    name: Joi.string().required(),
+    name: Joi.string(),
     email: Joi.string().email(),
     old_password: Joi.string().min(6),
     new_password: Joi.string().min(6),
