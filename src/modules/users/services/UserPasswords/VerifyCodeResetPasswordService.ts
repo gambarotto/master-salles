@@ -7,7 +7,7 @@ interface IRequest {
   verification_code: number;
 }
 
-injectable();
+@injectable()
 class VerifyCodeResetPasswordService {
   constructor(
     @inject('UsersRepository')

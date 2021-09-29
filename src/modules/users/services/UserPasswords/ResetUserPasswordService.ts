@@ -10,7 +10,7 @@ interface IRequest {
   password: string;
 }
 
-injectable();
+@injectable()
 class ResetUserPasswordService {
   constructor(
     @inject('UsersRepository')
@@ -28,6 +28,7 @@ class ResetUserPasswordService {
     const userToken = await this.userTokensRepository.findByCode(
       verification_code,
     );
+
     if (!userToken) {
       throw new AppError('Invalid code');
     }
@@ -42,7 +43,9 @@ class ResetUserPasswordService {
     if (isAfter(Date.now(), createdAtWithTwoHours)) {
       throw new AppError('Code expired');
     }
+
     user.password = await this.hashProvider.generateHash(password);
+
     await this.usersRepository.update(user);
   }
 }

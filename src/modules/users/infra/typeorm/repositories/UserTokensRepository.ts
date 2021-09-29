@@ -21,12 +21,15 @@ class UserTokensRepository implements IUserTokensRepository {
   public async findByCode(code: number): Promise<UserToken | undefined> {
     const userToken = await this.ormRepository.findOne({
       where: { verification_code: code },
+      loadRelationIds: true,
     });
     return userToken;
   }
 
   public async findByUser(user_id: string): Promise<UserToken | undefined> {
-    const userToken = await this.ormRepository.findOne({ where: { user_id } });
+    const userToken = await this.ormRepository.findOne({
+      where: { user_id },
+    });
     return userToken;
   }
 
