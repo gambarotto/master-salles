@@ -3,7 +3,7 @@
 /* eslint-disable no-plusplus */
 import AppError from '@shared/errors/AppError';
 import axios from 'axios';
-import { addDays, isAfter, isBefore } from 'date-fns';
+import { addDays, format, isAfter, isBefore } from 'date-fns';
 
 interface ApiHolidayResponse {
   date: string | Date;
@@ -25,6 +25,7 @@ interface IVerifyAvailableDays {
 }
 export interface IAvailableDaysResponse {
   date: Date;
+  dateString: string;
   available: boolean;
   reason: string;
 }
@@ -88,11 +89,13 @@ class AvailableDayToDelivery {
     for (let i = 0; i < daysAdded; i++) {
       // Add um dia a cada volta do loop
       const date = addDays(initialDate, i);
+      const dateString = format(date, 'yyyy-MM-dd');
       // Verifica se for no mesmo dia se já passou das 08
       const today = date.getHours();
-      if (date === initialDate && today >= 8) {
+      if (date.getDate() === initialDate.getDate() && today >= 8) {
         availableDays.push({
           date,
+          dateString,
           available: false,
           reason: 'after 08:00',
         });
@@ -100,16 +103,19 @@ class AvailableDayToDelivery {
         let isAvailable = true;
         // Recupera apenas os feriados que estão dentro do período definido
         const periodHolidays = holidays.filter(holiday => {
-          const dateHolidayParams = String(holiday.date)
+          const dateHolidayString = String(holiday.date)
             .split('/')
             .reverse()
             .join('/');
-          const dateHoliday = new Date(dateHolidayParams);
+
+          const dateHoliday = new Date(dateHolidayString);
           if (
             isAfter(dateHoliday, initialDate) &&
             isBefore(dateHoliday, finalDate)
           ) {
-            Object.assign(holiday, { date: dateHoliday });
+            Object.assign(holiday, {
+              date: dateHoliday,
+            });
             return holiday;
           }
         });
@@ -122,6 +128,7 @@ class AvailableDayToDelivery {
             isAvailable = false;
             availableDays.push({
               date: holiday.date as Date,
+              dateString: format(holiday.date as Date, 'yyyy-MM-dd'),
               available: false,
               reason: holiday.name,
             });
@@ -133,12 +140,14 @@ class AvailableDayToDelivery {
           if (weekDay === 0 || weekDay === 6) {
             availableDays.push({
               date,
+              dateString,
               available: false,
               reason: weekDay === 0 ? 'Domingo' : 'Sábado',
             });
           } else {
             availableDays.push({
               date,
+              dateString,
               available: true,
               reason: 'available',
             });
