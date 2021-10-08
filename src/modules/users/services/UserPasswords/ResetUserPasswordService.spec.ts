@@ -64,18 +64,6 @@ describe('ResetPasswordService', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
-  it('should not be able to reset password if request user id is different of user token id', async () => {
-    const { verification_code } = await fakeUserTokenRepository.generate(
-      user.id,
-    );
-
-    await expect(
-      resetPassword.execute({
-        verification_code,
-        password: '123123',
-      }),
-    ).rejects.toBeInstanceOf(AppError);
-  });
   it('should not be able to reset password if passed more than 2 hours', async () => {
     const { verification_code } = await fakeUserTokenRepository.generate(
       user.id,

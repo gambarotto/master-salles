@@ -13,7 +13,7 @@ class FakeUserTokensRepository implements IUserTokensRepository {
     const userToken = new UserToken();
     Object.assign(userToken, {
       id: v4(),
-      token: v4(),
+      token: Math.floor(Math.random() * 899999 + 100000),
       user_id,
       created_at: new Date(),
       updated_at: new Date(),
